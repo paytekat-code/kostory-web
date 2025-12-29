@@ -2,23 +2,68 @@
 import { db } from "./firebase.js";
 import {
   collection,
-  addDoc,
-  serverTimestamp
+  getDocs,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// TEST koneksi Firestore (silent, tidak ganggu UI)
-async function testFirestore() {
+/**
+ * Ambil data kost dari Firestore
+ * (sementara hardcoded Palembang)
+ */
+async function loadKost() {
+  const resultContainer = document.querySelector(".result");
+  if (!resultContainer) return;
+
+  resultContainer.innerHTML = "";
+
   try {
-    await addDoc(collection(db, "system_logs"), {
-      type: "page_load",
-      page: "landing",
-      createdAt: serverTimestamp()
+    const q = query(
+      collection(db, "kost"),
+      where("kota", "==", "Palembang")
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      resultContainer.innerHTML = "<p>Tidak ada kost tersedia.</p>";
+      return;
+    }
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      const card = document.createElement("div");
+      card.className = "kost-card";
+
+      card.innerHTML = `
+        <h4>${data.nama}</h4>
+        <p>📍 ${data.kota} • ${data.tipe}</p>
+        <a href="https://booking.kostory.id">Lihat & Booking →</a>
+      `;
+
+      resultContainer.appendChild(card);
     });
-    console.log("🔥 Firestore connected");
-  } catch (e) {
-    console.error("❌ Firestore error:", e);
+
+  } catch (err) {
+    console.error("Firestore error:", err);
   }
 }
 
-// Jalan otomatis saat halaman dibuka
-testFirestore();
+/**
+ * Hook tombol "Cari Kamar"
+ * TANPA mengubah HTML
+ */
+function bindSearchButton() {
+  const btn = document.querySelector(".search-card button");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    loadKost();
+  });
+}
+
+// Init saat halaman siap
+document.addEventListener("DOMContentLoaded", () => {
+  bindSearchButton();
+});
