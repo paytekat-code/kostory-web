@@ -255,11 +255,11 @@ footer{
     height:340px;
   }
 
-  /* TAMBAHAN DI SINI */
   .search-card{
     max-width:900px;
     margin-left:auto;
     margin-right:auto;
+    margin-top:-20px;   /* ← ini kuncinya */
   }
 
   .result{
