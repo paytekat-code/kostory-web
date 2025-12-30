@@ -187,41 +187,6 @@ button{
   margin-bottom:12px;
 }
 
-/* EXPERIENCE SLIDER */
-.exp-slider{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:6px;
-}
-
-.exp-slider::-webkit-scrollbar{
-  display:none;
-}
-
-.exp-slider .exp-item{
-  min-width:85%;
-  scroll-snap-align:start;
-  border-radius:16px;
-  overflow:hidden;
-  background:#fff;
-  border:1px solid var(--border);
-}
-
-.exp-slider img{
-  height:160px;
-  object-fit:cover;
-}
-
-.exp-slider .exp-item div{
-  padding:12px;
-  font-size:14px;
-  font-weight:600;
-  text-align:center;
-}
-
 /* FOOTER */
 footer{
   margin:32px 0 16px;
