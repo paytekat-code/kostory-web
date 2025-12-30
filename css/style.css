@@ -274,8 +274,8 @@ footer{
 /* EXPERIENCE GRID */
 .experience-grid{
   display:grid;
+  grid-template-columns: repeat(2, 1fr); /* ← INI KUNCI */
   gap:24px;
-  margin-top:16px;
 }
 
 /* CARD */
