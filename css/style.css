@@ -187,6 +187,64 @@ button{
   margin-bottom:12px;
 }
 
+/* ===========================
+   EXPERIENCE SLIDER (FIXED)
+   =========================== */
+
+.exp-slider{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:10px;
+}
+
+.exp-slider::-webkit-scrollbar{
+  display:none;
+}
+
+.exp-item{
+  flex:0 0 auto;
+  min-width:85%;
+  scroll-snap-align:start;
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--border);
+  text-decoration:none;
+  color:#fff;
+  position:relative;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.exp-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.18);
+}
+
+.exp-item img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+
+.exp-item:hover img{
+  transform:scale(1.08);
+}
+
+.exp-item div{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:16px;
+  font-size:16px;
+  font-weight:700;
+  background:linear-gradient(to top, rgba(0,0,0,.65), transparent);
+}
+
 /* FOOTER */
 footer{
   margin:32px 0 16px;
@@ -212,6 +270,10 @@ footer{
     grid-template-columns: repeat(2,1fr);
     gap:16px;
   }
+
+  .exp-item{
+    min-width:45%;
+  }
 }
 
 /* DESKTOP */
@@ -224,77 +286,18 @@ footer{
     max-width:900px;
     margin-left:auto;
     margin-right:auto;
-    margin-top:-20px;   /* ← ini kuncinya */
+    margin-top:-20px;
   }
 
   .result{
     grid-template-columns: repeat(3,1fr);
   }
 
-  .exp-slider .exp-item{
+  .exp-item{
     min-width:32%;
   }
-}
 
-/* EXPERIENCE GRID */
-.experience-grid{
-  display:grid;
-  gap:24px;
-}
-
-/* HP */
-@media (max-width:767px){
-  .experience-grid{
-    grid-template-columns: 1fr;
+  .exp-item img{
+    height:260px;
   }
-}
-
-/* TABLET & DESKTOP (seperti Rosalia Indah) */
-@media (min-width:768px){
-  .experience-grid{
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-.exp-card{
-  display:block;
-  text-decoration:none;
-  color:var(--dark);
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid var(--border);
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-
-.exp-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
-}
-.exp-img{
-  position:relative;
-  height:260px;
-  overflow:hidden;
-}
-
-.exp-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .6s ease;
-}
-
-.exp-card:hover img{
-  transform:scale(1.08);
-}
-
-.exp-title{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:16px;
-  color:#fff;
-  font-size:16px;
-  font-weight:700;
-  background:linear-gradient(to top, rgba(0,0,0,.6), transparent);
 }
