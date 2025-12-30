@@ -236,3 +236,65 @@ footer{
   }
 }
 
+/* EXPERIENCE GRID */
+.experience-grid{
+  display:grid;
+  gap:24px;
+}
+
+/* HP */
+@media (max-width:767px){
+  .experience-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TABLET & DESKTOP (seperti Rosalia Indah) */
+@media (min-width:768px){
+  .experience-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.exp-card{
+  display:block;
+  text-decoration:none;
+  color:var(--dark);
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+
+.exp-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+.exp-img{
+  position:relative;
+  height:260px;
+  overflow:hidden;
+}
+
+.exp-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+
+.exp-card:hover img{
+  transform:scale(1.08);
+}
+
+.exp-title{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:16px;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  background:linear-gradient(to top, rgba(0,0,0,.6), transparent);
+}
