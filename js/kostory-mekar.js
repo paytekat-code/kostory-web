@@ -17,6 +17,7 @@ if (!slider || slides.length === 0 || !modal || !modalImg || !heroCaption) {
 
 let currentIndex = 0;
 let startX = 0;
+let isSwiping = false;
 
 /* paksa render caption setelah browser siap */
 setTimeout(() => {
@@ -35,14 +36,16 @@ function showSlide(index) {
 
   // ===== SWIPE (HP) =====
   slider.addEventListener('touchstart', function (e) {
-    startX = e.touches[0].clientX;
-  });
+  isSwiping = false; // ⬅️ TAMBAH INI
+  startX = e.touches[0].clientX;
+});
 
   slider.addEventListener('touchend', function (e) {
     const endX = e.changedTouches[0].clientX;
     const diff = startX - endX;
 
     if (Math.abs(diff) > 50) {
+         isSwiping = true; 
       if (diff > 0) {
         currentIndex = (currentIndex + 1) % slides.length;
       } else {
@@ -67,6 +70,7 @@ slider.addEventListener('mouseup', function (e) {
   const diff = startX - endX;
 
   if (Math.abs(diff) > 50) {
+       isSwiping = true; 
     if (diff > 0) {
       currentIndex = (currentIndex + 1) % slides.length;
     } else {
@@ -82,6 +86,7 @@ slider.addEventListener('mouseleave', function () {
 
 // ===== ZOOM (FIX: selalu zoom slide aktif) =====
 slider.addEventListener('click', function () {
+  if (isSwiping) return; // ⬅️ TAMBAH INI
   modalImg.src = slides[currentIndex].src;
   modal.style.display = 'flex';
 });
