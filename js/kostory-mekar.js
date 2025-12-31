@@ -51,6 +51,34 @@ function showSlide(index) {
       showSlide(currentIndex);
     }
   });
+// ===== SWIPE (LAPTOP / MOUSE) =====
+let isDragging = false;
+
+slider.addEventListener('mousedown', function (e) {
+  isDragging = true;
+  startX = e.clientX;
+});
+
+slider.addEventListener('mouseup', function (e) {
+  if (!isDragging) return;
+  isDragging = false;
+
+  const endX = e.clientX;
+  const diff = startX - endX;
+
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      currentIndex = (currentIndex + 1) % slides.length;
+    } else {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    }
+    showSlide(currentIndex);
+  }
+});
+
+slider.addEventListener('mouseleave', function () {
+  isDragging = false;
+});
 
   // ===== ZOOM =====
   slides.forEach(img => {
