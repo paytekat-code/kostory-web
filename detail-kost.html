@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kostory Mekar | Detail Kost</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo">KOSTORY</div>
+      <div class="tagline">Where Stories Find a Home</div>
+    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </div>
+</div>
+
+<!-- MENU -->
+<div class="menu-overlay" id="menu" onclick="closeMenu(event)">
+  <div class="menu-panel">
+    <a href="#">Tentang Kami</a>
+    <a href="#">Kerjasama Bisnis</a>
+    <a href="#">Lowongan Kerja</a>
+    <a href="#">Masuk</a>
+    <a href="#">Daftar</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HERO SLIDER -->
+  <div class="hero-slider">
+    <img src="img/kost-mekar-1.jpg" class="active">
+    <img src="img/kost-mekar-2.jpg">
+    <img src="img/kost-mekar-3.jpg">
+  </div>
+
+  <!-- INFO KOST -->
+  <div style="margin-top:16px">
+    <h2>Kostory Mekar</h2>
+    <p style="font-size:13px;color:#666">
+      ⭐⭐⭐⭐☆ 4.6 (123 Google reviews)<br>
+      📍 Palembang
+    </p>
+  </div>
+
+  <!-- FASILITAS -->
+  <div class="kost-card">
+    <h4>Fasilitas Umum</h4>
+    <p>
+      AC • WiFi • Parkir • CCTV • Laundry • Dapur Bersama
+    </p>
+  </div>
+
+  <!-- PILIH TIPE KAMAR -->
+  <h3 style="margin-top:24px">Pilih Tipe Kamar</h3>
+
+  <!-- TIPE A -->
+  <div class="kost-card">
+    <h4>Tipe A – Standard</h4>
+    <p>
+      ✔ AC • KM Dalam • Meja<br>
+      Ukuran ± 3x4 m
+    </p>
+
+    <p style="font-size:13px;color:#666">
+      Kamar tersedia: <strong>3</strong>
+    </p>
+
+    <p>
+      <strong>Rp 2.200.000</strong> / bulan
+    </p>
+
+    <a href="booking.html" style="color:#ff8a00;font-weight:600">
+      Pilih Tipe Ini →
+    </a>
+  </div>
+
+  <!-- TIPE B -->
+  <div class="kost-card">
+    <h4>Tipe B – Standard</h4>
+    <p>
+      ✔ AC • KM Luar • Lemari<br>
+      Ukuran ± 3x3 m
+    </p>
+
+    <p style="font-size:13px;color:#666">
+      Kamar tersedia: <strong>1</strong>
+    </p>
+
+    <p>
+      <strong>Rp 1.900.000</strong> / bulan
+    </p>
+
+    <a href="booking.html" style="color:#ff8a00;font-weight:600">
+      Pilih Tipe Ini →
+    </a>
+  </div>
+
+  <!-- CATATAN -->
+  <p style="font-size:12px;color:#666;margin-top:12px">
+    * Harga di atas adalah harga standar.  
+    * Opsi tambahan tersedia saat booking.
+  </p>
+
+  <footer>
+    © Kostory • Where stories find home
+  </footer>
+
+</div>
+
+<!-- JS MENU -->
+<script>
+function toggleMenu(){
+  document.getElementById('menu').style.display = 'block';
+}
+function closeMenu(e){
+  if(e.target.id === 'menu'){
+    e.target.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+</html>
