@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kostory – Detail Kost</title>
+
+  <!-- CSS utama kamu -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Font Icon untuk rating -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <!-- HERO & GALERI FOTO -->
+  <div class="detail-hero">
+    <div class="detail-carousel">
+      <img src="img/kost-large1.jpg" class="active">
+      <img src="img/kost-large2.jpg">
+      <img src="img/kost-large3.jpg">
+    </div>
+  </div>
+
+  <div class="detail-main container">
+
+    <!-- INFORMASI KOST -->
+    <div class="detail-header">
+      <h1 class="detail-title">Kostory Mekar</h1>
+      <div class="detail-rating">
+        <span class="stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+        </span>
+        <span class="rating-number">4.6</span>
+        <span class="review-count">(123 ulasan)</span>
+      </div>
+      <p class="detail-location">
+        <i class="fa-solid fa-location-dot"></i> Palembang, Sumatera Selatan
+      </p>
+    </div>
+
+    <!-- FORM PILIH TANGGAL -->
+    <div class="detail-datebox">
+      <label>Tanggal Inap</label>
+      <div class="date-fields">
+        <input type="date" id="checkin" />
+        <span class="separator">–</span>
+        <input type="date" id="checkout" />
+      </div>
+    </div>
+
+    <!-- PILIH TIPE KAMAR -->
+    <div class="detail-section">
+      <h2>Pilih Tipe Kamar</h2>
+
+      <!-- TIPE A -->
+      <div class="room-type-card">
+        <div class="room-type-info">
+          <h3>Tipe A – Standard</h3>
+          <p class="room-facilities">AC • KM Dalam • Meja</p>
+          <div class="room-stock">
+            <span>Kamar tersedia: <strong>3</strong></span>
+          </div>
+        </div>
+        <div class="room-type-price">
+          <span class="price">Rp 2.200.000</span>
+          <span class="per-duration">/ bulan</span>
+          <button class="btn-select-room">Pilih</button>
+        </div>
+      </div>
+
+      <!-- TIPE B -->
+      <div class="room-type-card">
+        <div class="room-type-info">
+          <h3>Tipe B – Standard</h3>
+          <p class="room-facilities">AC • KM Luar • Lemari</p>
+          <div class="room-stock">
+            <span>Kamar tersedia: <strong>1</strong></span>
+          </div>
+        </div>
+        <div class="room-type-price">
+          <span class="price">Rp 1.900.000</span>
+          <span class="per-duration">/ bulan</span>
+          <button class="btn-select-room">Pilih</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FASILITAS UMUM -->
+    <div class="detail-section">
+      <h2>Fasilitas Umum</h2>
+      <ul class="facility-list">
+        <li>AC</li>
+        <li>WiFi</li>
+        <li>Parkir</li>
+        <li>CCTV</li>
+        <li>Laundry</li>
+      </ul>
+    </div>
+
+    <!-- DESKRIPSI LENGKAP -->
+    <div class="detail-section">
+      <h2>Deskripsi Kost</h2>
+      <p>
+        Kostory Mekar adalah kost modern dengan lingkungan nyaman...
+      </p>
+    </div>
+
+  </div>
+
+  <!-- STICKY FOOTER (CTA) -->
+  <div class="detail-footer-cta">
+    <span class="footer-price">Mulai dari <strong>Rp 2.200.000/bulan</strong></span>
+    <button class="btn-footer-book">Lihat Semua Tipe</button>
+  </div>
+
+</body>
+</html>
