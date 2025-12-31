@@ -357,4 +357,5 @@ footer{
   color: #fff;
   background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
   pointer-events: none;
+  z-index: 2;
 }
