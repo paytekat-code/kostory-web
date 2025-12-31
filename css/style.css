@@ -404,48 +404,68 @@ footer{
 }
 
 /* ===========================
-   ROOM ACTION (BADGE + BUTTON)
+   ROOM ACTION (BADGE + BUTTON) - DIPERBAIKI
    =========================== */
 
 .room-action{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:10px;
+  flex-direction:column;
+  gap:10px;
+  margin-top:12px;
+  align-items:flex-start;
 }
 
+/* Badge Sisa Kamar - soft, tanpa border tebal merah + tanpa pulse mengganggu */
 .room-badge{
-  background:#fff;
-  border:2px solid #ff3b30;
+  background:rgba(255,59,48,0.12);
   color:#ff3b30;
   font-size:12px;
   font-weight:700;
-  padding:6px 10px;
+  padding:6px 12px;
   border-radius:10px;
-  animation:pulse 1.5s infinite;
+  border:none !important;
+  animation:none !important; /* matiin pulse */
 }
 
-/* tombol PILIH */
+/* Tombol PILIH - lebih besar, jelas, dan mencolok */
 .room-pilih{
-  background:#ff8a00;
+  align-self:flex-end;
+  background:var(--primary);
   color:#fff;
-  padding:10px 18px;
+  padding:12px 28px;
   border-radius:12px;
-  font-size:14px;
+  font-size:15px;
   font-weight:700;
   text-decoration:none;
-  box-shadow:0 6px 16px rgba(255,138,0,.4);
-  transition:transform .15s ease, box-shadow .15s ease;
+  box-shadow:0 8px 20px rgba(255,138,0,.35);
+  transition:all .2s ease;
 }
 
 .room-pilih:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(255,138,0,.55);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(255,138,0,.5);
 }
 
-/* efek nyala */
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(255,59,48,.6)}
-  70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}
-  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
+/* Responsive: di layar ≥480px, badge & tombol jadi sejajar */
+@media (min-width: 480px) {
+  .room-action{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+  }
+  
+  .room-badge{
+    align-self:center;
+  }
+  
+  .room-pilih{
+    align-self:center;
+  }
 }
+
+/* Hapus atau komentarin animasi pulse lama kalau masih ada */
+/*
+@keyframes pulse{
+  ...
+}
+*/
