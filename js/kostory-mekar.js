@@ -16,8 +16,12 @@ if (!slider || slides.length === 0 || !modal || !modalImg || !heroCaption) {
 }
 
 let currentIndex = 0;
-showSlide(currentIndex);
 let startX = 0;
+
+/* paksa render caption setelah browser siap */
+setTimeout(() => {
+  showSlide(currentIndex);
+}, 0);
 
 function showSlide(index) {
   slides.forEach((img, i) => {
