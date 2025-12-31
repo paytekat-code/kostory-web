@@ -95,5 +95,52 @@ slider.addEventListener('click', function () {
   window.closeZoom = function () {
     modal.style.display = 'none';
   };
+/* ===========================
+   ROOM SLIDER (PER TIPE)
+   =========================== */
+
+document.querySelectorAll('.room-slider').forEach(slider => {
+
+  const slides = slider.querySelectorAll('img');
+  const captionBox = slider.querySelector('.room-caption');
+
+  let index = 0;
+  let startX = 0;
+  let isSwiping = false;
+
+  function show(i){
+    slides.forEach((img, idx) => {
+      img.classList.toggle('active', idx === i);
+    });
+    captionBox.textContent = slides[i].dataset.caption || '';
+  }
+
+  show(index);
+
+  // TOUCH
+  slider.addEventListener('touchstart', e => {
+    isSwiping = false;
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50){
+      isSwiping = true;
+      index = diff > 0
+        ? (index + 1) % slides.length
+        : (index - 1 + slides.length) % slides.length;
+      show(index);
+    }
+  });
+
+  // CLICK → ZOOM
+  slider.addEventListener('click', () => {
+    if (isSwiping) return;
+    zoomedImage.src = slides[index].src;
+    imageModal.style.display = 'flex';
+  });
+
+});
 
 });
