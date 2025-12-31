@@ -402,3 +402,50 @@ footer{
   background:linear-gradient(to top, rgba(0,0,0,.6), transparent);
   pointer-events:none;
 }
+
+/* ===========================
+   ROOM ACTION (BADGE + BUTTON)
+   =========================== */
+
+.room-action{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:10px;
+}
+
+.room-badge{
+  background:#fff;
+  border:2px solid #ff3b30;
+  color:#ff3b30;
+  font-size:12px;
+  font-weight:700;
+  padding:6px 10px;
+  border-radius:10px;
+  animation:pulse 1.5s infinite;
+}
+
+/* tombol PILIH */
+.room-pilih{
+  background:#ff8a00;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 6px 16px rgba(255,138,0,.4);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.room-pilih:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(255,138,0,.55);
+}
+
+/* efek nyala */
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,59,48,.6)}
+  70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
+}
