@@ -5,25 +5,29 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ambil elemen
-  const slider = document.querySelector('.hero-slider');
-  const slides = document.querySelectorAll('.hero-slider img');
-  const modal = document.getElementById('imageModal');
-  const modalImg = document.getElementById('zoomedImage');
+const slider = document.querySelector('.hero-slider');
+const slides = document.querySelectorAll('.hero-slider img');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('zoomedImage');
+const heroCaption = document.getElementById('heroCaption'); // ⬅️ INI YANG KURANG
 
-  // pengaman
-  if (!slider || slides.length === 0 || !modal || !modalImg) {
-    return;
-  }
+if (!slider || slides.length === 0 || !modal || !modalImg || !heroCaption) {
+  return;
+}
 
-  let currentIndex = 0;
-  let startX = 0;
+let currentIndex = 0;
+showSlide(currentIndex);
+let startX = 0;
 
-  // tampilkan slide aktif
-  function showSlide(index) {
-    slides.forEach((img, i) => {
-      img.classList.toggle('active', i === index);
-    });
-  }
+function showSlide(index) {
+  slides.forEach((img, i) => {
+    img.classList.toggle('active', i === index);
+  });
+
+  const caption = slides[index].dataset.caption || '';
+  heroCaption.textContent = caption;
+}
+
 
   // ===== SWIPE (HP) =====
   slider.addEventListener('touchstart', function (e) {
