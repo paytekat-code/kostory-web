@@ -344,3 +344,17 @@ footer{
   border-radius: 12px;
   cursor: zoom-out;
 }
+
+/* HERO CAPTION */
+.hero-caption{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
+  pointer-events: none;
+}
