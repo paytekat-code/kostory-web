@@ -80,13 +80,11 @@ slider.addEventListener('mouseleave', function () {
   isDragging = false;
 });
 
-  // ===== ZOOM =====
-  slides.forEach(img => {
-    img.addEventListener('click', function () {
-      modalImg.src = img.src;
-      modal.style.display = 'flex';
-    });
-  });
+// ===== ZOOM (FIX: selalu zoom slide aktif) =====
+slider.addEventListener('click', function () {
+  modalImg.src = slides[currentIndex].src;
+  modal.style.display = 'flex';
+});
 
   // expose ke HTML
   window.closeZoom = function () {
