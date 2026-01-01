@@ -169,3 +169,21 @@ function prevSlide() {
 }
 
 loadKost();
+
+// === MENU ===
+const menuBtn = document.querySelector(".menu-btn");
+const menu = document.getElementById("menu");
+
+function openMenu() {
+  menu.style.display = "block";
+}
+
+function closeMenu(e) {
+  if (e.target === menu) {
+    menu.style.display = "none";
+  }
+}
+
+if (menuBtn && menu) {
+  menuBtn.addEventListener("click", openMenu);
+}
