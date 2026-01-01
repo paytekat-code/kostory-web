@@ -41,26 +41,28 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-    // === HERO IMAGES ===
-    const hero = document.getElementById("heroSlider");
-    hero.innerHTML = "";
+   // === HERO IMAGES ===
+const hero = document.getElementById("heroSlider");
+const heroTrack = document.getElementById("heroTrack");
 
-    const heroTrack = document.getElementById("heroTrack");
-heroTrack.innerHTML = "";
+if (hero && heroTrack && Array.isArray(kost.heroImages)) {
+  hero.innerHTML = "";
+  heroTrack.innerHTML = "";
 
-let currentSlide = 0;
+  let currentSlide = 0;
 
-kost.heroImages.forEach((img, i) => {
-  const slide = document.createElement("div");
-  slide.className = "hero-slide";
+  kost.heroImages.forEach((img, i) => {
+    const slide = document.createElement("div");
+    slide.className = "hero-slide";
 
-  slide.innerHTML = `
-    <img src="${img}" alt="${kost.nama}">
-    <div class="hero-caption">Tampak Depan</div>
-  `;
+    slide.innerHTML = `
+      <img src="${img}" alt="${kost.nama}">
+      <div class="hero-caption">Tampak Depan</div>
+    `;
 
-  heroTrack.appendChild(slide);
-});
+    heroTrack.appendChild(slide);
+  });
+}
 
 /* === SWIPE SUPPORT (HP) === */
 let startX = 0;
