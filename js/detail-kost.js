@@ -42,27 +42,61 @@ async function loadKost() {
     }
 
 // ===========================
-// HERO IMAGE (SUPER SAFE)
+// HERO SLIDER (STABLE VERSION)
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
 
-if (heroTrack) {
+if (heroTrack && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
   heroTrack.innerHTML = "";
 
-  if (Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
-    heroTrack.innerHTML = `
-      <div class="hero-slide">
-        <img src="${kost.heroImages[0]}" alt="${kost.nama}">
-        <div class="hero-caption">Tampak Kost</div>
-      </div>
+  let index = 0;
+  let startX = 0;
+  let isDragging = false;
+  let pointerId = null;
+
+  kost.heroImages.forEach((img) => {
+    const slide = document.createElement("div");
+    slide.className = "hero-slide";
+    slide.innerHTML = `
+      <img src="${img}" alt="${kost.nama}">
+      <div class="hero-caption">Tampak Kost</div>
     `;
-  } else {
-    heroTrack.innerHTML = `
-      <div class="hero-slide">
-        <img src="/img/placeholder.jpg" alt="Kostory">
-      </div>
-    `;
-  }
+    heroTrack.appendChild(slide);
+  });
+
+  const update = () => {
+    heroTrack.style.transform = `translateX(-${index * 100}%)`;
+  };
+
+  heroTrack.addEventListener("pointerdown", (e) => {
+    startX = e.clientX;
+    isDragging = true;
+    pointerId = e.pointerId;
+    heroTrack.setPointerCapture(pointerId);
+  });
+
+  heroTrack.addEventListener("pointerup", (e) => {
+    if (!isDragging) return;
+
+    const diff = startX - e.clientX;
+
+    if (diff > 50 && index < kost.heroImages.length - 1) index++;
+    if (diff < -50 && index > 0) index--;
+
+    update();
+
+    isDragging = false;
+    heroTrack.releasePointerCapture(pointerId);
+    pointerId = null;
+  });
+
+  heroTrack.addEventListener("pointercancel", () => {
+    isDragging = false;
+    if (pointerId !== null) {
+      heroTrack.releasePointerCapture(pointerId);
+      pointerId = null;
+    }
+  });
 }
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
