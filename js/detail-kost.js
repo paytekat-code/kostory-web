@@ -60,32 +60,29 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
   });
 
  let startX = 0;
-let currentX = 0;
+let isPointerDown = false;
 
-let startX = 0;
-let currentX = 0;
+heroTrack.style.touchAction = "pan-y"; // biar scroll vertikal tetap jalan
 
-heroTrack.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-  currentX = startX;
-}, { passive: false });
+heroTrack.addEventListener("pointerdown", e => {
+  startX = e.clientX;
+  isPointerDown = true;
+  heroTrack.setPointerCapture(e.pointerId);
+});
 
-heroTrack.addEventListener("touchmove", e => {
-  currentX = e.touches[0].clientX;
-  e.preventDefault(); // ⬅️ WAJIB
-}, { passive: false });
+heroTrack.addEventListener("pointerup", e => {
+  if (!isPointerDown) return;
 
-heroTrack.addEventListener("touchend", () => {
-  const diff = startX - currentX;
+  const diff = startX - e.clientX;
 
   if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
     currentSlide++;
-  } 
-  if (diff < -60 && currentSlide > 0) {
+  } else if (diff < -60 && currentSlide > 0) {
     currentSlide--;
   }
 
   heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  isPointerDown = false;
 });
 }
 
