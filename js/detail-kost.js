@@ -86,24 +86,29 @@ if (heroTrack && heroDots && Array.isArray(kost.heroImages)) {
     });
   });
 }
-    // ===========================
-// HERO IMAGE ZOOM (FULLSCREEN)
 // ===========================
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImage");
-
-if (modal && modalImg) {
-  // delegate click ke semua gambar hero
-  // ===========================
-// HERO IMAGE ZOOM (MOBILE SAFE)
+// HERO IMAGE ZOOM (FINAL, HP AMAN)
 // ===========================
 const modal = document.getElementById("imageModal");
 const modalImg = document.getElementById("modalImage");
 
 if (modal && modalImg) {
 
-  // OPEN ZOOM (tap / click)
-  document.addEventListener("pointerup", (e) => {
+  // TAP GAMBAR (KHUSUS IMG, BUKAN DOCUMENT)
+  heroTrack.addEventListener("touchend", (e) => {
+    const img = e.target.closest(".hero-slide img");
+    if (!img) return;
+
+    e.preventDefault();        // ⬅️ INI KUNCI DI HP
+    e.stopPropagation();
+
+    modalImg.src = img.src;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }, { passive: false });
+
+  // DESKTOP / MOUSE
+  heroTrack.addEventListener("click", (e) => {
     const img = e.target.closest(".hero-slide img");
     if (!img) return;
 
@@ -112,20 +117,11 @@ if (modal && modalImg) {
     document.body.style.overflow = "hidden";
   });
 
-  // CLOSE ZOOM
-  modal.addEventListener("pointerup", () => {
-    modal.style.display = "none";
-    modalImg.src = "";
-    document.body.style.overflow = "";
-  });
-}
-
-
-  // tutup modal saat tap/click
+  // TUTUP MODAL
   modal.addEventListener("click", () => {
     modal.style.display = "none";
     modalImg.src = "";
-    document.body.style.overflow = ""; // unlock scroll
+    document.body.style.overflow = "";
   });
 }
 
