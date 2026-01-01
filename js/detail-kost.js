@@ -59,24 +59,32 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
     heroTrack.appendChild(slide);
   });
 
-  // === SWIPE SUPPORT (HP) ===
-  let startX = 0;
+ let startX = 0;
+let isDragging = false;
 
-  heroTrack.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
+heroTrack.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+});
 
-  heroTrack.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50 && currentSlide < kost.heroImages.length - 1) {
-      currentSlide++;
-    } else if (endX - startX > 50 && currentSlide > 0) {
-      currentSlide--;
-    }
-    heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  });
+heroTrack.addEventListener("touchend", e => {
+  if (!isDragging) return;
+
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  if (diff > 50 && currentSlide < kost.heroImages.length - 1) {
+    currentSlide++;
+  }
+
+  if (diff < -50 && currentSlide > 0) {
+    currentSlide--;
+  }
+
+  heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+  isDragging = false;
+});
 }
-
 
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
