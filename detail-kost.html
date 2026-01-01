@@ -3,121 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kostory – Detail Kost</title>
-
-  <!-- CSS utama kamu -->
+  <title>Detail Kost | Kostory</title>
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Font Icon untuk rating -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
+
 <body>
 
-  <!-- HERO & GALERI FOTO -->
-  <div class="detail-hero">
-    <div class="detail-carousel">
-      <img src="img/kost-large1.jpg" class="active">
-      <img src="img/kost-large2.jpg">
-      <img src="img/kost-large3.jpg">
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo">KOSTORY</div>
+      <div class="tagline">Where Stories Find a Home</div>
     </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </div>
+</div>
+
+<!-- MENU -->
+<div class="menu-overlay" id="menu" onclick="closeMenu(event)">
+  <div class="menu-panel">
+    <a href="#">Tentang Kami</a>
+    <a href="#">Kerjasama Bisnis</a>
+    <a href="#">Lowongan Kerja</a>
+    <a href="#">Masuk</a>
+    <a href="#">Daftar</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- HERO SLIDER -->
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-caption" id="heroCaption"></div>
   </div>
 
-  <div class="detail-main container">
+  <!-- INFO KOST -->
+  <div style="margin-top:16px">
+    <h2 id="kostNama"></h2>
+    <p style="font-size:13px;color:#666">
+      ⭐ <span id="kostRating"></span>
+      (<span id="kostReview"></span> reviews)<br>
+      📍 <span id="kostAlamat"></span>
+    </p>
 
-    <!-- INFORMASI KOST -->
-    <div class="detail-header">
-      <h1 class="detail-title">Kostory Mekar</h1>
-      <div class="detail-rating">
-        <span class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-regular fa-star"></i>
-        </span>
-        <span class="rating-number">4.6</span>
-        <span class="review-count">(123 ulasan)</span>
-      </div>
-      <p class="detail-location">
-        <i class="fa-solid fa-location-dot"></i> Palembang, Sumatera Selatan
-      </p>
-    </div>
+    <p style="font-size:13px;color:#666;margin-top:6px">
+      <strong id="badgeJenisKost"></strong> •
+      <span id="badgeDurasi"></span> •
+      <span id="badgePasutri"></span>
+    </p>
 
-    <!-- FORM PILIH TANGGAL -->
-    <div class="detail-datebox">
-      <label>Tanggal Inap</label>
-      <div class="date-fields">
-        <input type="date" id="checkin" />
-        <span class="separator">–</span>
-        <input type="date" id="checkout" />
-      </div>
-    </div>
-
-    <!-- PILIH TIPE KAMAR -->
-    <div class="detail-section">
-      <h2>Pilih Tipe Kamar</h2>
-
-      <!-- TIPE A -->
-      <div class="room-type-card">
-        <div class="room-type-info">
-          <h3>Tipe A – Standard</h3>
-          <p class="room-facilities">AC • KM Dalam • Meja</p>
-          <div class="room-stock">
-            <span>Kamar tersedia: <strong>3</strong></span>
-          </div>
-        </div>
-        <div class="room-type-price">
-          <span class="price">Rp 2.200.000</span>
-          <span class="per-duration">/ bulan</span>
-          <button class="btn-select-room">Pilih</button>
-        </div>
-      </div>
-
-      <!-- TIPE B -->
-      <div class="room-type-card">
-        <div class="room-type-info">
-          <h3>Tipe B – Standard</h3>
-          <p class="room-facilities">AC • KM Luar • Lemari</p>
-          <div class="room-stock">
-            <span>Kamar tersedia: <strong>1</strong></span>
-          </div>
-        </div>
-        <div class="room-type-price">
-          <span class="price">Rp 1.900.000</span>
-          <span class="per-duration">/ bulan</span>
-          <button class="btn-select-room">Pilih</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- FASILITAS UMUM -->
-    <div class="detail-section">
-      <h2>Fasilitas Umum</h2>
-      <ul class="facility-list">
-        <li>AC</li>
-        <li>WiFi</li>
-        <li>Parkir</li>
-        <li>CCTV</li>
-        <li>Laundry</li>
-      </ul>
-    </div>
-
-    <!-- DESKRIPSI LENGKAP -->
-    <div class="detail-section">
-      <h2>Deskripsi Kost</h2>
-      <p>
-        Kostory Mekar adalah kost modern dengan lingkungan nyaman...
-      </p>
-    </div>
-
+    <p style="margin-top:8px">
+      <a id="btnMaps" target="_blank" style="color:#ff8a00;font-weight:600">
+        Lihat Lokasi di Google Maps →
+      </a>
+    </p>
   </div>
 
-  <!-- STICKY FOOTER (CTA) -->
-  <div class="detail-footer-cta">
-    <span class="footer-price">Mulai dari <strong>Rp 2.200.000/bulan</strong></span>
-    <button class="btn-footer-book">Lihat Semua Tipe</button>
+  <!-- FASILITAS UMUM -->
+  <div class="kost-card">
+    <h4>Fasilitas Umum</h4>
+    <p id="fasilitasUmum"></p>
   </div>
 
+  <!-- KEBIJAKAN -->
+  <div class="kost-card">
+    <h4>Kebijakan Kost</h4>
+    <ul id="kebijakanList" style="font-size:13px;color:#666"></ul>
+  </div>
+
+  <!-- KONTAK -->
+  <div class="kost-card">
+    <h4>Kontak Pengurus</h4>
+    <a id="btnWa" target="_blank" style="color:#ff8a00;font-weight:600">
+      Chat Pengurus via WhatsApp →
+    </a>
+  </div>
+
+  <!-- TIPE KAMAR -->
+  <h3 style="margin-top:24px">Pilih Tipe Kamar</h3>
+  <div id="roomList"></div>
+
+  <footer>
+    © Kostory • Where Stories Find a Home
+  </footer>
+
+</div>
+
+<!-- MENU SCRIPT -->
+<script>
+function toggleMenu(){
+  document.getElementById('menu').style.display = 'block';
+}
+function closeMenu(e){
+  if(e.target.id === 'menu'){
+    e.target.style.display = 'none';
+  }
+}
+</script>
+
+<script type="module" src="js/detail-kost.js"></script>
 </body>
 </html>
