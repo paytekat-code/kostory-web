@@ -6,19 +6,26 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-console.log("detail-kost.js loaded");
+/* =================================================
+   UTIL
+================================================= */
+function qs(id) {
+  return document.getElementById(id);
+}
 
-// ambil ID kost dari URL
+/* =================================================
+   AMBIL ID DARI URL
+================================================= */
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("id");
 
 if (!kostId) {
-  alert("ID kost tidak ditemukan");
+  alert("ID kost tidak ditemukan di URL");
 }
 
-// =======================
-// LOAD DATA KOST
-// =======================
+/* =================================================
+   LOAD DETAIL KOST
+================================================= */
 async function loadKost() {
   const ref = doc(db, "kost", kostId);
   const snap = await getDoc(ref);
@@ -29,108 +36,162 @@ async function loadKost() {
   }
 
   const data = snap.data();
-  console.log("DATA KOST:", data);
 
-  // BASIC INFO
-  document.getElementById("kostNama").textContent = data.nama || "-";
-  document.getElementById("kostRating").textContent = data.rating ?? "-";
-  document.getElementById("kostReview").textContent = data.reviewCount ?? 0;
-  document.getElementById("kostAlamat").textContent =
-    data.alamat ? `${data.alamat}, ${data.kota}` : data.kota;
+  /* ===== BASIC INFO ===== */
+  qs("kostNama").textContent = data.nama || "-";
+  qs("kostRating").textContent = data.rating ?? "-";
+  qs("kostReview").textContent = data.reviewCount ?? 0;
 
-  // BADGES
-  document.getElementById("badgeJenisKost").textContent =
-    `Kost ${data.jenisKost || "-"}`;
+  qs("kostAlamat").textContent = data.alamat
+    ? `${data.alamat}, ${data.kota}`
+    : data.kota || "-";
 
-  document.getElementById("badgeDurasi").textContent =
-    Array.isArray(data.durasiTersedia)
-      ? `Durasi: ${data.durasiTersedia.join(", ")}`
-      : "Durasi: -";
+  /* ===== BADGE ===== */
+  qs("badgeJenisKost").textContent = data.jenisKost
+    ? `Kost ${data.jenisKost}`
+    : "Kost";
 
-  document.getElementById("badgePasutri").textContent =
-    data.bolehSuamiIstri ? "Boleh Suami Istri" : "Tidak menerima Suami Istri";
+  qs("badgeDurasi").textContent = Array.isArray(data.durasiTersedia)
+    ? `Durasi: ${data.durasiTersedia.join(", ")}`
+    : "Durasi: -";
 
-  // MAPS
+  qs("badgePasutri").textContent =
+    data.bolehSuamiIstri === true
+      ? "Boleh Suami Istri"
+      : "Tidak menerima Suami Istri";
+
+  /* ===== MAPS ===== */
   if (data.location?.lat && data.location?.lng) {
-    document.getElementById("btnMaps").href =
+    qs("btnMaps").href =
       `https://www.google.com/maps?q=${data.location.lat},${data.location.lng}`;
   }
 
-  // WA
+  /* ===== WHATSAPP ===== */
   if (data.kontak?.wa) {
     const text = encodeURIComponent(
       `Halo, saya tertarik dengan ${data.nama}`
     );
-    document.getElementById("btnWa").href =
+    qs("btnWa").href =
       `https://wa.me/${data.kontak.wa}?text=${text}`;
   }
 
-  // FASILITAS
-  document.getElementById("fasilitasUmum").textContent =
-    Array.isArray(data.fasilitasUmum)
-      ? data.fasilitasUmum.join(" • ")
-      : "-";
+  /* ===== FASILITAS UMUM ===== */
+  qs("fasilitasUmum").textContent = Array.isArray(data.fasilitasUmum)
+    ? data.fasilitasUmum.join(" • ")
+    : "-";
 
-  // KEBIJAKAN
-  const kebijakanList = document.getElementById("kebijakanList");
+  /* ===== KEBIJAKAN ===== */
+  const kebijakanList = qs("kebijakanList");
   kebijakanList.innerHTML = "";
-  (data.kebijakan || []).forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    kebijakanList.appendChild(li);
-  });
 
-  // HERO SLIDER (FIX TOTAL)
-  const heroSlider = document.getElementById("heroSlider");
+  if (Array.isArray(data.kebijakan)) {
+    data.kebijakan.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      kebijakanList.appendChild(li);
+    });
+  }
+
+  /* ===== HERO SLIDER ===== */
+  const heroSlider = qs("heroSlider");
   heroSlider.innerHTML = "";
 
-  (data.heroImages || []).forEach((src, i) => {
-    const img = document.createElement("img");
-    img.src = src;
-    if (i === 0) img.classList.add("active");
-    heroSlider.appendChild(img);
-  });
+  if (Array.isArray(data.heroImages)) {
+    data.heroImages.forEach((src, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      if (index === 0) img.classList.add("active");
+      heroSlider.appendChild(img);
+    });
+  }
+
+  // caption (WAJIB, CSS kamu pakai ini)
+  const caption = document.createElement("div");
+  caption.className = "hero-caption";
+  caption.textContent = data.nama || "";
+  heroSlider.appendChild(caption);
 }
 
-// =======================
-// LOAD ROOMS
-// =======================
+/* =================================================
+   LOAD ROOMS
+================================================= */
 async function loadRooms() {
   const ref = collection(db, "kost", kostId, "rooms");
   const snap = await getDocs(ref);
 
-  const container = document.getElementById("roomList");
+  const container = qs("roomList");
   container.innerHTML = "";
 
-  snap.forEach(docSnap => {
-    const room = docSnap.data();
-    if (!room.aktif) return;
+  if (snap.empty) {
+    container.innerHTML = "<p>Tidak ada tipe kamar tersedia.</p>";
+    return;
+  }
+
+  snap.forEach(roomSnap => {
+    const room = roomSnap.data();
+    if (room.aktif === false) return;
 
     const card = document.createElement("div");
     card.className = "kost-card";
 
+    /* ===== ROOM HTML ===== */
     card.innerHTML = `
-      <h4>${room.nama}</h4>
-      <p>${(room.fasilitas || []).join(" • ")}</p>
-      <p style="font-size:13px;color:#666">
-        Kamar tersedia: <strong>${room.tersedia ?? 0}</strong>
-      </p>
+      <div class="room-slider"></div>
+
+      <h4>${room.nama || "-"}</h4>
+
       <p>
-        <strong>Rp ${room.hargaBulanan.toLocaleString("id-ID")}</strong> / bulan
+        ${Array.isArray(room.fasilitas)
+          ? room.fasilitas.join(" • ")
+          : "-"}
       </p>
+
+      <p style="font-size:13px;color:#666">
+        Kamar tersedia:
+        <strong>${room.tersedia ?? 0}</strong>
+      </p>
+
+      <p>
+        <strong>
+          Rp ${Number(room.hargaBulanan || 0).toLocaleString("id-ID")}
+        </strong> / bulan
+      </p>
+
       <a href="#" style="color:#ff8a00;font-weight:600">
         Pilih Tipe Ini →
       </a>
     `;
 
+    /* ===== ROOM SLIDER ===== */
+    const slider = card.querySelector(".room-slider");
+
+    if (Array.isArray(room.images)) {
+      room.images.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if (index === 0) img.classList.add("active");
+        slider.appendChild(img);
+      });
+    }
+
+    const roomCaption = document.createElement("div");
+    roomCaption.className = "room-caption";
+    roomCaption.textContent = room.nama || "";
+    slider.appendChild(roomCaption);
+
     container.appendChild(card);
   });
 }
 
-// =======================
-// INIT
-// =======================
+/* =================================================
+   INIT
+================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadKost();
-  await loadRooms();
+  try {
+    await loadKost();
+    await loadRooms();
+  } catch (err) {
+    console.error("ERROR DETAIL KOST:", err);
+    alert("Terjadi kesalahan saat memuat data kost");
+  }
 });
