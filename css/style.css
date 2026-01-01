@@ -147,6 +147,7 @@ img{width:100%;display:block}
   object-fit:cover;
   display:block;
   background:#000;
+  touch-action: manipulation; /* ⬅️ TAMBAH DI SINI */
 }
 
 
