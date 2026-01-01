@@ -104,7 +104,6 @@ img{width:100%;display:block}
 }
 
 /* HERO */
-/* HERO */
 .hero-slider{
   border-radius:16px;
   overflow:hidden;
@@ -117,7 +116,6 @@ img{width:100%;display:block}
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
-  transition: transform 0.3s ease;   /* <--- DITAMBAH */
 }
 
 .hero-track::-webkit-scrollbar{
@@ -128,7 +126,6 @@ img{width:100%;display:block}
   min-width:100%;
   height:100%;
   scroll-snap-align:start;
-  flex-shrink: 0;                    /* <--- DITAMBAH */
 }
 
 .hero-slide img{
@@ -137,6 +134,7 @@ img{width:100%;display:block}
   object-fit:cover;
   display:block;
 }
+
 /* SEARCH */
 .search-card{
   background:#fff;
