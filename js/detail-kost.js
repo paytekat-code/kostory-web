@@ -174,16 +174,16 @@ loadKost();
 const menuBtn = document.querySelector(".menu-btn");
 const menu = document.getElementById("menu");
 
-function openMenu() {
+window.openMenu = function () {
   menu.style.display = "block";
-}
+};
 
-function closeMenu(e) {
+window.closeMenu = function (e) {
   if (e.target === menu) {
     menu.style.display = "none";
   }
-}
+};
 
 if (menuBtn && menu) {
-  menuBtn.addEventListener("click", openMenu);
+  menuBtn.addEventListener("click", window.openMenu);
 }
