@@ -62,21 +62,26 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
  let startX = 0;
 let currentX = 0;
 
+let startX = 0;
+let currentX = 0;
+
 heroTrack.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
   currentX = startX;
-}, { passive: true });
+}, { passive: false });
 
 heroTrack.addEventListener("touchmove", e => {
   currentX = e.touches[0].clientX;
-}, { passive: true });
+  e.preventDefault(); // ⬅️ WAJIB
+}, { passive: false });
 
 heroTrack.addEventListener("touchend", () => {
   const diff = startX - currentX;
 
   if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
     currentSlide++;
-  } else if (diff < -60 && currentSlide > 0) {
+  } 
+  if (diff < -60 && currentSlide > 0) {
     currentSlide--;
   }
 
