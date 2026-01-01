@@ -427,3 +427,27 @@ footer{
   background:linear-gradient(to top, rgba(0,0,0,.6), transparent);
   pointer-events:none;
 }
+/* ===========================
+   HERO DOT INDICATOR
+   =========================== */
+
+.hero-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px;
+}
+
+.hero-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#ccc;
+  transition:background .2s ease, transform .2s ease;
+  cursor:pointer;
+}
+
+.hero-dot.active{
+  background:#ff8a00;
+  transform:scale(1.2);
+}
