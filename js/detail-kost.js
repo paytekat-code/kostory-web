@@ -94,14 +94,32 @@ const modalImg = document.getElementById("modalImage");
 
 if (modal && modalImg) {
   // delegate click ke semua gambar hero
-  document.addEventListener("click", (e) => {
+  // ===========================
+// HERO IMAGE ZOOM (MOBILE SAFE)
+// ===========================
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+
+if (modal && modalImg) {
+
+  // OPEN ZOOM (tap / click)
+  document.addEventListener("pointerup", (e) => {
     const img = e.target.closest(".hero-slide img");
     if (!img) return;
 
     modalImg.src = img.src;
     modal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // lock scroll
+    document.body.style.overflow = "hidden";
   });
+
+  // CLOSE ZOOM
+  modal.addEventListener("pointerup", () => {
+    modal.style.display = "none";
+    modalImg.src = "";
+    document.body.style.overflow = "";
+  });
+}
+
 
   // tutup modal saat tap/click
   modal.addEventListener("click", () => {
