@@ -42,17 +42,12 @@ async function loadKost() {
     }
 
 // ===========================
-// HERO SLIDER (STABLE VERSION)
+// HERO SLIDER (NATIVE SCROLL)
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
 
-if (heroTrack && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
+if (heroTrack && Array.isArray(kost.heroImages)) {
   heroTrack.innerHTML = "";
-
-  let index = 0;
-  let startX = 0;
-  let isDragging = false;
-  let pointerId = null;
 
   kost.heroImages.forEach((img) => {
     const slide = document.createElement("div");
@@ -62,40 +57,6 @@ if (heroTrack && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
       <div class="hero-caption">Tampak Kost</div>
     `;
     heroTrack.appendChild(slide);
-  });
-
-  const update = () => {
-    heroTrack.style.transform = `translateX(-${index * 100}%)`;
-  };
-
-  heroTrack.addEventListener("pointerdown", (e) => {
-    startX = e.clientX;
-    isDragging = true;
-    pointerId = e.pointerId;
-    heroTrack.setPointerCapture(pointerId);
-  });
-
-  heroTrack.addEventListener("pointerup", (e) => {
-    if (!isDragging) return;
-
-    const diff = startX - e.clientX;
-
-    if (diff > 50 && index < kost.heroImages.length - 1) index++;
-    if (diff < -50 && index > 0) index--;
-
-    update();
-
-    isDragging = false;
-    heroTrack.releasePointerCapture(pointerId);
-    pointerId = null;
-  });
-
-  heroTrack.addEventListener("pointercancel", () => {
-    isDragging = false;
-    if (pointerId !== null) {
-      heroTrack.releasePointerCapture(pointerId);
-      pointerId = null;
-    }
   });
 }
     // === FASILITAS UMUM ===
