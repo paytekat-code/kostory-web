@@ -54,7 +54,6 @@ if (heroTrack && Array.isArray(kost.heroImages)) {
     slide.className = "hero-slide";
     slide.innerHTML = `
       <img src="${img}" alt="${kost.nama}">
-      <div class="hero-caption">Tampak Kost</div>
     `;
     heroTrack.appendChild(slide);
   });
