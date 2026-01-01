@@ -41,26 +41,39 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-   // === HERO IMAGES ===
+   // === HERO IMAGES (AMAN) ===
 const hero = document.getElementById("heroSlider");
 const heroTrack = document.getElementById("heroTrack");
 
 if (hero && heroTrack && Array.isArray(kost.heroImages)) {
-  hero.innerHTML = "";
   heroTrack.innerHTML = "";
-
   let currentSlide = 0;
 
-  kost.heroImages.forEach((img, i) => {
+  kost.heroImages.forEach(img => {
     const slide = document.createElement("div");
     slide.className = "hero-slide";
-
     slide.innerHTML = `
       <img src="${img}" alt="${kost.nama}">
       <div class="hero-caption">Tampak Depan</div>
     `;
-
     heroTrack.appendChild(slide);
+  });
+
+  // === SWIPE SUPPORT (HP) ===
+  let startX = 0;
+
+  heroTrack.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
+
+  heroTrack.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50 && currentSlide < kost.heroImages.length - 1) {
+      currentSlide++;
+    } else if (endX - startX > 50 && currentSlide > 0) {
+      currentSlide--;
+    }
+    heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
   });
 }
 
