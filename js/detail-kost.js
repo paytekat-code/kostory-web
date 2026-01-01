@@ -77,37 +77,6 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
   });
 }
 
-/* === SWIPE SUPPORT (HP) === */
-let startX = 0;
-
-heroTrack.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-heroTrack.addEventListener("touchend", e => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) nextSlide();
-  if (endX - startX > 50) prevSlide();
-});
-
-function updateSlide() {
-  heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-}
-
-function nextSlide() {
-  if (currentSlide < kost.heroImages.length - 1) {
-    currentSlide++;
-    updateSlide();
-  }
-}
-
-function prevSlide() {
-  if (currentSlide > 0) {
-    currentSlide--;
-    updateSlide();
-  }
-}
-
 
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
