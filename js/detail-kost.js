@@ -59,21 +59,27 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
     heroTrack.appendChild(slide);
   });
 
- let startX = 0;
-let isPointerDown = false;
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
 
-heroTrack.style.touchAction = "pan-y"; // biar scroll vertikal tetap jalan
+heroTrack.style.touchAction = "pan-y";
 
 heroTrack.addEventListener("pointerdown", e => {
   startX = e.clientX;
-  isPointerDown = true;
-  heroTrack.setPointerCapture(e.pointerId);
+  currentX = startX;
+  isDragging = true;
 });
 
-heroTrack.addEventListener("pointerup", e => {
-  if (!isPointerDown) return;
+heroTrack.addEventListener("pointermove", e => {
+  if (!isDragging) return;
+  currentX = e.clientX;
+});
 
-  const diff = startX - e.clientX;
+heroTrack.addEventListener("pointerup", () => {
+  if (!isDragging) return;
+
+  const diff = startX - currentX;
 
   if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
     currentSlide++;
@@ -82,16 +88,13 @@ heroTrack.addEventListener("pointerup", e => {
   }
 
   heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  isPointerDown = false;
-});
-}
-heroTrack.addEventListener("pointercancel", () => {
-  isPointerDown = false;
+  isDragging = false;
 });
 
-heroTrack.addEventListener("pointerleave", () => {
-  isPointerDown = false;
+heroTrack.addEventListener("pointercancel", () => {
+  isDragging = false;
 });
+
 
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
