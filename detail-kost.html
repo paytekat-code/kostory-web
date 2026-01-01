@@ -2,82 +2,62 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Detail Kost | Kostory</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-inner">
-    <div>
-      <div class="logo">KOSTORY</div>
-      <div class="tagline">Where Stories Find a Home</div>
-    </div>
-    <div class="menu-btn">☰</div>
+<header class="header">
+  <div class="logo">
+    <strong>KOSTORY</strong><br />
+    <small>Where Stories Find a Home</small>
   </div>
-</div>
+</header>
 
-<div class="container">
+<main class="container">
 
-  <!-- HERO SLIDER -->
-  <div class="hero-slider" id="heroSlider"></div>
+  <!-- HERO -->
+  <section id="hero"></section>
 
   <!-- INFO -->
-  <div style="margin-top:16px">
-    <h2 id="kostNama"></h2>
-
-    <p style="font-size:13px;color:#666">
-      ⭐ <span id="kostRating">-</span>
-      (<span id="kostReview">0</span> reviews)<br>
-      📍 <span id="kostAlamat">-</span>
-    </p>
-
-    <p style="font-size:13px;color:#666;margin-top:6px">
-      <strong id="badgeJenisKost"></strong> •
-      <span id="badgeDurasi"></span> •
-      <span id="badgePasutri"></span>
-    </p>
-
-    <p style="margin-top:8px">
-      <a id="btnMaps" target="_blank" style="color:#ff8a00;font-weight:600">
-        Lihat Lokasi di Google Maps →
-      </a>
-    </p>
-  </div>
+  <section class="info">
+    <h1 id="nama-kost">-</h1>
+    <div id="rating"></div>
+    <div id="alamat"></div>
+    <a id="maps-link" target="_blank">Lihat Lokasi di Google Maps →</a>
+  </section>
 
   <!-- FASILITAS -->
-  <div class="kost-card">
-    <h4>Fasilitas Umum</h4>
-    <p id="fasilitasUmum">-</p>
-  </div>
+  <section class="card">
+    <h3>Fasilitas Umum</h3>
+    <ul id="fasilitas-umum"></ul>
+  </section>
 
   <!-- KEBIJAKAN -->
-  <div class="kost-card">
-    <h4>Kebijakan Kost</h4>
-    <ul id="kebijakanList"></ul>
-  </div>
+  <section class="card">
+    <h3>Kebijakan Kost</h3>
+    <ul id="kebijakan"></ul>
+  </section>
 
   <!-- KONTAK -->
-  <div class="kost-card">
-    <h4>Kontak Pengurus</h4>
-    <a id="btnWa" target="_blank" style="color:#ff8a00;font-weight:600">
-      Chat Pengurus via WhatsApp →
-    </a>
-  </div>
+  <section class="card">
+    <h3>Kontak Pengurus</h3>
+    <a id="wa-link" target="_blank">Chat Pengurus via WhatsApp →</a>
+  </section>
 
   <!-- ROOMS -->
-  <h3 style="margin-top:24px">Pilih Tipe Kamar</h3>
-  <div id="roomList"></div>
+  <section>
+    <h2>Pilih Tipe Kamar</h2>
+    <div id="rooms"></div>
+  </section>
 
-  <footer>
-    © Kostory • Where Stories Find a Home
-  </footer>
+</main>
 
-</div>
+<footer>
+  © Kostory • Where Stories Find a Home
+</footer>
 
+<!-- 🔥 WAJIB -->
 <script type="module" src="js/detail-kost.js"></script>
 </body>
 </html>
