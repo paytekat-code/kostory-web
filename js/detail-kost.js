@@ -46,7 +46,19 @@ async function loadKost() {
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
 
-if (heroTrack && Array.isArray(kost.heroImages)) {
+if (
+  heroTrack &&
+  Array.isArray(kost.heroImages) &&
+  kost.heroImages.length > 0
+) {
+else {
+  heroTrack.innerHTML = `
+    <div class="hero-slide">
+      <img src="/img/placeholder.jpg" alt="Kostory">
+    </div>
+  `;
+}
+
   heroTrack.innerHTML = "";
 
   let index = 0;
@@ -57,9 +69,12 @@ if (heroTrack && Array.isArray(kost.heroImages)) {
     const slide = document.createElement("div");
     slide.className = "hero-slide";
     slide.innerHTML = `
-      <img src="${img}" alt="${kost.nama}">
-      <div class="hero-caption">Tampak Kost</div>
-    `;
+  <img src="${img}" alt="${kost.nama}" loading="eager"
+       onload="this.style.opacity=1"
+       style="opacity:0; transition:opacity .3s ease">
+  <div class="hero-caption">Tampak Kost</div>
+`;
+
     heroTrack.appendChild(slide);
   });
 
