@@ -2,62 +2,92 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detail Kost | Kostory</title>
+
+  <!-- CSS UTAMA (SAMA DENGAN MOCKUP) -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
-<header class="header">
-  <div class="logo">
-    <strong>KOSTORY</strong><br />
-    <small>Where Stories Find a Home</small>
-  </div>
-</header>
+  <!-- HEADER (SAMA, JANGAN DIUBAH) -->
+  <header class="header">
+    <div class="logo">
+      <strong>KOSTORY</strong>
+      <span>Where Stories Find a Home</span>
+    </div>
+    <div class="menu">☰</div>
+  </header>
 
-<main class="container">
+  <!-- MAIN CONTENT -->
+  <main class="container">
 
-  <!-- HERO -->
-  <section id="hero"></section>
+    <!-- HERO SLIDER (SAMA STRUKTUR) -->
+    <section class="hero">
+      <div class="hero-slider" id="heroSlider">
+        <!-- images injected by JS -->
+      </div>
+    </section>
 
-  <!-- INFO -->
-  <section class="info">
-    <h1 id="nama-kost">-</h1>
-    <div id="rating"></div>
-    <div id="alamat"></div>
-    <a id="maps-link" target="_blank">Lihat Lokasi di Google Maps →</a>
-  </section>
+    <!-- INFO UTAMA -->
+    <section class="kost-info">
+      <h1 id="kostNama">-</h1>
 
-  <!-- FASILITAS -->
-  <section class="card">
-    <h3>Fasilitas Umum</h3>
-    <ul id="fasilitas-umum"></ul>
-  </section>
+      <div class="rating">
+        ⭐ <span id="kostRating">-</span>
+        (<span id="kostReview">0</span> reviews)
+      </div>
 
-  <!-- KEBIJAKAN -->
-  <section class="card">
-    <h3>Kebijakan Kost</h3>
-    <ul id="kebijakan"></ul>
-  </section>
+      <div class="alamat">
+        📍 <span id="kostAlamat">-</span>
+      </div>
 
-  <!-- KONTAK -->
-  <section class="card">
-    <h3>Kontak Pengurus</h3>
-    <a id="wa-link" target="_blank">Chat Pengurus via WhatsApp →</a>
-  </section>
+      <a id="mapsLink" href="#" target="_blank" class="maps-link">
+        Lihat Lokasi di Google Maps →
+      </a>
+    </section>
 
-  <!-- ROOMS -->
-  <section>
-    <h2>Pilih Tipe Kamar</h2>
-    <div id="rooms"></div>
-  </section>
+    <!-- FASILITAS UMUM -->
+    <section class="card">
+      <h3>Fasilitas Umum</h3>
+      <ul id="fasilitasUmum">
+        <!-- li injected -->
+      </ul>
+    </section>
 
-</main>
+    <!-- KEBIJAKAN KOST -->
+    <section class="card">
+      <h3>Kebijakan Kost</h3>
+      <ul id="kebijakanKost">
+        <!-- li injected -->
+      </ul>
+    </section>
 
-<footer>
-  © Kostory • Where Stories Find a Home
-</footer>
+    <!-- KONTAK PENGURUS -->
+    <section class="card">
+      <h3>Kontak Pengurus</h3>
+      <a id="waPengurus" href="#" target="_blank" class="wa-link">
+        Chat Pengurus via WhatsApp →
+      </a>
+    </section>
 
-<!-- 🔥 WAJIB -->
-<script type="module" src="js/detail-kost.js"></script>
+    <!-- PILIH TIPE KAMAR -->
+    <section class="rooms">
+      <h2>Pilih Tipe Kamar</h2>
+      <div id="roomList" class="room-list">
+        <!-- room cards injected -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © Kostory • Where Stories Find a Home
+  </footer>
+
+  <!-- JS (WAJIB MODULE) -->
+  <script type="module" src="js/detail-kost.js"></script>
 </body>
 </html>
