@@ -41,111 +41,83 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-  // === HERO IMAGES (SWIPE HALUS + AMAN, TIDAK BIKIN SCRIPT MATI) ===
+  // === HERO IMAGES (SWIPE HALUS + SUPER AMAN) ===
   const hero = document.getElementById("heroSlider");
   const heroTrack = document.getElementById("heroTrack");
 
+  // Cek dulu apakah elemen dan data gambar ada
   if (hero && heroTrack && kost.heroImages && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
     heroTrack.innerHTML = "";
-    let currentSlide = 0;
 
-    // Buat slide-slide
+    // Buat semua slide
     kost.heroImages.forEach((img, index) => {
       const slide = document.createElement("div");
       slide.className = "hero-slide";
       slide.innerHTML = `
-        <img src="${img}" alt="${kost.nama} - Gambar ${index + 1}">
-        <div class="hero-caption">
-          ${index === 0 ? 'Tampak Depan' : 'Interior / Fasilitas'}
-        </div>
+        <img src="${img}" alt="${kost.nama}">
+        <div class="hero-caption">${index === 0 ? 'Tampak Depan' : 'Interior / Fasilitas'}</div>
       `;
       heroTrack.appendChild(slide);
     });
 
-    // Tambah transition halus
-    heroTrack.style.transition = "transform 0.3s ease";
+    let currentSlide = 0;
+    const totalSlides = kost.heroImages.length;
+
+    const goToSlide = () => {
+      heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    };
 
     let startX = 0;
     let isDragging = false;
 
-    const updateSlide = () => {
-      heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-    };
-
-    // Touch/Mouse start
-    heroTrack.addEventListener("pointerdown", e => {
-      startX = e.clientX || e.touches[0].clientX;
+    heroTrack.addEventListener("pointerdown", (e) => {
+      startX = e.clientX || (e.touches && e.touches[0].clientX);
       isDragging = true;
       heroTrack.style.transition = "none";
     });
 
-    // Touch/Mouse move
-    heroTrack.addEventListener("pointermove", e => {
+    heroTrack.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
-      e.preventDefault(); // biar tidak scroll halaman saat swipe
       const currentX = e.clientX || (e.touches && e.touches[0].clientX);
-      if (currentX === undefined) return;
       const diff = startX - currentX;
       heroTrack.style.transform = `translateX(calc(-${currentSlide * 100}% - ${diff}px))`;
     });
 
-    // Touch/Mouse end
-    const endDrag = (e) => {
+    heroTrack.addEventListener("pointerup", (e) => {
       if (!isDragging) return;
       isDragging = false;
       heroTrack.style.transition = "transform 0.3s ease";
 
-      let endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
       const diff = startX - endX;
 
       if (Math.abs(diff) > 50) {
-        if (diff > 0 && currentSlide < kost.heroImages.length - 1) {
-          currentSlide++;
-        } else if (diff < 0 && currentSlide > 0) {
-          currentSlide--;
-        }
+        if (diff > 0 && currentSlide < totalSlides - 1) currentSlide++;
+        else if (diff < 0 && currentSlide > 0) currentSlide--;
       }
-      updateSlide();
-    };
 
-    heroTrack.addEventListener("pointerup", endDrag);
-    heroTrack.addEventListener("pointercancel", endDrag);
-    heroTrack.addEventListener("touchend", endDrag); // extra safety untuk touch
+      goToSlide();
+    });
 
-    // Initial
-    updateSlide();
+    heroTrack.addEventListener("pointercancel", () => {
+      isDragging = false;
+      heroTrack.style.transition = "transform 0.3s ease";
+      goToSlide();
+    });
 
-    // === DOT INDIKATOR (opsional, tapi bagus) ===
-    if (kost.heroImages.length > 1) {
-      const dots = document.createElement("div");
-      dots.style.cssText = "position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3;";
-      
-      kost.heroImages.forEach((_, i) => {
-        const dot = document.createElement("div");
-        dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===0?'#fff':'rgba(255,255,255,0.5)'};transition:background 0.3s;`;
-        dots.appendChild(dot);
-      });
-      
-      hero.appendChild(dots);
-
-      // Update dots saat slide berubah
-      const updateDots = () => {
-        dots.querySelectorAll("div").forEach((dot, i) => {
-          dot.style.background = i === currentSlide ? "#fff" : "rgba(255,255,255,0.5)";
-        });
-      };
-
-      // Override updateSlide supaya dots ikut update
-      const originalUpdate = updateSlide;
-      updateSlide = () => {
-        originalUpdate();
-        updateDots();
-      };
-      updateDots(); // pertama kali
+    // Pastikan posisi awal benar
+    goToSlide();
+  } else {
+    // Kalau tidak ada gambar atau hanya 1, tetap tampilkan yang pertama kalau ada
+    if (heroTrack && kost.heroImages && kost.heroImages[0]) {
+      heroTrack.innerHTML = `
+        <div class="hero-slide">
+          <img src="${kost.heroImages[0]}" alt="${kost.nama}">
+          <div class="hero-caption">Tampak Depan</div>
+        </div>
+      `;
     }
-  }
-  // === AKHIR HERO IMAGES ===
-    
+  }    
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
     fasilitas.innerHTML = "";
