@@ -5,89 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detail Kost | Kostory</title>
 
-  <!-- CSS UTAMA (SAMA DENGAN MOCKUP) -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-  <!-- HEADER (SAMA, JANGAN DIUBAH) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="logo">
       <strong>KOSTORY</strong>
       <span>Where Stories Find a Home</span>
     </div>
-    <div class="menu">☰</div>
+    <button class="menu-btn">☰</button>
   </header>
+
+  <!-- HERO SLIDER (SAMA PERSIS SEPERTI kostorymekar.html) -->
+  <section class="hero">
+    <div class="hero-slider" id="heroSlider">
+      <!-- image injected by JS -->
+    </div>
+  </section>
 
   <!-- MAIN CONTENT -->
   <main class="container">
 
-    <!-- HERO SLIDER (SAMA STRUKTUR) -->
-    <section class="hero">
-      <div class="hero-slider" id="heroSlider">
-        <!-- images injected by JS -->
-      </div>
-    </section>
+    <!-- TITLE -->
+    <h1 id="kostNama">-</h1>
 
-    <!-- INFO UTAMA -->
-    <section class="kost-info">
-      <h1 id="kostNama">-</h1>
-
-      <div class="rating">
-        ⭐ <span id="kostRating">-</span>
-        (<span id="kostReview">0</span> reviews)
-      </div>
-
-      <div class="alamat">
-        📍 <span id="kostAlamat">-</span>
-      </div>
-
-      <a id="mapsLink" href="#" target="_blank" class="maps-link">
-        Lihat Lokasi di Google Maps →
-      </a>
-    </section>
+    <div class="meta">
+      <span id="kostRating">⭐ - (0 reviews)</span><br />
+      <span id="kostAlamat">-</span><br />
+      <a id="mapLink" href="#" target="_blank">Lihat Lokasi di Google Maps →</a>
+    </div>
 
     <!-- FASILITAS UMUM -->
     <section class="card">
-      <h3>Fasilitas Umum</h3>
-      <ul id="fasilitasUmum">
-        <!-- li injected -->
-      </ul>
+      <h2>Fasilitas Umum</h2>
+      <ul id="fasilitasUmum"></ul>
     </section>
 
-    <!-- KEBIJAKAN KOST -->
+    <!-- KEBIJAKAN -->
     <section class="card">
-      <h3>Kebijakan Kost</h3>
-      <ul id="kebijakanKost">
-        <!-- li injected -->
-      </ul>
+      <h2>Kebijakan Kost</h2>
+      <ul id="kebijakan"></ul>
     </section>
 
-    <!-- KONTAK PENGURUS -->
+    <!-- KONTAK -->
     <section class="card">
-      <h3>Kontak Pengurus</h3>
-      <a id="waPengurus" href="#" target="_blank" class="wa-link">
+      <h2>Kontak Pengurus</h2>
+      <a id="waLink" href="#" target="_blank">
         Chat Pengurus via WhatsApp →
       </a>
     </section>
 
-    <!-- PILIH TIPE KAMAR -->
-    <section class="rooms">
+    <!-- ROOM -->
+    <section>
       <h2>Pilih Tipe Kamar</h2>
-      <div id="roomList" class="room-list">
+      <div class="room-list" id="roomList">
         <!-- room cards injected -->
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     © Kostory • Where Stories Find a Home
   </footer>
 
-  <!-- JS (WAJIB MODULE) -->
+  <!-- JS -->
   <script type="module" src="js/detail-kost.js"></script>
 </body>
 </html>
