@@ -60,29 +60,27 @@ if (hero && heroTrack && Array.isArray(kost.heroImages)) {
   });
 
  let startX = 0;
-let isDragging = false;
+let currentX = 0;
 
 heroTrack.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
-  isDragging = true;
-});
+  currentX = startX;
+}, { passive: true });
 
-heroTrack.addEventListener("touchend", e => {
-  if (!isDragging) return;
+heroTrack.addEventListener("touchmove", e => {
+  currentX = e.touches[0].clientX;
+}, { passive: true });
 
-  const endX = e.changedTouches[0].clientX;
-  const diff = startX - endX;
+heroTrack.addEventListener("touchend", () => {
+  const diff = startX - currentX;
 
-  if (diff > 50 && currentSlide < kost.heroImages.length - 1) {
+  if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
     currentSlide++;
-  }
-
-  if (diff < -50 && currentSlide > 0) {
+  } else if (diff < -60 && currentSlide > 0) {
     currentSlide--;
   }
 
   heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  isDragging = false;
 });
 }
 
