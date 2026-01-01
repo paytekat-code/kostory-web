@@ -42,20 +42,48 @@ async function loadKost() {
     }
 
 // ===========================
-// HERO SLIDER (NATIVE SCROLL)
+// HERO SLIDER + DOT INDICATOR
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
+const heroDots = document.getElementById("heroDots");
 
-if (heroTrack && Array.isArray(kost.heroImages)) {
+if (heroTrack && heroDots && Array.isArray(kost.heroImages)) {
   heroTrack.innerHTML = "";
+  heroDots.innerHTML = "";
 
-  kost.heroImages.forEach((img) => {
+  const slideCount = kost.heroImages.length;
+
+  kost.heroImages.forEach((img, index) => {
+    // slide
     const slide = document.createElement("div");
     slide.className = "hero-slide";
-    slide.innerHTML = `
-      <img src="${img}" alt="${kost.nama}">
-    `;
+    slide.innerHTML = `<img src="${img}" alt="${kost.nama}">`;
     heroTrack.appendChild(slide);
+
+    // dot
+    const dot = document.createElement("div");
+    dot.className = "hero-dot";
+    if (index === 0) dot.classList.add("active");
+
+    dot.addEventListener("click", () => {
+      heroTrack.scrollTo({
+        left: index * heroTrack.clientWidth,
+        behavior: "smooth"
+      });
+    });
+
+    heroDots.appendChild(dot);
+  });
+
+  // sync dot saat scroll
+  heroTrack.addEventListener("scroll", () => {
+    const index = Math.round(
+      heroTrack.scrollLeft / heroTrack.clientWidth
+    );
+
+    [...heroDots.children].forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
   });
 }
     // === FASILITAS UMUM ===
