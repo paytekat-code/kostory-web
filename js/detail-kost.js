@@ -41,59 +41,53 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-   // === HERO IMAGES (AMAN) ===
-const hero = document.getElementById("heroSlider");
+  // ===========================
+// HERO SLIDER (FINAL & STABLE)
+// ===========================
 const heroTrack = document.getElementById("heroTrack");
 
-if (hero && heroTrack && Array.isArray(kost.heroImages)) {
+if (heroTrack && Array.isArray(kost.heroImages)) {
   heroTrack.innerHTML = "";
-  let currentSlide = 0;
 
-  kost.heroImages.forEach(img => {
+  let index = 0;
+  let startX = 0;
+  let isDragging = false;
+
+  kost.heroImages.forEach((img) => {
     const slide = document.createElement("div");
     slide.className = "hero-slide";
     slide.innerHTML = `
       <img src="${img}" alt="${kost.nama}">
-      <div class="hero-caption">Tampak Depan</div>
+      <div class="hero-caption">Tampak Kost</div>
     `;
     heroTrack.appendChild(slide);
   });
 
-let startX = 0;
-let currentX = 0;
-let isDragging = false;
+  const updateSlide = () => {
+    heroTrack.style.transform = `translateX(-${index * 100}%)`;
+  };
 
-heroTrack.style.touchAction = "pan-y";
+  heroTrack.addEventListener("pointerdown", (e) => {
+    startX = e.clientX;
+    isDragging = true;
+  });
 
-heroTrack.addEventListener("pointerdown", e => {
-  startX = e.clientX;
-  currentX = startX;
-  isDragging = true;
-});
+  heroTrack.addEventListener("pointerup", (e) => {
+    if (!isDragging) return;
 
-heroTrack.addEventListener("pointermove", e => {
-  if (!isDragging) return;
-  currentX = e.clientX;
-});
+    const diff = startX - e.clientX;
 
-heroTrack.addEventListener("pointerup", () => {
-  if (!isDragging) return;
+    if (diff > 50 && index < kost.heroImages.length - 1) index++;
+    if (diff < -50 && index > 0) index--;
 
-  const diff = startX - currentX;
+    updateSlide();
+    isDragging = false;
+  });
 
-  if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
-    currentSlide++;
-  } else if (diff < -60 && currentSlide > 0) {
-    currentSlide--;
-  }
-
-  heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-  isDragging = false;
-});
-
-heroTrack.addEventListener("pointercancel", () => {
-  isDragging = false;
-});
+  heroTrack.addEventListener("pointerleave", () => {
+    isDragging = false;
+  });
+}
 
 
     // === FASILITAS UMUM ===
