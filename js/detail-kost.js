@@ -41,72 +41,61 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-     // === HERO IMAGES (SWIPE SEDERHANA TAPI PASTI AMAN) ===
-    const heroSlider = document.getElementById("heroSlider");
+         // === HERO IMAGES (AMAN) ===
+    const hero = document.getElementById("heroSlider");
     const heroTrack = document.getElementById("heroTrack");
 
-    if (heroTrack && kost.heroImages && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
-      heroTrack.innerHTML = ""; // kosongin dulu
+    if (hero && heroTrack && Array.isArray(kost.heroImages)) {
+      heroTrack.innerHTML = "";
+      let currentSlide = 0;
 
-      // Tambah semua gambar
-      kost.heroImages.forEach((img, index) => {
+      kost.heroImages.forEach(img => {
         const slide = document.createElement("div");
         slide.className = "hero-slide";
         slide.innerHTML = `
           <img src="${img}" alt="${kost.nama}">
-          <div class="hero-caption">
-            ${index === 0 ? 'Tampak Depan' : 'Gambar ' + (index + 1)}
-          </div>
+          <div class="hero-caption">Tampak Depan</div>
         `;
         heroTrack.appendChild(slide);
       });
 
-      // Swipe sederhana tapi halus
-      let currentSlide = 0;
-      const total = kost.heroImages.length;
-
-      const update = () => {
-        if (heroTrack) {
-          heroTrack.style.transition = "transform 0.3s ease";
-          heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-      };
-
       let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
 
-      heroTrack.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
+      heroTrack.style.touchAction = "pan-y";
+
+      heroTrack.addEventListener("pointerdown", e => {
+        startX = e.clientX;
+        currentX = startX;
+        isDragging = true;
       });
 
-      heroTrack.addEventListener("touchend", e => {
-        const endX = e.changedTouches[0].clientX;
-        const diff = startX - endX;
+      heroTrack.addEventListener("pointermove", e => {
+        if (!isDragging) return;
+        currentX = e.clientX;
+      });
 
-        if (Math.abs(diff) > 50) { // geser cukup jauh
-          if (diff > 0 && currentSlide < total - 1) {
-            currentSlide++;
-          } else if (diff < 0 && currentSlide > 0) {
-            currentSlide--;
-          }
+      heroTrack.addEventListener("pointerup", () => {
+        if (!isDragging) return;
+
+        const diff = startX - currentX;
+
+        if (diff > 60 && currentSlide < kost.heroImages.length - 1) {
+          currentSlide++;
+        } else if (diff < -60 && currentSlide > 0) {
+          currentSlide--;
         }
-        update();
+
+        heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        isDragging = false;
       });
 
-      // Untuk mouse (kalau buka di laptop)
-      heroTrack.addEventListener("mousedown", e => startX = e.clientX);
-      heroTrack.addEventListener("mouseup", e => {
-        const diff = startX - e.clientX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0 && currentSlide < total - 1) currentSlide++;
-          else if (diff < 0 && currentSlide > 0) currentSlide--;
-        }
-        update();
+      heroTrack.addEventListener("pointercancel", () => {
+        isDragging = false;
       });
-
-      // Posisi awal
-      update();
     }
-    // === AKHIR HERO IMAGES ===    
+    
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
     fasilitas.innerHTML = "";
