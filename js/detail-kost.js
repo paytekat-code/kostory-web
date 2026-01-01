@@ -85,6 +85,13 @@ heroTrack.addEventListener("pointerup", e => {
   isPointerDown = false;
 });
 }
+heroTrack.addEventListener("pointercancel", () => {
+  isPointerDown = false;
+});
+
+heroTrack.addEventListener("pointerleave", () => {
+  isPointerDown = false;
+});
 
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
