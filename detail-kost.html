@@ -12,39 +12,27 @@
 <!-- HEADER -->
 <div class="header">
   <div class="header-inner">
-    <div class="logo-wrap">
+    <div>
       <div class="logo">KOSTORY</div>
       <div class="tagline">Where Stories Find a Home</div>
     </div>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  </div>
-</div>
-
-<!-- MENU -->
-<div class="menu-overlay" id="menu" onclick="closeMenu(event)">
-  <div class="menu-panel">
-    <a href="#">Tentang Kami</a>
-    <a href="#">Kerjasama Bisnis</a>
-    <a href="#">Lowongan Kerja</a>
-    <a href="#">Masuk</a>
-    <a href="#">Daftar</a>
+    <div class="menu-btn">☰</div>
   </div>
 </div>
 
 <div class="container">
 
   <!-- HERO SLIDER -->
-  <div class="hero-slider" id="heroSlider">
-    <div class="hero-caption" id="heroCaption"></div>
-  </div>
+  <div class="hero-slider" id="heroSlider"></div>
 
-  <!-- INFO KOST -->
+  <!-- INFO -->
   <div style="margin-top:16px">
     <h2 id="kostNama"></h2>
+
     <p style="font-size:13px;color:#666">
-      ⭐ <span id="kostRating"></span>
-      (<span id="kostReview"></span> reviews)<br>
-      📍 <span id="kostAlamat"></span>
+      ⭐ <span id="kostRating">-</span>
+      (<span id="kostReview">0</span> reviews)<br>
+      📍 <span id="kostAlamat">-</span>
     </p>
 
     <p style="font-size:13px;color:#666;margin-top:6px">
@@ -60,16 +48,16 @@
     </p>
   </div>
 
-  <!-- FASILITAS UMUM -->
+  <!-- FASILITAS -->
   <div class="kost-card">
     <h4>Fasilitas Umum</h4>
-    <p id="fasilitasUmum"></p>
+    <p id="fasilitasUmum">-</p>
   </div>
 
   <!-- KEBIJAKAN -->
   <div class="kost-card">
     <h4>Kebijakan Kost</h4>
-    <ul id="kebijakanList" style="font-size:13px;color:#666"></ul>
+    <ul id="kebijakanList"></ul>
   </div>
 
   <!-- KONTAK -->
@@ -80,7 +68,7 @@
     </a>
   </div>
 
-  <!-- TIPE KAMAR -->
+  <!-- ROOMS -->
   <h3 style="margin-top:24px">Pilih Tipe Kamar</h3>
   <div id="roomList"></div>
 
@@ -89,18 +77,6 @@
   </footer>
 
 </div>
-
-<!-- MENU SCRIPT -->
-<script>
-function toggleMenu(){
-  document.getElementById('menu').style.display = 'block';
-}
-function closeMenu(e){
-  if(e.target.id === 'menu'){
-    e.target.style.display = 'none';
-  }
-}
-</script>
 
 <script type="module" src="js/detail-kost.js"></script>
 </body>
