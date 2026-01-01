@@ -1,3 +1,4 @@
+console.log("DETAIL-KOST.JS JALAN");
 import { db } from "./firebase.js";
 import {
   doc,
