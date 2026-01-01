@@ -116,12 +116,11 @@ img{width:100%;display:block}
   max-width:1200px;
   margin:0 auto;
   border-radius:16px;
-  overflow:hidden;
+  overflow:visible;   /* ✅ PARENT JANGAN KUNCI SCROLL */
   aspect-ratio:16 / 9;
-  min-height:220px;     /* ⬅️ WAJIB untuk iOS */
+  min-height:220px;
   background:#000;
 }
-
 
 .hero-track{
   display:flex;
@@ -345,7 +344,7 @@ footer{
    =========================== */
 
 .hero-slider{
-  touch-action: pan-y;
+  touch-action: auto;
 }
 
 /* pastikan klik terasa */
