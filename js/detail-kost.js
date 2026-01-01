@@ -41,69 +41,62 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-  // ===========================
-// HERO SLIDER (FINAL & STABLE)
+// ===========================
+// HERO SLIDER (SAFE VERSION)
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
 
-if (
-  heroTrack &&
-  Array.isArray(kost.heroImages) &&
-  kost.heroImages.length > 0
-) {
-else {
-  heroTrack.innerHTML = `
-    <div class="hero-slide">
-      <img src="/img/placeholder.jpg" alt="Kostory">
-    </div>
-  `;
-}
-
+if (heroTrack) {
   heroTrack.innerHTML = "";
 
-  let index = 0;
-  let startX = 0;
-  let isDragging = false;
+  if (Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
+    let index = 0;
+    let startX = 0;
+    let isDragging = false;
 
-  kost.heroImages.forEach((img) => {
-    const slide = document.createElement("div");
-    slide.className = "hero-slide";
-    slide.innerHTML = `
-  <img src="${img}" alt="${kost.nama}" loading="eager"
-       onload="this.style.opacity=1"
-       style="opacity:0; transition:opacity .3s ease">
-  <div class="hero-caption">Tampak Kost</div>
-`;
+    kost.heroImages.forEach((img) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide";
+      slide.innerHTML = `
+        <img src="${img}" alt="${kost.nama}">
+        <div class="hero-caption">Tampak Kost</div>
+      `;
+      heroTrack.appendChild(slide);
+    });
 
-    heroTrack.appendChild(slide);
-  });
+    const update = () => {
+      heroTrack.style.transform = `translateX(-${index * 100}%)`;
+    };
 
-  const updateSlide = () => {
-    heroTrack.style.transform = `translateX(-${index * 100}%)`;
-  };
+    heroTrack.addEventListener("pointerdown", (e) => {
+      startX = e.clientX;
+      isDragging = true;
+    });
 
-  heroTrack.addEventListener("pointerdown", (e) => {
-    startX = e.clientX;
-    isDragging = true;
-  });
+    heroTrack.addEventListener("pointerup", (e) => {
+      if (!isDragging) return;
 
-  heroTrack.addEventListener("pointerup", (e) => {
-    if (!isDragging) return;
+      const diff = startX - e.clientX;
+      if (diff > 50 && index < kost.heroImages.length - 1) index++;
+      if (diff < -50 && index > 0) index--;
 
-    const diff = startX - e.clientX;
+      update();
+      isDragging = false;
+    });
 
-    if (diff > 50 && index < kost.heroImages.length - 1) index++;
-    if (diff < -50 && index > 0) index--;
+    heroTrack.addEventListener("pointerleave", () => {
+      isDragging = false;
+    });
 
-    updateSlide();
-    isDragging = false;
-  });
-
-  heroTrack.addEventListener("pointerleave", () => {
-    isDragging = false;
-  });
+  } else {
+    // fallback jika tidak ada gambar
+    heroTrack.innerHTML = `
+      <div class="hero-slide">
+        <img src="/img/placeholder.jpg" alt="Kostory">
+      </div>
+    `;
+  }
 }
-
 
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
