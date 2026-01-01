@@ -41,83 +41,72 @@ async function loadKost() {
       document.getElementById("mapLink").href = mapUrl;
     }
 
-  // === HERO IMAGES (SWIPE HALUS + SUPER AMAN) ===
-  const hero = document.getElementById("heroSlider");
-  const heroTrack = document.getElementById("heroTrack");
+     // === HERO IMAGES (SWIPE SEDERHANA TAPI PASTI AMAN) ===
+    const heroSlider = document.getElementById("heroSlider");
+    const heroTrack = document.getElementById("heroTrack");
 
-  // Cek dulu apakah elemen dan data gambar ada
-  if (hero && heroTrack && kost.heroImages && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
-    heroTrack.innerHTML = "";
+    if (heroTrack && kost.heroImages && Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
+      heroTrack.innerHTML = ""; // kosongin dulu
 
-    // Buat semua slide
-    kost.heroImages.forEach((img, index) => {
-      const slide = document.createElement("div");
-      slide.className = "hero-slide";
-      slide.innerHTML = `
-        <img src="${img}" alt="${kost.nama}">
-        <div class="hero-caption">${index === 0 ? 'Tampak Depan' : 'Interior / Fasilitas'}</div>
-      `;
-      heroTrack.appendChild(slide);
-    });
+      // Tambah semua gambar
+      kost.heroImages.forEach((img, index) => {
+        const slide = document.createElement("div");
+        slide.className = "hero-slide";
+        slide.innerHTML = `
+          <img src="${img}" alt="${kost.nama}">
+          <div class="hero-caption">
+            ${index === 0 ? 'Tampak Depan' : 'Gambar ' + (index + 1)}
+          </div>
+        `;
+        heroTrack.appendChild(slide);
+      });
 
-    let currentSlide = 0;
-    const totalSlides = kost.heroImages.length;
+      // Swipe sederhana tapi halus
+      let currentSlide = 0;
+      const total = kost.heroImages.length;
 
-    const goToSlide = () => {
-      heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-    };
+      const update = () => {
+        if (heroTrack) {
+          heroTrack.style.transition = "transform 0.3s ease";
+          heroTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+      };
 
-    let startX = 0;
-    let isDragging = false;
+      let startX = 0;
 
-    heroTrack.addEventListener("pointerdown", (e) => {
-      startX = e.clientX || (e.touches && e.touches[0].clientX);
-      isDragging = true;
-      heroTrack.style.transition = "none";
-    });
+      heroTrack.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+      });
 
-    heroTrack.addEventListener("pointermove", (e) => {
-      if (!isDragging) return;
-      const currentX = e.clientX || (e.touches && e.touches[0].clientX);
-      const diff = startX - currentX;
-      heroTrack.style.transform = `translateX(calc(-${currentSlide * 100}% - ${diff}px))`;
-    });
+      heroTrack.addEventListener("touchend", e => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
 
-    heroTrack.addEventListener("pointerup", (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      heroTrack.style.transition = "transform 0.3s ease";
+        if (Math.abs(diff) > 50) { // geser cukup jauh
+          if (diff > 0 && currentSlide < total - 1) {
+            currentSlide++;
+          } else if (diff < 0 && currentSlide > 0) {
+            currentSlide--;
+          }
+        }
+        update();
+      });
 
-      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-      const diff = startX - endX;
+      // Untuk mouse (kalau buka di laptop)
+      heroTrack.addEventListener("mousedown", e => startX = e.clientX);
+      heroTrack.addEventListener("mouseup", e => {
+        const diff = startX - e.clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0 && currentSlide < total - 1) currentSlide++;
+          else if (diff < 0 && currentSlide > 0) currentSlide--;
+        }
+        update();
+      });
 
-      if (Math.abs(diff) > 50) {
-        if (diff > 0 && currentSlide < totalSlides - 1) currentSlide++;
-        else if (diff < 0 && currentSlide > 0) currentSlide--;
-      }
-
-      goToSlide();
-    });
-
-    heroTrack.addEventListener("pointercancel", () => {
-      isDragging = false;
-      heroTrack.style.transition = "transform 0.3s ease";
-      goToSlide();
-    });
-
-    // Pastikan posisi awal benar
-    goToSlide();
-  } else {
-    // Kalau tidak ada gambar atau hanya 1, tetap tampilkan yang pertama kalau ada
-    if (heroTrack && kost.heroImages && kost.heroImages[0]) {
-      heroTrack.innerHTML = `
-        <div class="hero-slide">
-          <img src="${kost.heroImages[0]}" alt="${kost.nama}">
-          <div class="hero-caption">Tampak Depan</div>
-        </div>
-      `;
+      // Posisi awal
+      update();
     }
-  }    
+    // === AKHIR HERO IMAGES ===    
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
     fasilitas.innerHTML = "";
