@@ -42,7 +42,7 @@ async function loadKost() {
     }
 
 // ===========================
-// HERO SLIDER (SAFE VERSION)
+// HERO IMAGE (SUPER SAFE)
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
 
@@ -50,46 +50,13 @@ if (heroTrack) {
   heroTrack.innerHTML = "";
 
   if (Array.isArray(kost.heroImages) && kost.heroImages.length > 0) {
-    let index = 0;
-    let startX = 0;
-    let isDragging = false;
-
-    kost.heroImages.forEach((img) => {
-      const slide = document.createElement("div");
-      slide.className = "hero-slide";
-      slide.innerHTML = `
-        <img src="${img}" alt="${kost.nama}">
+    heroTrack.innerHTML = `
+      <div class="hero-slide">
+        <img src="${kost.heroImages[0]}" alt="${kost.nama}">
         <div class="hero-caption">Tampak Kost</div>
-      `;
-      heroTrack.appendChild(slide);
-    });
-
-    const update = () => {
-      heroTrack.style.transform = `translateX(-${index * 100}%)`;
-    };
-
-    heroTrack.addEventListener("pointerdown", (e) => {
-      startX = e.clientX;
-      isDragging = true;
-    });
-
-    heroTrack.addEventListener("pointerup", (e) => {
-      if (!isDragging) return;
-
-      const diff = startX - e.clientX;
-      if (diff > 50 && index < kost.heroImages.length - 1) index++;
-      if (diff < -50 && index > 0) index--;
-
-      update();
-      isDragging = false;
-    });
-
-    heroTrack.addEventListener("pointerleave", () => {
-      isDragging = false;
-    });
-
+      </div>
+    `;
   } else {
-    // fallback jika tidak ada gambar
     heroTrack.innerHTML = `
       <div class="hero-slide">
         <img src="/img/placeholder.jpg" alt="Kostory">
@@ -97,7 +64,6 @@ if (heroTrack) {
     `;
   }
 }
-
     // === FASILITAS UMUM ===
     const fasilitas = document.getElementById("fasilitasUmum");
     fasilitas.innerHTML = "";
