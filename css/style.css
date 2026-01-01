@@ -431,12 +431,21 @@ footer{
    HERO DOT INDICATOR
    =========================== */
 
+.hero-slider{
+  position:relative;   /* WAJIB */
+}
+
 .hero-dots{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:12px;
   display:flex;
   justify-content:center;
   gap:8px;
-  margin-top:10px;
+  z-index:5;
 }
+
 
 .hero-dot{
   width:8px;
