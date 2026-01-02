@@ -50,13 +50,12 @@
 
 .hero-slide img {
   width: 100%;
-  height: 100%;
+  height: auto;        /* ⬅️ WAJIB GANTI */
+  min-height: 100%;    /* ⬅️ WAJIB TAMBAH */
   object-fit: cover;
   display: block;
-
-  transform: translateZ(0);   /* ⬅️ PAKSA SAFARI RENDER */
-  -webkit-transform: translateZ(0);
 }
+
 
 /* DOTS */
 .hero-dots {
