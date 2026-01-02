@@ -1,5 +1,5 @@
 // js/detail-kost.js
-import { db } from "./firebase.js";
+import { db } from "/js/firebase.js";
 import {
   doc,
   getDoc,
