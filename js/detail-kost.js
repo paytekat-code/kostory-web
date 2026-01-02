@@ -108,17 +108,37 @@ const modalImg = document.getElementById("modalImage");
 if (modal && modalImg) {
 
   // TAP GAMBAR (KHUSUS IMG, BUKAN DOCUMENT)
-  heroTrack.addEventListener("touchend", (e) => {
-    const img = e.target.closest(".hero-slide img");
-    if (!img) return;
+  let startX = 0;
+let startY = 0;
+let moved = false;
 
-    e.preventDefault();        // ⬅️ INI KUNCI DI HP
-    e.stopPropagation();
+heroTrack.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  startX = touch.clientX;
+  startY = touch.clientY;
+  moved = false;
+}, { passive: true });
 
-    modalImg.src = img.src;
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  }, { passive: false });
+heroTrack.addEventListener("touchmove", (e) => {
+  const touch = e.touches[0];
+  const dx = Math.abs(touch.clientX - startX);
+  const dy = Math.abs(touch.clientY - startY);
+
+  if (dx > 12 || dy > 12) {
+    moved = true; // 👉 dianggap swipe
+  }
+}, { passive: true });
+
+heroTrack.addEventListener("touchend", (e) => {
+  if (moved) return; // ❌ swipe → JANGAN zoom
+
+  const img = e.target.closest(".hero-slide img");
+  if (!img) return;
+
+  modalImg.src = img.src;
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+});
 
   // DESKTOP / MOUSE
   heroTrack.addEventListener("click", (e) => {
