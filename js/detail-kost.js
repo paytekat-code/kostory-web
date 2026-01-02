@@ -43,34 +43,28 @@ async function loadKost() {
 
 // ===========================
 // HERO SLIDER + DOT INDICATOR
-// ===========================
 const heroTrack = document.getElementById("heroTrack");
 const heroDots = document.getElementById("heroDots");
 
-if (heroTrack && heroDots && Array.isArray(kost.heroImages)) {
-  heroTrack.innerHTML = "";
-  heroDots.innerHTML = "";
+const images =
+  Array.isArray(kost.heroImages) && kost.heroImages.length
+    ? kost.heroImages
+    : ["/img/placeholder-hero.jpg"]; // fallback WAJIB
 
-  const slideCount = kost.heroImages.length;
+heroTrack.innerHTML = "";
+heroDots.innerHTML = "";
 
-  kost.heroImages.forEach((img, index) => {
-    // slide
-    const slide = document.createElement("div");
-    slide.className = "hero-slide";
-    slide.innerHTML = `<img src="${img}" alt="${kost.nama}">`;
-    heroTrack.appendChild(slide);
+images.forEach((img, index) => {
+  const slide = document.createElement("div");
+  slide.className = "hero-slide";
+  slide.innerHTML = `<img src="${img}" alt="${kost.nama}">`;
+  heroTrack.appendChild(slide);
 
-    // dot
-    const dot = document.createElement("div");
-    dot.className = "hero-dot";
-    if (index === 0) dot.classList.add("active");
-
-    dot.addEventListener("click", () => {
-      heroTrack.scrollTo({
-        left: index * heroTrack.clientWidth,
-        behavior: "smooth"
-      });
-    });
+  const dot = document.createElement("div");
+  dot.className = "hero-dot";
+  if (index === 0) dot.classList.add("active");
+  heroDots.appendChild(dot);
+});
 
     heroDots.appendChild(dot);
   });
