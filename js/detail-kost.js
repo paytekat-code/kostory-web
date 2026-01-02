@@ -85,17 +85,20 @@ images.forEach((img, index) => {
   heroDots.appendChild(dot);
 });
 
-  heroDots.appendChild(dot);
-});
-
 // sync dot saat scroll
 heroTrack.addEventListener("scroll", () => {
   const index = Math.round(
     heroTrack.scrollLeft / heroTrack.clientWidth
   );
 
+  // sync dot
   [...heroDots.children].forEach((dot, i) => {
     dot.classList.toggle("active", i === index);
+  });
+
+  // sync image (WAJIB, IKUT CSS GLOBAL)
+  [...heroTrack.querySelectorAll("img")].forEach((img, i) => {
+    img.classList.toggle("active", i === index);
   });
 });
 
