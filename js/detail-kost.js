@@ -13,7 +13,7 @@ const kostId = params.get("id");
 
 if (!kostId) {
   alert("ID kost tidak ditemukan");
-  throw new Error("ID kosong");
+  return;
 }
 
 async function loadKost() {
@@ -87,9 +87,11 @@ images.forEach((img, index) => {
 
 // sync dot saat scroll
 heroTrack.addEventListener("scroll", () => {
-  const index = Math.round(
-    heroTrack.scrollLeft / heroTrack.clientWidth
-  );
+  const slideWidth = heroTrack.querySelector(".hero-slide")?.offsetWidth;
+if (!slideWidth) return;
+
+const index = Math.round(heroTrack.scrollLeft / slideWidth);
+
 
   // sync dot
   [...heroDots.children].forEach((dot, i) => {
