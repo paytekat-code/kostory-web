@@ -33,7 +33,11 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+
+  transform: translateZ(0);          /* ⬅️ PAKSA LAYER */
+  -webkit-transform: translateZ(0);
 }
+
 
 .hero-track::-webkit-scrollbar {
   display: none;
