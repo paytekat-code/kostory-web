@@ -7,10 +7,9 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ambil ID dari URL
+// ambil ID
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("id");
-
 if (!kostId) {
   alert("ID kost tidak ditemukan");
   return;
@@ -18,10 +17,8 @@ if (!kostId) {
 
 async function loadKost() {
   try {
-    // ===== KOST =====
     const kostRef = doc(db, "kost", kostId);
     const kostSnap = await getDoc(kostRef);
-
     if (!kostSnap.exists()) {
       alert("Data kost tidak ditemukan");
       return;
@@ -29,151 +26,121 @@ async function loadKost() {
 
     const kost = kostSnap.data();
 
-    // === TITLE ===
-    document.getElementById("kostNama").textContent = kost.nama;
-    document.getElementById("kostAlamat").textContent = kost.alamat;
-    document.getElementById("kostRating").textContent =
+    // ===== BASIC INFO =====
+    kostNama.textContent = kost.nama;
+    kostAlamat.textContent = kost.alamat;
+    kostRating.textContent =
       `⭐ ${kost.rating} (${kost.reviewCount} reviews)`;
 
-    // === MAP ===
     if (kost.location) {
-      const mapUrl = `https://www.google.com/maps?q=${kost.location.lat},${kost.location.lng}`;
-      document.getElementById("mapLink").href = mapUrl;
+      mapLink.href =
+        `https://www.google.com/maps?q=${kost.location.lat},${kost.location.lng}`;
     }
 
-// ===========================
-// HERO SLIDER + DOT INDICATOR
-// ===========================
-const heroTrack = document.getElementById("heroTrack");
-const heroDots = document.getElementById("heroDots");
+    // =========================
+    // DETAIL HERO (BERSIH)
+    // =========================
+    const track = document.getElementById("detailHeroTrack");
+    const dotsWrap = document.getElementById("detailHeroDots");
 
-const images =
-  Array.isArray(kost.heroImages) && kost.heroImages.length
-    ? kost.heroImages
-    : ["/img/placeholder-hero.jpg"];
+    track.innerHTML = "";
+    dotsWrap.innerHTML = "";
 
-heroTrack.innerHTML = "";
-heroDots.innerHTML = "";
+    const images = Array.isArray(kost.heroImages) && kost.heroImages.length
+      ? kost.heroImages
+      : ["/img/placeholder-hero.jpg"];
 
-images.forEach((img, index) => {
-  const slide = document.createElement("div");
-  slide.className = "hero-slide";
+    images.forEach((src, index) => {
+      const slide = document.createElement("div");
+      slide.className = "detail-hero-slide";
 
-  const image = document.createElement("img");
-  image.src = img;
-  image.alt = kost.nama;
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = kost.nama;
 
-  // ⬇️ INI KUNCI UTAMA (IKUT CSS GLOBAL)
-  if (index === 0) {
-    image.classList.add("active");
-  }
+      slide.appendChild(img);
+      track.appendChild(slide);
 
-  slide.appendChild(image);
-  heroTrack.appendChild(slide);
+      const dot = document.createElement("div");
+      dot.className = "detail-hero-dot";
+      if (index === 0) dot.classList.add("active");
 
-  const dot = document.createElement("div");
-  dot.className = "hero-dot";
-  if (index === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => {
+        track.scrollTo({
+          left: index * track.clientWidth,
+          behavior: "smooth"
+        });
+      });
 
-  dot.addEventListener("click", () => {
-    heroTrack.scrollTo({
-      left: index * heroTrack.clientWidth,
-      behavior: "smooth"
+      dotsWrap.appendChild(dot);
     });
-  });
 
-  heroDots.appendChild(dot);
-});
+    // sync dot
+    track.addEventListener("scroll", () => {
+      const width = track.querySelector(".detail-hero-slide")?.offsetWidth;
+      if (!width) return;
+      const index = Math.round(track.scrollLeft / width);
 
-// sync dot saat scroll
-heroTrack.addEventListener("scroll", () => {
-  const slideWidth = heroTrack.querySelector(".hero-slide")?.offsetWidth;
-if (!slideWidth) return;
+      [...dotsWrap.children].forEach((d, i) => {
+        d.classList.toggle("active", i === index);
+      });
+    });
 
-const index = Math.round(heroTrack.scrollLeft / slideWidth);
+    // =========================
+    // IMAGE ZOOM (TAP ≠ SWIPE)
+    // =========================
+    const modal = imageModal;
+    const modalImg = modalImage;
 
+    let sx = 0, sy = 0, moved = false;
 
-  // sync dot
-  [...heroDots.children].forEach((dot, i) => {
-    dot.classList.toggle("active", i === index);
-  });
+    track.addEventListener("touchstart", e => {
+      const t = e.touches[0];
+      sx = t.clientX;
+      sy = t.clientY;
+      moved = false;
+    }, { passive: true });
 
-  // sync image (WAJIB, IKUT CSS GLOBAL)
-  [...heroTrack.querySelectorAll("img")].forEach((img, i) => {
-    img.classList.toggle("active", i === index);
-  });
-});
+    track.addEventListener("touchmove", e => {
+      const t = e.touches[0];
+      if (Math.abs(t.clientX - sx) > 12 || Math.abs(t.clientY - sy) > 12) {
+        moved = true;
+      }
+    }, { passive: true });
 
-    // ===========================
-// HERO IMAGE ZOOM (FINAL, HP AMAN)
-// ===========================
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImage");
+    track.addEventListener("touchend", e => {
+      if (moved) return;
+      const img = e.target.closest("img");
+      if (!img) return;
 
-if (modal && modalImg) {
+      modalImg.src = img.src;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
 
-  // TAP GAMBAR (KHUSUS IMG, BUKAN DOCUMENT)
-  let startX = 0;
-let startY = 0;
-let moved = false;
+    track.addEventListener("click", e => {
+      const img = e.target.closest("img");
+      if (!img) return;
 
-heroTrack.addEventListener("touchstart", (e) => {
-  const touch = e.touches[0];
-  startX = touch.clientX;
-  startY = touch.clientY;
-  moved = false;
-}, { passive: true });
+      modalImg.src = img.src;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
 
-heroTrack.addEventListener("touchmove", (e) => {
-  const touch = e.touches[0];
-  const dx = Math.abs(touch.clientX - startX);
-  const dy = Math.abs(touch.clientY - startY);
+    modal.addEventListener("click", () => {
+      modal.style.display = "none";
+      modalImg.src = "";
+      document.body.style.overflow = "";
+    });
 
-  if (dx > 12 || dy > 12) {
-    moved = true; // 👉 dianggap swipe
-  }
-}, { passive: true });
-
-heroTrack.addEventListener("touchend", (e) => {
-  if (moved) return; // ❌ swipe → JANGAN zoom
-
-  const img = e.target.closest(".hero-slide img");
-  if (!img) return;
-
-  modalImg.src = img.src;
-  modal.style.display = "flex";
-  document.body.style.overflow = "hidden";
-});
-
-  // DESKTOP / MOUSE
-  heroTrack.addEventListener("click", (e) => {
-    const img = e.target.closest(".hero-slide img");
-    if (!img) return;
-
-    modalImg.src = img.src;
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  });
-
-  // TUTUP MODAL
-  modal.addEventListener("click", () => {
-    modal.style.display = "none";
-    modalImg.src = "";
-    document.body.style.overflow = "";
-  });
-}
-
-    // === FASILITAS UMUM ===
-    const fasilitas = document.getElementById("fasilitasUmum");
-    fasilitas.innerHTML = "";
+    // ===== FASILITAS =====
+    fasilitasUmum.innerHTML = "";
     kost.fasilitasUmum.forEach(f => {
       const li = document.createElement("li");
       li.textContent = f;
-      fasilitas.appendChild(li);
+      fasilitasUmum.appendChild(li);
     });
 
-    // === KEBIJAKAN ===
-    const kebijakan = document.getElementById("kebijakan");
     kebijakan.innerHTML = "";
     kost.kebijakan.forEach(k => {
       const li = document.createElement("li");
@@ -181,19 +148,16 @@ heroTrack.addEventListener("touchend", (e) => {
       kebijakan.appendChild(li);
     });
 
-    // === WHATSAPP ===
-    document.getElementById("waLink").href =
-      `https://wa.me/${kost.kontak.wa}`;
+    waLink.href = `https://wa.me/${kost.kontak.wa}`;
 
     // ===== ROOMS =====
-    const roomList = document.getElementById("roomList");
     roomList.innerHTML = "";
+    const roomSnap = await getDocs(
+      collection(db, "kost", kostId, "rooms")
+    );
 
-    const roomRef = collection(db, "kost", kostId, "rooms");
-    const roomSnap = await getDocs(roomRef);
-
-    roomSnap.forEach(docSnap => {
-      const room = docSnap.data();
+    roomSnap.forEach(r => {
+      const room = r.data();
 
       const card = document.createElement("div");
       card.className = "room-card";
@@ -204,7 +168,6 @@ heroTrack.addEventListener("touchend", (e) => {
 
       const info = document.createElement("div");
       info.className = "room-info";
-
       info.innerHTML = `
         <h3>${room.nama}</h3>
         <p>Rp ${room.hargaBulanan.toLocaleString("id-ID")} / bulan</p>
@@ -224,20 +187,13 @@ heroTrack.addEventListener("touchend", (e) => {
 
 loadKost();
 
-// === MENU ===
+// ===== MENU (TIDAK DIUBAH) =====
 const menuBtn = document.querySelector(".menu-btn");
 const menu = document.getElementById("menu");
 
-window.openMenu = function () {
-  menu.style.display = "block";
+window.openMenu = () => menu.style.display = "block";
+window.closeMenu = e => {
+  if (e.target === menu) menu.style.display = "none";
 };
 
-window.closeMenu = function (e) {
-  if (e.target === menu) {
-    menu.style.display = "none";
-  }
-};
-
-if (menuBtn && menu) {
-  menuBtn.addEventListener("click", window.openMenu);
-}
+menuBtn?.addEventListener("click", window.openMenu);
