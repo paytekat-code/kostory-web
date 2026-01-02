@@ -58,7 +58,17 @@ heroDots.innerHTML = "";
 images.forEach((img, index) => {
   const slide = document.createElement("div");
   slide.className = "hero-slide";
-  slide.innerHTML = `<img src="${img}" alt="${kost.nama}">`;
+
+  const image = document.createElement("img");
+  image.src = img;
+  image.alt = kost.nama;
+
+  // ⬇️ INI KUNCI UTAMA (IKUT CSS GLOBAL)
+  if (index === 0) {
+    image.classList.add("active");
+  }
+
+  slide.appendChild(image);
   heroTrack.appendChild(slide);
 
   const dot = document.createElement("div");
@@ -71,6 +81,9 @@ images.forEach((img, index) => {
       behavior: "smooth"
     });
   });
+
+  heroDots.appendChild(dot);
+});
 
   heroDots.appendChild(dot);
 });
