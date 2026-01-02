@@ -42,14 +42,16 @@ async function loadKost() {
     }
 
 // ===========================
+// ===========================
 // HERO SLIDER + DOT INDICATOR
+// ===========================
 const heroTrack = document.getElementById("heroTrack");
 const heroDots = document.getElementById("heroDots");
 
 const images =
   Array.isArray(kost.heroImages) && kost.heroImages.length
     ? kost.heroImages
-    : ["/img/placeholder-hero.jpg"]; // fallback WAJIB
+    : ["/img/placeholder-hero.jpg"];
 
 heroTrack.innerHTML = "";
 heroDots.innerHTML = "";
@@ -63,24 +65,29 @@ images.forEach((img, index) => {
   const dot = document.createElement("div");
   dot.className = "hero-dot";
   if (index === 0) dot.classList.add("active");
+
+  dot.addEventListener("click", () => {
+    heroTrack.scrollTo({
+      left: index * heroTrack.clientWidth,
+      behavior: "smooth"
+    });
+  });
+
   heroDots.appendChild(dot);
 });
 
-    heroDots.appendChild(dot);
-  });
+// sync dot saat scroll
+heroTrack.addEventListener("scroll", () => {
+  const index = Math.round(
+    heroTrack.scrollLeft / heroTrack.clientWidth
+  );
 
-  // sync dot saat scroll
-  heroTrack.addEventListener("scroll", () => {
-    const index = Math.round(
-      heroTrack.scrollLeft / heroTrack.clientWidth
-    );
-
-    [...heroDots.children].forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
-    });
+  [...heroDots.children].forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
   });
-}
-// ===========================
+});
+
+    // ===========================
 // HERO IMAGE ZOOM (FINAL, HP AMAN)
 // ===========================
 const modal = document.getElementById("imageModal");
