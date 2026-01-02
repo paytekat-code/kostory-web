@@ -6,6 +6,78 @@
   <title>Detail Kost | Kostory</title>
 
   <link rel="stylesheet" href="css/style.css" />
+<style>
+/* =========================
+   HERO SLIDER (DETAIL KOST)
+   ========================= */
+
+.hero {
+  margin-bottom: 16px;
+}
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #000;
+}
+
+/* TRACK */
+.hero-track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* SLIDE */
+.hero-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* DOTS */
+.hero-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+}
+
+.hero-dot.active {
+  background: #fff;
+}
+</style>
+
+  
 </head>
 <body>
 
