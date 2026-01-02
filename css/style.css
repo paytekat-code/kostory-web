@@ -108,30 +108,20 @@ img{width:100%;display:block}
   border-radius:16px;
   overflow:hidden;
   height:220px;
-}
-
-.hero-track{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-}
-
-.hero-track::-webkit-scrollbar{
-  display:none;
-}
-
-.hero-slide{
-  flex:0 0 100%;
-  scroll-snap-align:start;
   position:relative;
 }
 
-.hero-slide img{
-  width:100%;
+.hero-slider img{
   height:100%;
   object-fit:cover;
-  display:block;
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+
+.hero-slider img.active{
+  opacity:1;
 }
 
 /* SEARCH */
