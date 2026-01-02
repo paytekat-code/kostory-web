@@ -6,102 +6,85 @@
   <title>Detail Kost | Kostory</title>
 
   <link rel="stylesheet" href="css/style.css" />
-<style>
-/* =========================
-   HERO SLIDER (DETAIL KOST)
-   ========================= */
 
-.hero {
-  margin-bottom: 16px;
-}
+  <style>
+  /* =========================
+     DETAIL HERO (ISOLATED)
+     ========================= */
 
-.hero-slider {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 220px;   /* ⬅️ TAMBAH DI SINI */
-  overflow: hidden;
-  border-radius: 16px;
-  background: #000;
-}
+  .detail-hero {
+    margin-bottom: 16px;
+  }
 
-/* TRACK */
-.hero-track {
-  white-space: nowrap;
-  height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
+  .detail-hero-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 220px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #000;
+  }
 
-.hero-track::-webkit-scrollbar {
-  display: none;
-}
+  .detail-hero-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
 
-/* SLIDE */
-.hero-slide {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-  position: relative;
-}
+  .detail-hero-track::-webkit-scrollbar {
+    display: none;
+  }
 
-.hero-slide img {
-  width: 100%;
-  height: auto;        /* ⬅️ WAJIB GANTI */
-  min-height: 100%;    /* ⬅️ WAJIB TAMBAH */
-  object-fit: cover;
-  display: block;
-}
+  .detail-hero-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: start;
+  }
 
+  .detail-hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-/* DOTS */
-.hero-dots {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  z-index: 5;
-}
+  .detail-hero-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 5;
+  }
 
-.hero-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.4);
-}
+  .detail-hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.4);
+  }
 
-.hero-dot.active {
-  background: #fff;
-}
-/* ===========================
-   FIX GLOBAL HERO CSS (DETAIL)
-   =========================== */
-
-/* matikan sistem opacity global */
-.hero-slider img{
-  position: static !important;
-  opacity: 1 !important;
-  transition: none !important;
-}
-  
-</style> 
+  .detail-hero-dot.active {
+    background: #fff;
+  }
+  </style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
+<!-- HEADER (TIDAK DIUBAH) -->
+<header class="header">
   <div class="header-inner">
     <div class="logo-wrap">
       <div class="logo">KOSTORY</div>
       <div class="tagline">Where Stories Find a Home</div>
     </div>
-
     <div class="menu-btn">☰</div>
   </div>
 </header>
@@ -116,66 +99,54 @@
   </div>
 </div>
 
-  <!-- HERO SLIDER (SAMA PERSIS SEPERTI kostorymekar.html) -->
- <section class="hero">
-  <div class="hero-slider" id="heroSlider">
-    <div class="hero-track" id="heroTrack"></div>
-
-    <!-- DOT INDICATOR -->
-    <div class="hero-dots" id="heroDots"></div>
+<!-- DETAIL HERO (BARU, BERSIH) -->
+<section class="detail-hero">
+  <div class="detail-hero-slider">
+    <div class="detail-hero-track" id="detailHeroTrack"></div>
+    <div class="detail-hero-dots" id="detailHeroDots"></div>
   </div>
 </section>
 
-  <!-- MAIN CONTENT -->
-  <main class="container">
+<!-- MAIN CONTENT (TIDAK DIUBAH) -->
+<main class="container">
+  <h1 id="kostNama">-</h1>
 
-    <!-- TITLE -->
-    <h1 id="kostNama">-</h1>
+  <div class="meta">
+    <span id="kostRating">⭐ - (0 reviews)</span><br />
+    <span id="kostAlamat">-</span><br />
+    <a id="mapLink" href="#" target="_blank">Lihat Lokasi di Google Maps →</a>
+  </div>
 
-    <div class="meta">
-      <span id="kostRating">⭐ - (0 reviews)</span><br />
-      <span id="kostAlamat">-</span><br />
-      <a id="mapLink" href="#" target="_blank">Lihat Lokasi di Google Maps →</a>
-    </div>
+  <section class="card">
+    <h2>Fasilitas Umum</h2>
+    <ul id="fasilitasUmum"></ul>
+  </section>
 
-    <!-- FASILITAS UMUM -->
-    <section class="card">
-      <h2>Fasilitas Umum</h2>
-      <ul id="fasilitasUmum"></ul>
-    </section>
+  <section class="card">
+    <h2>Kebijakan Kost</h2>
+    <ul id="kebijakan"></ul>
+  </section>
 
-    <!-- KEBIJAKAN -->
-    <section class="card">
-      <h2>Kebijakan Kost</h2>
-      <ul id="kebijakan"></ul>
-    </section>
+  <section class="card">
+    <h2>Kontak Pengurus</h2>
+    <a id="waLink" href="#" target="_blank">
+      Chat Pengurus via WhatsApp →
+    </a>
+  </section>
 
-    <!-- KONTAK -->
-    <section class="card">
-      <h2>Kontak Pengurus</h2>
-      <a id="waLink" href="#" target="_blank">
-        Chat Pengurus via WhatsApp →
-      </a>
-    </section>
+  <section>
+    <h2>Pilih Tipe Kamar</h2>
+    <div class="room-list" id="roomList"></div>
+  </section>
+</main>
 
-    <!-- ROOM -->
-    <section>
-      <h2>Pilih Tipe Kamar</h2>
-      <div class="room-list" id="roomList">
-        <!-- room cards injected -->
-      </div>
-    </section>
+<footer>
+  © Kostory • Where Stories Find a Home
+</footer>
 
-  </main>
+<script type="module" src="js/detail-kost.js"></script>
 
-  <footer>
-    © Kostory • Where Stories Find a Home
-  </footer>
-
-  <!-- JS -->
-  <script type="module" src="js/detail-kost.js"></script>
-
-  <!-- IMAGE ZOOM MODAL -->
+<!-- IMAGE MODAL (TETAP DIPAKAI) -->
 <div class="image-modal" id="imageModal">
   <img id="modalImage" src="" alt="Preview">
 </div>
