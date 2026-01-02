@@ -1,5 +1,5 @@
 // js/detail-kost.js
-import { db } from "/js/firebase.js";
+const db = firebase.firestore();
 import {
   doc,
   getDoc,
