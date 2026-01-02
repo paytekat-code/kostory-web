@@ -102,28 +102,24 @@
 
   <!-- JS -->
   <script>
-  function toggleMenu(){
-    const menu = document.getElementById('menu');
-    menu.style.display = 'block';
-  }
-
-  function closeMenu(e){
-    // hanya tutup jika klik di area gelap (overlay)
-    if (e.target.id === 'menu') {
-      e.target.style.display = 'none';
-    }
-  }
-
-  // HERO SLIDER
+document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.hero-slider img');
   let index = 0;
+
+  if (slides.length === 0) return;
+
+  slides.forEach((img, i) => {
+    img.classList.toggle('active', i === 0);
+  });
 
   setInterval(() => {
     slides[index].classList.remove('active');
     index = (index + 1) % slides.length;
     slides[index].classList.add('active');
   }, 4000);
+});
 </script>
+
 
 
 </body>
