@@ -42,7 +42,6 @@ async function loadKost() {
     }
 
 // ===========================
-// ===========================
 // HERO SLIDER + DOT INDICATOR
 // ===========================
 const heroTrack = document.getElementById("heroTrack");
@@ -183,7 +182,7 @@ if (modal && modalImg) {
     console.error("DETAIL KOST ERROR:", err);
     alert("Terjadi kesalahan saat memuat data kost");
   }
-}
+
 
 loadKost();
 
