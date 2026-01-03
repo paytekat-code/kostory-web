@@ -16,6 +16,7 @@ if (!kostId) {
   loadKost();
 }
 const kostNama = document.getElementById("kostNama");
+const kostJenis = document.getElementById("kostJenis");
 const kostAlamat = document.getElementById("kostAlamat");
 const kostRating = document.getElementById("kostRating");
 const mapLink = document.getElementById("mapLink");
