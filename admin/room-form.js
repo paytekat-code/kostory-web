@@ -1,0 +1,85 @@
+import { db } from "../js/firebase.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const params = new URLSearchParams(window.location.search);
+const kostId = params.get("kostId");
+const roomId = params.get("roomId");
+const isEdit = !!roomId;
+
+if (!kostId) {
+  alert("kostId tidak ditemukan");
+  throw new Error("kostId missing");
+}
+
+const formTitle = document.getElementById("formTitle");
+const form = document.getElementById("roomForm");
+
+if (isEdit) {
+  formTitle.textContent = "Edit Tipe Kamar";
+  loadRoom();
+}
+
+async function loadRoom() {
+  const ref = doc(db, "kost", kostId, "rooms", roomId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return;
+
+  const r = snap.data();
+
+  nama.value = r.nama || "";
+  fasilitas.value = (r.fasilitas || []).join(", ");
+  ukuranKamar.value = r.ukuranKamar || "";
+  hargaHarian.value = r.hargaHarian ?? "";
+  hargaMingguan.value = r.hargaMingguan ?? "";
+  hargaBulanan.value = r.hargaBulanan ?? "";
+  totalKamar.value = r.totalKamar ?? 0;
+  tersedia.value = r.tersedia ?? 0;
+}
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const data = {
+    nama: nama.value.trim(),
+    fasilitas: fasilitas.value.split(",").map(v => v.trim()).filter(Boolean),
+    ukuranKamar: ukuranKamar.value.trim(),
+
+    hargaHarian: Number(hargaHarian.value) || null,
+    hargaMingguan: Number(hargaMingguan.value) || null,
+    hargaBulanan: Number(hargaBulanan.value) || null,
+
+    totalKamar: Number(totalKamar.value),
+    tersedia: Number(tersedia.value),
+
+    images: []
+  };
+
+  try {
+    if (isEdit) {
+      await updateDoc(
+        doc(db, "kost", kostId, "rooms", roomId),
+        data
+      );
+      alert("Tipe kamar diperbarui");
+    } else {
+      const newRef = doc(
+        db,
+        "kost",
+        kostId,
+        "rooms",
+        crypto.randomUUID()
+      );
+      await setDoc(newRef, data);
+      alert("Tipe kamar ditambahkan");
+      form.reset();
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan data kamar");
+  }
+});
