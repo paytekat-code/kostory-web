@@ -44,7 +44,10 @@ async function loadKost() {
     // ===== BASIC INFO =====
     kostNama.textContent = kost.nama;
 
-let jenis = kost.jenisKost || "";
+let jenis = "";
+if (kost.jenisKost === "Pria") jenis = "Kost Pria";
+else if (kost.jenisKost === "Wanita") jenis = "Kost Wanita";
+else if (kost.jenisKost === "Campur") jenis = "Kost Campur";
 
 let statusSI =
   kost.bolehSuamiIstri === true ||
