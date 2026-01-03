@@ -34,11 +34,16 @@
     <label>Harga Bulanan</label>
     <input type="number" id="hargaBulanan">
 
-    <label>Total Kamar</label>
-    <input type="number" id="totalKamar" required>
+    <label>Jumlah Kamar (total fisik)</label>
+    <input type="number" id="jumlahKamar" required>
 
-    <label>Kamar Tersedia</label>
-    <input type="number" id="tersedia" required>
+    <label>Kamar Ditempati</label>
+    <input type="number" id="ditempati" value="0">
+
+    <p class="help">
+      Sisa kamar dihitung otomatis:<br>
+      <b>Jumlah Kamar − Ditempati</b>
+    </p>
 
     <button type="submit">Simpan Tipe Kamar</button>
 
