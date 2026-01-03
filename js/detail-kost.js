@@ -15,6 +15,19 @@ if (!kostId) {
 } else {
   loadKost();
 }
+const kostNama = document.getElementById("kostNama");
+const kostAlamat = document.getElementById("kostAlamat");
+const kostRating = document.getElementById("kostRating");
+const mapLink = document.getElementById("mapLink");
+
+const fasilitasUmum = document.getElementById("fasilitasUmum");
+const kebijakan = document.getElementById("kebijakan");
+const waLink = document.getElementById("waLink");
+const roomList = document.getElementById("roomList");
+
+const imageModal = document.getElementById("imageModal");
+const modalImage = document.getElementById("modalImage");
+
 
 async function loadKost() {
   try {
