@@ -525,3 +525,24 @@ footer{
     align-items: center;
   }
 }
+/* =========================
+   TOGGLE SECTION (DESKRIPSI & KEBIJAKAN)
+   ========================= */
+
+.toggle-title {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-content {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.toggle-content li {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #444;
+}
