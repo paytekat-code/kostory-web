@@ -258,6 +258,7 @@ toggleKebijakan.onclick = () => {
   const fasilitasInline = Array.isArray(room.fasilitas)
     ? room.fasilitas.join(" · ")
     : "";
+const ukuranKamar = room.ukuranKamar || "-";
 
   info.innerHTML = `
     <h3>${room.nama}</h3>
