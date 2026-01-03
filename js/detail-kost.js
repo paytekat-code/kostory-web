@@ -303,7 +303,7 @@ const hargaBulanan  = room.hargaBulanan ?? null;
     Sisa Kamar : ${room.tersedia ?? 0}
   </div>
 
-  <button class="btn-book full">Book Now</button>
+  <button class="btn-book full">Pilih Kamar Ini</button>
 `;
 
   card.appendChild(title);
