@@ -23,7 +23,7 @@ const mapLink = document.getElementById("mapLink");
 
 const fasilitasUmum = document.getElementById("fasilitasUmum");
 const kebijakan = document.getElementById("kebijakan");
-const waLink = document.getElementById("waLink");
+
 const roomList = document.getElementById("roomList");
 
 const imageModal = document.getElementById("imageModal");
@@ -193,8 +193,6 @@ toggle.onclick = () => {
       li.textContent = k;
       kebijakan.appendChild(li);
     });
-
-    waLink.href = `https://wa.me/${kost.kontak.wa}`;
 
     // ===== ROOMS =====
     roomList.innerHTML = "";
