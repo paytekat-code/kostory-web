@@ -1,3 +1,9 @@
+// ===== HELPER GLOBAL =====
+function rupiah(nominal) {
+  if (nominal === null || nominal === undefined) return "-";
+  return "Rp. " + nominal.toLocaleString("id-ID");
+}
+
 // js/detail-kost.js
 import { db } from "./firebase.js";
 import {
@@ -13,12 +19,7 @@ const kostId = params.get("id");
 if (!kostId) {
   alert("ID kost tidak ditemukan");
 } else {
-
-  function rupiah(nominal) {
-  if (nominal === null || nominal === undefined) return "-";
-  return "Rp. " + nominal.toLocaleString("id-ID");
-}
-
+  
 window.onerror = (msg, src, line, col) => {
   console.error("JS ERROR:", msg, "at", line + ":" + col);
 };
