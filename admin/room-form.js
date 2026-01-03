@@ -37,7 +37,8 @@ async function loadRoom() {
   hargaHarian.value = r.hargaHarian ?? "";
   hargaMingguan.value = r.hargaMingguan ?? "";
   hargaBulanan.value = r.hargaBulanan ?? "";
-  jumlahKamar.value = r.jumlahKamar ?? 0;
+  jumlahKamar.value = r.jumlahKamar ?? "";
+  images.value = (r.images || []).join(", ");
 }
 
 form.addEventListener("submit", async e => {
@@ -58,8 +59,16 @@ form.addEventListener("submit", async e => {
 
     jumlahKamar: Number(jumlahKamar.value),
 
-    images: []
+    images: images.value
+      .split(",")
+      .map(v => v.trim())
+      .filter(Boolean)
   };
+
+  if (!data.nama) {
+    alert("Nama tipe kamar wajib diisi");
+    return;
+  }
 
   if (data.jumlahKamar < 1) {
     alert("Jumlah kamar minimal 1");
@@ -87,6 +96,6 @@ form.addEventListener("submit", async e => {
     }
   } catch (err) {
     console.error(err);
-    alert("Gagal menyimpan data kamar");
+    alert("Gagal menyimpan data tipe kamar");
   }
 });
