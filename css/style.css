@@ -404,12 +404,13 @@ footer{
 }
 
 .kost-jenis {
-  margin-top: -10px;     /* tarik naik, nempel ke nama kost */
-  margin-bottom: 10px;   /* jarak jelas ke rating */
+  margin-top: 0;      /* jangan minus, biar stabil */
+  margin-bottom: 8px;
   font-size: 14px;
   color: #ff6b2c;
   font-weight: 500;
 }
+
 #kostNama {
   margin-bottom: 2px; /* kecilkan jarak ke kostJenis */
 }
