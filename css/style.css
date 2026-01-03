@@ -552,3 +552,21 @@ footer{
   color: #444;
   margin-top: 1px;
 }
+
+.room-harga-list {
+  font-size: 14px;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.room-tersedia {
+  font-weight: 600;
+  margin: 8px 0 12px;
+}
+
+.btn-book.full {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+}
