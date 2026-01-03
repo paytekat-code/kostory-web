@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit Kamar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+<main class="container">
+
+  <h1 id="pageTitle">Unit Kamar</h1>
+  <p class="help" id="info"></p>
+
+  <form id="unitForm">
+
+    <label>Nomor Kamar</label>
+    <input
+      type="text"
+      id="nomor"
+      placeholder="101"
+      required
+    >
+
+    <button type="submit">Simpan Unit</button>
+  </form>
+
+  <hr style="margin:32px 0">
+
+  <h3>Daftar Unit</h3>
+  <div id="unitList"></div>
+
+</main>
+
+<script type="module" src="unit-form.js"></script>
+</body>
+</html>
