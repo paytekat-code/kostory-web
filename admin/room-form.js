@@ -1,94 +1,53 @@
-import { db } from "../js/firebase.js";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Tipe Kamar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const params = new URLSearchParams(window.location.search);
-const kostId = params.get("kostId");
-const roomId = params.get("roomId");
-const isEdit = !!roomId;
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
 
-if (!kostId) {
-  alert("kostId tidak ditemukan");
-  throw new Error("kostId missing");
-}
+<body>
+<main class="container">
 
-const formTitle = document.getElementById("formTitle");
-const form = document.getElementById("roomForm");
+  <h1 id="formTitle">Tambah Tipe Kamar</h1>
 
-if (isEdit) {
-  formTitle.textContent = "Edit Tipe Kamar";
-  loadRoom();
-}
+  <form id="roomForm">
 
-async function loadRoom() {
-  const ref = doc(db, "kost", kostId, "rooms", roomId);
-  const snap = await getDoc(ref);
-  if (!snap.exists()) return;
+    <label>Nama Tipe Kamar</label>
+    <input type="text" id="nama" required>
 
-  const r = snap.data();
+    <label>Fasilitas (pisahkan dengan koma)</label>
+    <input type="text" id="fasilitas" placeholder="AC, KM Dalam, TV">
 
-  nama.value = r.nama || "";
-  fasilitas.value = (r.fasilitas || []).join(", ");
-  ukuranKamar.value = r.ukuranKamar || "";
-  hargaHarian.value = r.hargaHarian ?? "";
-  hargaMingguan.value = r.hargaMingguan ?? "";
-  hargaBulanan.value = r.hargaBulanan ?? "";
-  jumlahKamar.value = r.jumlahKamar ?? 0;
-  ditempati.value = r.ditempati ?? 0;
-}
+    <label>Ukuran Kamar</label>
+    <input type="text" id="ukuranKamar" placeholder="3 x 4 m">
 
-form.addEventListener("submit", async e => {
-  e.preventDefault();
+    <label>Harga Harian</label>
+    <input type="number" id="hargaHarian">
 
-  const data = {
-    nama: nama.value.trim(),
-    fasilitas: fasilitas.value
-      .split(",")
-      .map(v => v.trim())
-      .filter(Boolean),
+    <label>Harga Mingguan</label>
+    <input type="number" id="hargaMingguan">
 
-    ukuranKamar: ukuranKamar.value.trim(),
+    <label>Harga Bulanan</label>
+    <input type="number" id="hargaBulanan">
 
-    hargaHarian: Number(hargaHarian.value) || null,
-    hargaMingguan: Number(hargaMingguan.value) || null,
-    hargaBulanan: Number(hargaBulanan.value) || null,
+    <label>Jumlah Kamar (total fisik)</label>
+    <input type="number" id="jumlahKamar" required>
 
-    jumlahKamar: Number(jumlahKamar.value),
-    ditempati: Number(ditempati.value),
+    <p class="help">
+      Sisa kamar akan dihitung otomatis dari transaksi penghuni.<br>
+      <b>(Jumlah Kamar − Kamar Ditempati)</b>
+    </p>
 
-    images: []
-  };
+    <button type="submit">Simpan Tipe Kamar</button>
 
-  if (data.ditempati > data.jumlahKamar) {
-    alert("Kamar ditempati tidak boleh melebihi jumlah kamar");
-    return;
-  }
+  </form>
 
-  try {
-    if (isEdit) {
-      await updateDoc(
-        doc(db, "kost", kostId, "rooms", roomId),
-        data
-      );
-      alert("Tipe kamar berhasil diperbarui");
-    } else {
-      const newRef = doc(
-        db,
-        "kost",
-        kostId,
-        "rooms",
-        crypto.randomUUID()
-      );
-      await setDoc(newRef, data);
-      alert("Tipe kamar berhasil ditambahkan");
-      form.reset();
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Gagal menyimpan data kamar");
-  }
-});
+</main>
+
+<script type="module" src="room-form.js"></script>
+</body>
+</html>
