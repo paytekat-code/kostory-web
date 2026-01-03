@@ -43,6 +43,16 @@ async function loadKost() {
 
     // ===== BASIC INFO =====
     kostNama.textContent = kost.nama;
+
+let jenis = kost.jenisKost || "";
+let statusSI = kost.bolehSuamiIstri ? "Bisa Suami Istri" : "";
+
+let teks = jenis;
+if (jenis && statusSI) teks += " · " + statusSI;
+else if (statusSI) teks = statusSI;
+
+kostJenis.textContent = teks;
+    
     kostAlamat.textContent = kost.alamat;
     kostRating.textContent =
       `⭐ ${kost.rating} (${kost.reviewCount} reviews)`;
