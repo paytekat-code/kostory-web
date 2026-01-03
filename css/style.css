@@ -546,3 +546,9 @@ footer{
   font-size: 14px;
   color: #444;
 }
+
+.room-ukuran {
+  font-size: 13px;
+  color: #444;
+  margin-top: 2px;
+}
