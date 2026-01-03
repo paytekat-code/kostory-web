@@ -211,6 +211,15 @@ document.addEventListener("DOMContentLoaded", () => {
     d.style.display = d.style.display === "none" ? "block" : "none";
   };
 });
+const toggleTitle = document.getElementById("toggleDeskripsi");
+const deskripsiEl = document.getElementById("deskripsi");
+const toggleIcon = document.getElementById("toggleIcon");
+
+toggleTitle.addEventListener("click", () => {
+  const isOpen = deskripsiEl.style.display === "block";
+  deskripsiEl.style.display = isOpen ? "none" : "block";
+  toggleIcon.textContent = isOpen ? "▼" : "▲";
+});
 
 // ===== MENU (TIDAK DIUBAH) =====
 const menuBtn = document.querySelector(".menu-btn");
