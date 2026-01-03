@@ -181,18 +181,26 @@ toggle.onclick = () => {
 
     // ===== FASILITAS =====
     fasilitasUmum.innerHTML = "";
-    kost.fasilitasUmum.forEach(f => {
-      const li = document.createElement("li");
-      li.textContent = f;
-      fasilitasUmum.appendChild(li);
-    });
+
+if (Array.isArray(kost.fasilitasUmum)) {
+  kost.fasilitasUmum.forEach(f => {
+    const li = document.createElement("li");
+    li.textContent = f;
+    fasilitasUmum.appendChild(li);
+  });
+}
+
 
     kebijakan.innerHTML = "";
-    kost.kebijakan.forEach(k => {
-      const li = document.createElement("li");
-      li.textContent = k;
-      kebijakan.appendChild(li);
-    });
+
+if (Array.isArray(kost.kebijakan)) {
+  kost.kebijakan.forEach(k => {
+    const li = document.createElement("li");
+    li.textContent = k;
+    kebijakan.appendChild(li);
+  });
+}
+
 
     // ===== ROOMS =====
     roomList.innerHTML = "";
@@ -240,3 +248,5 @@ window.closeMenu = e => {
 };
 
 menuBtn?.addEventListener("click", window.openMenu);
+
+console.log("DATA KOST:", kost);
