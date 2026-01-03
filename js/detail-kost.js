@@ -13,6 +13,12 @@ const kostId = params.get("id");
 if (!kostId) {
   alert("ID kost tidak ditemukan");
 } else {
+
+  function rupiah(nominal) {
+  if (nominal === null || nominal === undefined) return "-";
+  return "Rp. " + nominal.toLocaleString("id-ID");
+}
+  
   loadKost();
 }
 const kostNama = document.getElementById("kostNama");
@@ -259,6 +265,10 @@ toggleKebijakan.onclick = () => {
     ? room.fasilitas.join(" · ")
     : "";
 const ukuranKamar = room.ukuranKamar || "-";
+// ===== HARGA (MULTI PERIODE) =====
+const hargaHarian   = room.hargaHarian ?? null;
+const hargaMingguan = room.hargaMingguan ?? null;
+const hargaBulanan  = room.hargaBulanan ?? null;
 
   info.innerHTML = `
     <h3>${room.nama}</h3>
@@ -271,15 +281,30 @@ const ukuranKamar = room.ukuranKamar || "-";
     Ukuran Kamar : ${ukuranKamar}
   </div>
   
-    <div class="room-footer">
-      <div class="room-harga">
-        Rp ${room.hargaBulanan.toLocaleString("id-ID")} / bulan<br>
-        <small>Tersedia: ${room.tersedia}</small>
-      </div>
+    info.innerHTML = `
+  <h3>${room.nama}</h3>
 
-      <button class="btn-book">Book Now »</button>
-    </div>
-  `;
+  <div class="room-fasilitas">
+    ${fasilitasInline}
+  </div>
+
+  <div class="room-ukuran">
+    Ukuran Kamar : ${room.ukuranKamar || "-"}
+  </div>
+
+  <div class="room-harga-list">
+    ${hargaHarian   !== null ? `<div>Harian : ${rupiah(hargaHarian)}</div>` : ""}
+    ${hargaMingguan !== null ? `<div>Mingguan : ${rupiah(hargaMingguan)}</div>` : ""}
+    ${hargaBulanan  !== null ? `<div>Bulanan : ${rupiah(hargaBulanan)}</div>` : ""}
+  </div>
+
+  <div class="room-tersedia">
+    Sisa Kamar : ${room.tersedia ?? 0}
+  </div>
+
+  <button class="btn-book full">Book Now</button>
+`;
+
 
   card.appendChild(hero);
   card.appendChild(info);
