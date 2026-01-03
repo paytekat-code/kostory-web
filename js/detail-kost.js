@@ -53,6 +53,10 @@ async function loadKost() {
 document.getElementById("deskripsi").innerHTML =
   (kost.deskripsi || "").replace(/\n/g, "<br><br>");
 
+document.getElementById("toggleDeskripsi").onclick = () => {
+  const d = document.getElementById("deskripsi");
+  d.style.display = d.style.display === "none" ? "block" : "none";
+};
 
     // =========================
     // DETAIL HERO (BERSIH)
