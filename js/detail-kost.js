@@ -44,13 +44,21 @@ async function loadKost() {
     // ===== BASIC INFO =====
     kostNama.textContent = kost.nama;
 
+// ===== JENIS KOST =====
 let jenis = "";
 if (kost.jenisKost === "Pria") jenis = "Kost Pria";
 else if (kost.jenisKost === "Wanita") jenis = "Kost Wanita";
 else if (kost.jenisKost === "Campur") jenis = "Kost Campur";
 
-let statusSI = kost.bolehSuamiIstri ? "Bisa Suami Istri" : "";
+// ===== STATUS SUAMI ISTRI (TEGAS) =====
+let statusSI = "";
+if (kost.bolehSuamiIstri === true) {
+  statusSI = "Bisa Suami Istri";
+} else if (kost.bolehSuamiIstri === false) {
+  statusSI = "Tidak Bisa Suami Istri";
+}
 
+// ===== GABUNGKAN =====
 let teks = jenis;
 if (jenis && statusSI) teks += " · " + statusSI;
 else if (statusSI) teks = statusSI;
