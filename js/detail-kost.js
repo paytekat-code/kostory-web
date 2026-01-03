@@ -200,6 +200,15 @@ if (Array.isArray(kost.kebijakan)) {
     kebijakan.appendChild(li);
   });
 }
+// TOGGLE KEBIJAKAN
+const toggleKebijakan = document.getElementById("toggleKebijakan");
+const toggleKebijakanIcon = document.getElementById("toggleKebijakanIcon");
+
+toggleKebijakan.onclick = () => {
+  const show = kebijakan.style.display === "none";
+  kebijakan.style.display = show ? "block" : "none";
+  toggleKebijakanIcon.textContent = show ? "▲" : "▼";
+};
 
 
     // ===== ROOMS =====
