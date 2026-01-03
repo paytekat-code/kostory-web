@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Kostory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+<main class="container">
+
+  <h1 id="formTitle">Tambah Kostory</h1>
+
+  <form id="kostForm">
+
+    <label>Nama Kost</label>
+    <input type="text" id="nama" required />
+
+    <label>Alamat</label>
+    <textarea id="alamat" required></textarea>
+
+    <label>Jenis Kost</label>
+    <select id="jenisKost" required>
+      <option value="">-- pilih --</option>
+      <option value="Pria">Pria</option>
+      <option value="Wanita">Wanita</option>
+      <option value="Campur">Campur</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="bolehSuamiIstri" />
+      Bisa Suami Istri
+    </label>
+
+    <label>Deskripsi</label>
+    <textarea id="deskripsi" rows="4"></textarea>
+
+    <label>Fasilitas Umum (pisahkan dengan koma)</label>
+    <input type="text" id="fasilitasUmum" placeholder="AC, WiFi, Parkir" />
+
+    <label>Kebijakan (pisahkan dengan koma)</label>
+    <input type="text" id="kebijakan" placeholder="Tidak merokok, Tidak bawa hewan" />
+
+    <label>Latitude</label>
+    <input type="number" step="any" id="lat" />
+
+    <label>Longitude</label>
+    <input type="number" step="any" id="lng" />
+
+    <label>Hero Images (URL, pisahkan koma)</label>
+    <textarea id="heroImages" rows="3"></textarea>
+
+    <button type="submit" class="btn-primary" id="submitBtn">
+      Simpan Kostory
+    </button>
+
+  </form>
+
+</main>
+
+<script type="module" src="kost-form.js"></script>
+</body>
+</html>
