@@ -37,8 +37,8 @@ async function loadRoom() {
   hargaHarian.value = r.hargaHarian ?? "";
   hargaMingguan.value = r.hargaMingguan ?? "";
   hargaBulanan.value = r.hargaBulanan ?? "";
-  totalKamar.value = r.totalKamar ?? 0;
-  tersedia.value = r.tersedia ?? 0;
+  jumlahKamar.value = r.jumlahKamar ?? 0;
+  ditempati.value = r.ditempati ?? 0;
 }
 
 form.addEventListener("submit", async e => {
@@ -46,18 +46,27 @@ form.addEventListener("submit", async e => {
 
   const data = {
     nama: nama.value.trim(),
-    fasilitas: fasilitas.value.split(",").map(v => v.trim()).filter(Boolean),
+    fasilitas: fasilitas.value
+      .split(",")
+      .map(v => v.trim())
+      .filter(Boolean),
+
     ukuranKamar: ukuranKamar.value.trim(),
 
     hargaHarian: Number(hargaHarian.value) || null,
     hargaMingguan: Number(hargaMingguan.value) || null,
     hargaBulanan: Number(hargaBulanan.value) || null,
 
-    totalKamar: Number(totalKamar.value),
-    tersedia: Number(tersedia.value),
+    jumlahKamar: Number(jumlahKamar.value),
+    ditempati: Number(ditempati.value),
 
     images: []
   };
+
+  if (data.ditempati > data.jumlahKamar) {
+    alert("Kamar ditempati tidak boleh melebihi jumlah kamar");
+    return;
+  }
 
   try {
     if (isEdit) {
@@ -65,7 +74,7 @@ form.addEventListener("submit", async e => {
         doc(db, "kost", kostId, "rooms", roomId),
         data
       );
-      alert("Tipe kamar diperbarui");
+      alert("Tipe kamar berhasil diperbarui");
     } else {
       const newRef = doc(
         db,
@@ -75,7 +84,7 @@ form.addEventListener("submit", async e => {
         crypto.randomUUID()
       );
       await setDoc(newRef, data);
-      alert("Tipe kamar ditambahkan");
+      alert("Tipe kamar berhasil ditambahkan");
       form.reset();
     }
   } catch (err) {
