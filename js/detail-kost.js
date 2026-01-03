@@ -209,27 +209,69 @@ if (Array.isArray(kost.kebijakan)) {
     );
 
     roomSnap.forEach(r => {
-      const room = r.data();
+  const room = r.data();
 
-      const card = document.createElement("div");
-      card.className = "room-card";
+  const card = document.createElement("div");
+  card.className = "room-card";
 
-      const img = document.createElement("img");
-      img.src = room.images[0];
-      img.alt = room.nama;
+  /* HERO FOTO KAMAR (SWIPE) */
+  const hero = document.createElement("div");
+  hero.className = "room-hero";
 
-      const info = document.createElement("div");
-      info.className = "room-info";
-      info.innerHTML = `
-        <h3>${room.nama}</h3>
-        <p>Rp ${room.hargaBulanan.toLocaleString("id-ID")} / bulan</p>
-        <p>Tersedia: ${room.tersedia}</p>
-      `;
+  const track = document.createElement("div");
+  track.className = "room-hero-track";
 
-      card.appendChild(img);
-      card.appendChild(info);
-      roomList.appendChild(card);
-    });
+  (room.images || []).forEach(src => {
+    const slide = document.createElement("div");
+    slide.className = "room-hero-slide";
+
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = room.nama;
+
+    // zoom pakai modal yg sudah ada
+    img.onclick = () => {
+      modalImage.src = src;
+      imageModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    };
+
+    slide.appendChild(img);
+    track.appendChild(slide);
+  });
+
+  hero.appendChild(track);
+
+  /* INFO KAMAR */
+  const info = document.createElement("div");
+  info.className = "room-info";
+
+  const fasilitasInline = Array.isArray(room.fasilitas)
+    ? room.fasilitas.join(" · ")
+    : "";
+
+  info.innerHTML = `
+    <h3>${room.nama}</h3>
+
+    <div class="room-fasilitas">
+      ${fasilitasInline}
+    </div>
+
+    <div class="room-footer">
+      <div class="room-harga">
+        Rp ${room.hargaBulanan.toLocaleString("id-ID")} / bulan<br>
+        <small>Tersedia: ${room.tersedia}</small>
+      </div>
+
+      <button class="btn-book">Book Now »</button>
+    </div>
+  `;
+
+  card.appendChild(hero);
+  card.appendChild(info);
+  roomList.appendChild(card);
+});
+
 
   } catch (err) {
     console.error("DETAIL KOST ERROR:", err);
