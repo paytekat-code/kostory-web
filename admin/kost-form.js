@@ -1,0 +1,74 @@
+import { db } from "../js/firebase.js";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const params = new URLSearchParams(window.location.search);
+const kostId = params.get("id");
+const isEdit = !!kostId;
+
+const formTitle = document.getElementById("formTitle");
+const form = document.getElementById("kostForm");
+
+if (isEdit) {
+  formTitle.textContent = "Edit Kostory";
+  loadData();
+}
+
+async function loadData() {
+  const ref = doc(db, "kost", kostId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return;
+
+  const d = snap.data();
+
+  nama.value = d.nama || "";
+  alamat.value = d.alamat || "";
+  jenisKost.value = d.jenisKost || "";
+  bolehSuamiIstri.checked = d.bolehSuamiIstri === true;
+  deskripsi.value = d.deskripsi || "";
+  fasilitasUmum.value = (d.fasilitasUmum || []).join(", ");
+  kebijakan.value = (d.kebijakan || []).join(", ");
+  lat.value = d.location?.lat ?? "";
+  lng.value = d.location?.lng ?? "";
+  heroImages.value = (d.heroImages || []).join(", ");
+}
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const data = {
+    nama: nama.value.trim(),
+    alamat: alamat.value.trim(),
+    jenisKost: jenisKost.value,
+    bolehSuamiIstri: bolehSuamiIstri.checked,
+    deskripsi: deskripsi.value.trim(),
+    fasilitasUmum: fasilitasUmum.value.split(",").map(v => v.trim()).filter(Boolean),
+    kebijakan: kebijakan.value.split(",").map(v => v.trim()).filter(Boolean),
+    heroImages: heroImages.value.split(",").map(v => v.trim()).filter(Boolean),
+    location: {
+      lat: Number(lat.value),
+      lng: Number(lng.value)
+    },
+    rating: 0,
+    reviewCount: 0
+  };
+
+  try {
+    if (isEdit) {
+      await updateDoc(doc(db, "kost", kostId), data);
+      alert("Kostory berhasil diperbarui");
+    } else {
+      const newRef = doc(db, "kost", crypto.randomUUID());
+      await setDoc(newRef, data);
+      alert("Kostory berhasil ditambahkan");
+      form.reset();
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan data");
+  }
+});
