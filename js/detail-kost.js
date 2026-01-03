@@ -49,12 +49,7 @@ if (kost.jenisKost === "Pria") jenis = "Kost Pria";
 else if (kost.jenisKost === "Wanita") jenis = "Kost Wanita";
 else if (kost.jenisKost === "Campur") jenis = "Kost Campur";
 
-let statusSI =
-  kost.bolehSuamiIstri === true ||
-  kost.bolehSuamiIstri === "true" ||
-  kost.bolehSuamiIstri === 1
-    ? "Bisa Suami Istri"
-    : "";
+let statusSI = kost.bolehSuamiIstri ? "Bisa Suami Istri" : "";
 
 let teks = jenis;
 if (jenis && statusSI) teks += " · " + statusSI;
