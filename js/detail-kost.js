@@ -266,7 +266,11 @@ const ukuranKamar = room.ukuranKamar || "-";
     <div class="room-fasilitas">
       ${fasilitasInline}
     </div>
-
+    
+<div class="room-ukuran">
+    Ukuran Kamar : ${ukuranKamar}
+  </div>
+  
     <div class="room-footer">
       <div class="room-harga">
         Rp ${room.hargaBulanan.toLocaleString("id-ID")} / bulan<br>
