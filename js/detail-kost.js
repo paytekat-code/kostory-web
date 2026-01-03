@@ -18,6 +18,10 @@ if (!kostId) {
   if (nominal === null || nominal === undefined) return "-";
   return "Rp. " + nominal.toLocaleString("id-ID");
 }
+
+window.onerror = (msg, src, line, col) => {
+  console.error("JS ERROR:", msg, "at", line + ":" + col);
+};
   
   loadKost();
 }
@@ -210,11 +214,14 @@ if (Array.isArray(kost.kebijakan)) {
 const toggleKebijakan = document.getElementById("toggleKebijakan");
 const toggleKebijakanIcon = document.getElementById("toggleKebijakanIcon");
 
-toggleKebijakan.onclick = () => {
-  const show = kebijakan.style.display === "none";
-  kebijakan.style.display = show ? "block" : "none";
-  toggleKebijakanIcon.textContent = show ? "▲" : "▼";
-};
+if (toggleKebijakan && toggleKebijakanIcon) {
+  toggleKebijakan.onclick = () => {
+    const show = kebijakan.style.display === "none";
+    kebijakan.style.display = show ? "block" : "none";
+    toggleKebijakanIcon.textContent = show ? "▲" : "▼";
+  };
+}
+
 
 
     // ===== ROOMS =====
@@ -269,17 +276,6 @@ const ukuranKamar = room.ukuranKamar || "-";
 const hargaHarian   = room.hargaHarian ?? null;
 const hargaMingguan = room.hargaMingguan ?? null;
 const hargaBulanan  = room.hargaBulanan ?? null;
-
-  info.innerHTML = `
-    <h3>${room.nama}</h3>
-
-    <div class="room-fasilitas">
-      ${fasilitasInline}
-    </div>
-    
-<div class="room-ukuran">
-    Ukuran Kamar : ${ukuranKamar}
-  </div>
   
     info.innerHTML = `
   <h3>${room.nama}</h3>
