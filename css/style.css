@@ -410,3 +410,6 @@ footer{
   color: #ff6b2c;
   font-weight: 500;
 }
+#kostNama {
+  margin-bottom: 2px; /* kecilkan jarak ke kostJenis */
+}
