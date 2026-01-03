@@ -45,7 +45,13 @@ async function loadKost() {
     kostNama.textContent = kost.nama;
 
 let jenis = kost.jenisKost || "";
-let statusSI = kost.bolehSuamiIstri ? "Bisa Suami Istri" : "";
+
+let statusSI =
+  kost.bolehSuamiIstri === true ||
+  kost.bolehSuamiIstri === "true" ||
+  kost.bolehSuamiIstri === 1
+    ? "Bisa Suami Istri"
+    : "";
 
 let teks = jenis;
 if (jenis && statusSI) teks += " · " + statusSI;
