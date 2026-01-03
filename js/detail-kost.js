@@ -53,10 +53,6 @@ async function loadKost() {
 document.getElementById("deskripsi").innerHTML =
   (kost.deskripsi || "").replace(/\n/g, "<br><br>");
 
-document.getElementById("toggleDeskripsi").onclick = () => {
-  const d = document.getElementById("deskripsi");
-  d.style.display = d.style.display === "none" ? "block" : "none";
-};
 
     // =========================
     // DETAIL HERO (BERSIH)
@@ -205,6 +201,16 @@ document.getElementById("toggleDeskripsi").onclick = () => {
     alert("Terjadi kesalahan saat memuat data kost");
   }
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("toggleDeskripsi");
+  const d = document.getElementById("deskripsi");
+
+  if (!toggle || !d) return;
+
+  toggle.onclick = () => {
+    d.style.display = d.style.display === "none" ? "block" : "none";
+  };
+});
 
 // ===== MENU (TIDAK DIUBAH) =====
 const menuBtn = document.querySelector(".menu-btn");
