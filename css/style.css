@@ -405,7 +405,7 @@ footer{
 
 .kost-jenis {
   margin-top: 0;      /* jangan minus, biar stabil */
-  margin-bottom: 8px;
+  margin-bottom: 14px;
   font-size: 14px;
   color: #ff6b2c;
   font-weight: 500;
