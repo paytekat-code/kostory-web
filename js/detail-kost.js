@@ -12,7 +12,8 @@ const params = new URLSearchParams(window.location.search);
 const kostId = params.get("id");
 if (!kostId) {
   alert("ID kost tidak ditemukan");
-  return;
+} else {
+  loadKost();
 }
 
 async function loadKost() {
@@ -184,8 +185,6 @@ async function loadKost() {
     alert("Terjadi kesalahan saat memuat data kost");
   }
 }
-
-loadKost();
 
 // ===== MENU (TIDAK DIUBAH) =====
 const menuBtn = document.querySelector(".menu-btn");
