@@ -50,6 +50,7 @@ async function loadKost() {
       mapLink.href =
         `https://www.google.com/maps?q=${kost.location.lat},${kost.location.lng}`;
     }
+document.getElementById("deskripsi").textContent = kost.deskripsi || "";
 
     // =========================
     // DETAIL HERO (BERSIH)
