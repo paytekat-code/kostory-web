@@ -236,6 +236,11 @@ if (toggleKebijakan && toggleKebijakanIcon) {
 
   const card = document.createElement("div");
   card.className = "room-card";
+      
+// JUDUL KAMAR (DI ATAS GAMBAR)
+const title = document.createElement("h3");
+title.className = "room-title";
+title.textContent = room.nama;
 
   /* HERO FOTO KAMAR (SWIPE) */
   const hero = document.createElement("div");
@@ -279,7 +284,6 @@ const hargaMingguan = room.hargaMingguan ?? null;
 const hargaBulanan  = room.hargaBulanan ?? null;
   
     info.innerHTML = `
-  <h3>${room.nama}</h3>
 
   <div class="room-fasilitas">
     ${fasilitasInline}
@@ -302,7 +306,7 @@ const hargaBulanan  = room.hargaBulanan ?? null;
   <button class="btn-book full">Book Now</button>
 `;
 
-
+  card.appendChild(title);
   card.appendChild(hero);
   card.appendChild(info);
   roomList.appendChild(card);
