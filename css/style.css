@@ -404,7 +404,8 @@ footer{
 }
 
 .kost-jenis {
-  margin-top: 4px;
+  margin-top: -6px;   /* narik ke atas, nempel ke judul */
+  margin-bottom: 6px; /* kasih jarak halus ke rating */
   font-size: 14px;
   color: #ff6b2c;
   font-weight: 500;
