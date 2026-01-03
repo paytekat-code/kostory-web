@@ -59,16 +59,22 @@ async function loadRooms() {
     card.style.background = "#fff";
 
     card.innerHTML = `
-      <strong>${room.nama}</strong><br>
-      <span class="help">
-        Total: ${room.totalKamar} • Tersedia: ${room.tersedia}
-      </span><br><br>
+  <strong>${room.nama}</strong><br>
+  <span class="help">
+    Jumlah Kamar : ${room.jumlahKamar}
+  </span><br><br>
 
-      <button data-edit>Edit</button>
-      <button data-delete style="margin-left:8px; background:#e11d48">
-        Hapus
-      </button>
-    `;
+  <button data-edit>Edit</button>
+
+  <button data-unit style="margin-left:8px">
+    Kelola Unit
+  </button>
+
+  <button data-delete style="margin-left:8px; background:#e11d48">
+    Hapus
+  </button>
+`;
+
 
     // EDIT
     card.querySelector("[data-edit]").onclick = () => {
