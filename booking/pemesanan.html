@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pemesanan Kamar | Kostory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/booking.css" />
+</head>
+
+<body>
+<main class="container">
+
+  <h1>Pemesanan Kamar</h1>
+  <p class="help">Pilih tipe kamar dan add-on sesuai kebutuhan</p>
+
+  <!-- INFO KOST -->
+  <div class="card" style="margin-bottom:16px">
+    <strong id="kostNama">-</strong>
+  </div>
+
+  <!-- TIPE KAMAR -->
+  <div id="roomList"></div>
+
+  <!-- ADD-ON -->
+  <div class="card" style="margin-top:20px">
+    <h3>Add-on (Opsional)</h3>
+    <div id="addonList"></div>
+  </div>
+
+  <!-- RINGKASAN -->
+  <div class="card" style="margin-top:20px">
+    <h3>Ringkasan Harga</h3>
+    <div id="summary">-</div>
+
+    <button id="btnLanjut" class="primary" disabled style="margin-top:14px">
+      Lanjut Booking
+    </button>
+  </div>
+
+</main>
+
+<script type="module" src="pemesanan.js"></script>
+</body>
+</html>
