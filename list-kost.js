@@ -41,8 +41,8 @@ async function loadKost() {
     card.innerHTML = `
       <strong>${k.nama}</strong><br>
       <span class="help">${k.alamat}</span><br><br>
-      <span class="help">
-        Mulai dari Rp ${k.hargaMulai?.toLocaleString("id-ID") ?? "-"}
+      <span class="price">
+  Mulai dari Rp ${k.hargaMulai?.toLocaleString("id-ID") ?? "-"}
       </span><br><br>
 
       <button>Lihat Detail</button>
