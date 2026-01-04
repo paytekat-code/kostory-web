@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking Kamar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+<main class="container">
+
+  <h1>Booking Kamar</h1>
+  <p class="help">Lengkapi data di bawah untuk melakukan booking</p>
+
+  <!-- INFO KOST -->
+  <div class="card">
+    <strong id="kostNama">-</strong><br>
+    <span id="roomTypeNama" class="help"></span>
+  </div>
+
+  <form id="bookingForm" class="card">
+
+    <h3>Data Pemesan</h3>
+    <input type="text" id="bookerNama" placeholder="Nama Pemesan" required />
+    <input type="email" id="bookerEmail" placeholder="Email" disabled />
+
+    <hr>
+
+    <h3>Untuk Siapa</h3>
+    <select id="untukSiapa">
+      <option value="diri_sendiri">Untuk diri sendiri</option>
+      <option value="orang_lain">Untuk orang lain</option>
+    </select>
+
+    <div id="penghuniBox">
+      <input type="text" id="penghuniNama" placeholder="Nama Calon Penghuni" />
+      <input type="text" id="penghuniHp" placeholder="No HP Calon Penghuni" />
+    </div>
+
+    <hr>
+
+    <h3>Ringkasan Harga</h3>
+    <div id="hargaBox">-</div>
+
+    <button type="submit" class="primary">
+      Kirim Booking
+    </button>
+
+  </form>
+
+</main>
+
+<script type="module" src="booking-form.js"></script>
+</body>
+</html>
