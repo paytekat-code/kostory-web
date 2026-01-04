@@ -8,52 +8,90 @@ const params = new URLSearchParams(window.location.search);
 const city = params.get("city");
 const duration = params.get("duration");
 
-if (!city || !duration) {
-  alert("Parameter pencarian tidak lengkap");
-  throw new Error("missing param");
-}
-
 const kostList = document.getElementById("kostList");
 const summary = document.getElementById("summary");
 
 summary.textContent =
   `Menampilkan kost di ${city} untuk durasi ${duration}`;
 
+async function getHargaBulananTerendah(kostId) {
+  const roomSnap = await getDocs(
+    collection(db, "kost", kostId, "rooms")
+  );
+
+  let hargaTerendah = null;
+
+  roomSnap.forEach(r => {
+    const room = r.data();
+    if (!room.aktif) return;
+    if (!room.hargaBulanan) return;
+
+    if (hargaTerendah === null || room.hargaBulanan < hargaTerendah) {
+      hargaTerendah = room.hargaBulanan;
+    }
+  });
+
+  return hargaTerendah;
+}
+
 async function loadKost() {
   const snap = await getDocs(collection(db, "kost"));
-
   kostList.innerHTML = "";
 
-  snap.forEach(docSnap => {
+  for (const docSnap of snap.docs) {
     const k = docSnap.data();
 
-    // FILTER KOTA
-   if (k.kota !== city) return;
+    if (k.kota !== city) continue;
+    if (!k.durasiTersedia?.includes(duration)) continue;
 
-
-    // FILTER DURASI
-    if (!k.durasiTersedia?.includes(duration)) return;
+    const hargaMulai = await getHargaBulananTerendah(docSnap.id);
+    const foto = k.heroImages?.[0] ?? "img/default-kost.jpg";
 
     const card = document.createElement("div");
-    card.className = "card";
-    card.style.marginBottom = "12px";
+    card.className = "kost-card";
 
     card.innerHTML = `
-      <strong>${k.nama}</strong><br>
-      <span class="help">${k.alamat}</span><br><br>
-      <span class="price">
-  Mulai dari Rp ${k.hargaMulai?.toLocaleString("id-ID") ?? "-"}
-      </span><br><br>
+      <div class="kost-img">
+        <img src="${foto}" alt="${k.nama}">
+      </div>
 
-      <button>Lihat Detail</button>
+      <div class="kost-info">
+        <h3>${k.nama}</h3>
+
+        <div class="rating">
+          ⭐ ${k.rating ?? "4.8"}
+          <span>(${k.reviewCount ?? 0})</span>
+        </div>
+
+        <div class="location">
+          📍 ${k.kota}
+        </div>
+
+        <div class="facility">
+          ${(k.fasilitasUmum ?? []).slice(0,3).join(" · ")}
+        </div>
+
+        <div class="price-row">
+          <div class="price">
+            IDR ${hargaMulai
+              ? hargaMulai.toLocaleString("id-ID")
+              : "-"}
+            <span>/bulan</span>
+          </div>
+
+          <button class="btn-detail">
+            Lihat Detail
+          </button>
+        </div>
+      </div>
     `;
 
-    card.querySelector("button").onclick = () => {
+    card.querySelector(".btn-detail").onclick = () => {
       location.href = `/detail-kost.html?id=${docSnap.id}`;
     };
 
     kostList.appendChild(card);
-  });
+  }
 }
 
 loadKost();
