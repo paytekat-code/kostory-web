@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Booking Kamar</title>
+  <title>Booking Kamar | Kostory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="../css/style.css" />
@@ -12,39 +12,115 @@
 <main class="container">
 
   <h1>Booking Kamar</h1>
-  <p class="help">Lengkapi data di bawah untuk melakukan booking</p>
+  <p class="help">
+    Lengkapi data berikut untuk melakukan booking kamar.
+  </p>
 
   <!-- INFO KOST -->
-  <div class="card">
+  <div class="card" style="margin-bottom:20px">
     <strong id="kostNama">-</strong><br>
     <span id="roomTypeNama" class="help"></span>
   </div>
 
   <form id="bookingForm" class="card">
 
+    <!-- DATA PEMESAN -->
     <h3>Data Pemesan</h3>
-    <input type="text" id="bookerNama" placeholder="Nama Pemesan" required />
-    <input type="email" id="bookerEmail" placeholder="Email" disabled />
+
+    <label>Nama Pemesan</label>
+    <input type="text" id="bookerNama" required>
+
+    <label>Email</label>
+    <input type="email" id="bookerEmail" disabled>
 
     <hr>
 
+    <!-- UNTUK SIAPA -->
     <h3>Untuk Siapa</h3>
+
     <select id="untukSiapa">
       <option value="diri_sendiri">Untuk diri sendiri</option>
       <option value="orang_lain">Untuk orang lain</option>
     </select>
 
-    <div id="penghuniBox">
-      <input type="text" id="penghuniNama" placeholder="Nama Calon Penghuni" />
-      <input type="text" id="penghuniHp" placeholder="No HP Calon Penghuni" />
+    <div id="penghuniBox" style="display:none;margin-top:12px">
+      <label>Nama Calon Penghuni</label>
+      <input type="text" id="penghuniNama">
+
+      <label>No HP Calon Penghuni</label>
+      <input type="text" id="penghuniHp">
     </div>
 
     <hr>
 
+    <!-- RINGKASAN HARGA -->
     <h3>Ringkasan Harga</h3>
-    <div id="hargaBox">-</div>
+    <div id="hargaBox" class="help">-</div>
 
-    <button type="submit" class="primary">
+    <hr>
+
+    <!-- SYARAT & KETENTUAN -->
+    <h3>Syarat & Ketentuan</h3>
+
+    <div
+      style="
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        padding:14px;
+        max-height:180px;
+        overflow-y:auto;
+        background:#fafafa;
+        font-size:14px;
+        line-height:1.6;
+      "
+    >
+      <strong>Syarat dan Ketentuan Booking Kamar Kost di Kostory</strong><br><br>
+
+      <b>1. Proses Booking</b><br>
+      Booking dilakukan melalui sistem Kostory dengan mengisi data yang benar dan lengkap.
+      Booking dianggap sah setelah pembayaran Deposit Pemesanan (DP) dan dikonfirmasi
+      oleh pengelola.<br><br>
+
+      <b>2. Deposit Pemesanan</b><br>
+      Deposit bersifat <b>non-refundable</b>. Deposit akan diperhitungkan sebagai
+      jaminan saat check-in dan dikembalikan saat check-out apabila tidak terdapat
+      pelanggaran, kerusakan, atau tunggakan pembayaran.<br><br>
+
+      <b>3. Masa Holding</b><br>
+      Kamar akan di-hold maksimal sesuai kebijakan kost sejak tanggal check-in
+      yang disepakati. Apabila penyewa tidak melakukan check-in tanpa konfirmasi,
+      booking dapat dibatalkan.<br><br>
+
+      <b>4. Pembatalan</b><br>
+      Pembatalan sepihak oleh penyewa menyebabkan deposit hangus.
+      Pembatalan oleh pengelola mengharuskan pengembalian deposit penuh.<br><br>
+
+      <b>5. Ketentuan Umum</b><br>
+      Data pribadi digunakan hanya untuk keperluan proses sewa.
+      Dengan melakukan booking, penyewa dianggap telah membaca,
+      memahami, dan menyetujui seluruh ketentuan ini.
+    </div>
+
+    <label
+      style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-top:14px;
+        font-size:14px;
+      "
+    >
+      <input type="checkbox" id="agreeTnc">
+      Saya telah membaca dan menyetujui Syarat & Ketentuan di atas
+    </label>
+
+    <button
+      type="submit"
+      class="primary"
+      id="submitBtn"
+      disabled
+      style="margin-top:20px"
+    >
       Kirim Booking
     </button>
 
