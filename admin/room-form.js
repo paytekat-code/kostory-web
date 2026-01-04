@@ -77,10 +77,11 @@ form.addEventListener("submit", async e => {
 
   try {
     if (isEdit) {
-      await updateDoc(
-        doc(db, "kost", kostId, "rooms", roomId),
-        data
-      );
+      await setDoc(
+  doc(db, "kost", kostId, "rooms", roomId),
+  data,
+  { merge: true }
+);
       alert("Tipe kamar berhasil diperbarui");
     } else {
       const newRef = doc(
