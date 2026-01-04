@@ -312,10 +312,13 @@ card.appendChild(info);   // ⬅️ WAJIB sebelum query button
 
 const btnBook = card.querySelector(".btn-book");
 
-btnBook.addEventListener("click", () => {
-  window.location.href =
-    `/booking/pemesanan.html?kostId=${kostId}&roomTypeId=${r.id}`;
-});
+if (btnBook) {
+  btnBook.addEventListener("click", () => {
+    window.location.href =
+      `/booking/pemesanan.html?kostId=${kostId}&roomTypeId=${r.id}`;
+  });
+}
+
 
 roomList.appendChild(card);
 
