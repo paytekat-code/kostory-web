@@ -79,6 +79,7 @@
 ============================= */
 .durasi-pills {
   display: flex;
+   justify-content: center;   /* ⬅️ INI KUNCINYA */
   gap: 10px;
   flex-wrap: wrap;
 }
