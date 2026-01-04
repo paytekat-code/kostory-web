@@ -82,6 +82,12 @@ async function loadRooms() {
         `room-form.html?kostId=${kostId}&roomId=${roomId}`;
     };
 
+    // KELOLA UNIT  ← ★ INI YANG KURANG ★
+card.querySelector("[data-unit]").onclick = () => {
+  location.href =
+    `unit-form.html?kostId=${kostId}&roomTypeId=${roomId}`;
+};
+
     // DELETE
     card.querySelector("[data-delete]").onclick = async () => {
       if (!confirm("Hapus tipe kamar ini?")) return;
