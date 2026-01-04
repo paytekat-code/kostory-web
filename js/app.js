@@ -59,8 +59,26 @@ function bindSearchButton() {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    loadKost();
-  });
+  const citySelect =
+    document.querySelector(".search-card select");
+  const durationSelect =
+    document.querySelectorAll(".search-card select")[1];
+  const checkinInput =
+    document.querySelector(".search-card input[type='date']");
+
+  const city = citySelect?.value || "";
+  const duration = durationSelect?.value || "";
+  const checkin = checkinInput?.value || "";
+
+  if (!city || !duration || !checkin) {
+    alert("Lengkapi pencarian terlebih dahulu");
+    return;
+  }
+
+  window.location.href =
+    `/list-kost.html?city=${encodeURIComponent(city)}&duration=${encodeURIComponent(duration)}&checkin=${checkin}`;
+});
+
 }
 
 // Init saat halaman siap
