@@ -86,17 +86,23 @@ function loadDurasi() {
   const pills = document.querySelectorAll(".pill input");
 
   pills.forEach(input => {
+    // INIT STATE (INI YANG KURANG SEBELUMNYA)
+    if (input.checked) {
+      input.closest(".pill").classList.add("active");
+      selectedDurasi = input.value;
+    }
+
     input.addEventListener("change", () => {
       document.querySelectorAll(".pill")
         .forEach(p => p.classList.remove("active"));
 
       input.closest(".pill").classList.add("active");
-
       selectedDurasi = input.value;
       updateSummary();
     });
   });
 }
+
 
 function loadAddons() {
   addonListEl.innerHTML = "";
