@@ -6,7 +6,6 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ===== PARAM =====
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("kostId");
 
@@ -15,25 +14,26 @@ if (!kostId) {
   throw new Error("missing kostId");
 }
 
-// ===== ELEMENT =====
 const kostNamaEl = document.getElementById("kostNama");
 const roomListEl = document.getElementById("roomList");
 const addonListEl = document.getElementById("addonList");
 const summaryEl = document.getElementById("summary");
 const btnLanjut = document.getElementById("btnLanjut");
 
-// ===== STATE =====
 let selectedRoom = null;
+let selectedDurasi = "Bulanan";
 let selectedAddons = [];
 
-// ===== DATA ADDON (V1 – statis dulu) =====
+/* ===== ADDON SESUAI DOKUMEN ===== */
 const ADDONS = [
-  { id: "listrik", nama: "Listrik", harga: 150000 },
-  { id: "laundry", nama: "Laundry", harga: 100000 },
-  { id: "parkir", nama: "Parkir Motor", harga: 50000 }
+  { id:"motor", nama:"Garasi Sepeda Motor", harga:0 },
+  { id:"mobil", nama:"Carport Mobil", harga:150000 },
+  { id:"laundry", nama:"Laundry Unlimited", harga:200000 },
+  { id:"listrik", nama:"Token Listrik Unlimited", harga:450000 },
+  { id:"pasangan", nama:"Kost Bersama Pasangan", harga:350000 },
+  { id:"housekeeping", nama:"Housekeeping Ekstra", harga:300000 }
 ];
 
-// ===== LOAD KOST =====
 async function loadKost() {
   const snap = await getDoc(doc(db, "kost", kostId));
   if (snap.exists()) {
@@ -41,74 +41,71 @@ async function loadKost() {
   }
 }
 
-// ===== LOAD ROOM TYPES =====
 async function loadRooms() {
-  const snap = await getDocs(
-    collection(db, "kost", kostId, "rooms")
-  );
-
+  const snap = await getDocs(collection(db, "kost", kostId, "rooms"));
   roomListEl.innerHTML = "";
 
   snap.forEach(docSnap => {
     const r = docSnap.data();
-    const roomTypeId = docSnap.id;
+
+    if (!r.aktif) return;
 
     const card = document.createElement("div");
-    card.className = "card";
-    card.style.marginBottom = "12px";
-    card.style.cursor = "pointer";
+    card.className = "card room";
 
     card.innerHTML = `
-      <strong>${r.nama}</strong><br>
-      <span class="help">
-        Bulanan: Rp ${r.hargaBulanan?.toLocaleString("id-ID")}
-      </span>
+      <strong>${r.nama}</strong>
+      <div class="help">
+        Bulanan: Rp ${r.hargaBulanan?.toLocaleString("id-ID") ?? "-"}<br>
+        Mingguan: Rp ${r.hargaMingguan?.toLocaleString("id-ID") ?? "-"}<br>
+        Harian: Rp ${r.hargaHarian?.toLocaleString("id-ID") ?? "-"}
+      </div>
     `;
 
     card.onclick = () => {
-  document
-    .querySelectorAll("#roomList .card")
-    .forEach(c => c.classList.remove("selected"));
+      document.querySelectorAll(".room").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
 
-  card.classList.add("selected");
-
-  selectedRoom = {
-    roomTypeId,
-    nama: r.nama,
-    harga: r.hargaBulanan || 0
-  };
-
-  updateSummary();
-};
+      selectedRoom = {
+        id: docSnap.id,
+        nama: r.nama,
+        harga: {
+          Bulanan: r.hargaBulanan || 0,
+          Mingguan: r.hargaMingguan || 0,
+          Harian: r.hargaHarian || 0
+        }
+      };
+      updateSummary();
+    };
 
     roomListEl.appendChild(card);
   });
 }
 
-// ===== LOAD ADDONS =====
+function loadDurasi() {
+  document.querySelectorAll("input[name='durasi']").forEach(r => {
+    r.onchange = () => {
+      selectedDurasi = r.value;
+      updateSummary();
+    };
+  });
+}
+
 function loadAddons() {
   addonListEl.innerHTML = "";
 
   ADDONS.forEach(a => {
     const row = document.createElement("label");
-    row.style.display = "flex";
-    row.style.alignItems = "center";
-    row.style.gap = "8px";
-    row.style.marginBottom = "8px";
-
     row.innerHTML = `
-      <input type="checkbox" value="${a.id}">
-      ${a.nama} (+Rp ${a.harga.toLocaleString("id-ID")})
+      <input type="checkbox">
+      ${a.nama}
+      <span>Rp ${a.harga.toLocaleString("id-ID")}</span>
     `;
 
-    const checkbox = row.querySelector("input");
-    checkbox.onchange = () => {
-      if (checkbox.checked) {
-        selectedAddons.push(a);
-      } else {
-        selectedAddons =
-          selectedAddons.filter(x => x.id !== a.id);
-      }
+    const cb = row.querySelector("input");
+    cb.onchange = () => {
+      if (cb.checked) selectedAddons.push(a);
+      else selectedAddons = selectedAddons.filter(x => x.id !== a.id);
       updateSummary();
     };
 
@@ -116,57 +113,43 @@ function loadAddons() {
   });
 }
 
-// ===== UPDATE SUMMARY =====
 function updateSummary() {
   if (!selectedRoom) {
-    summaryEl.innerHTML = "Pilih tipe kamar terlebih dahulu";
+    summaryEl.textContent = "Pilih kamar terlebih dahulu";
     btnLanjut.disabled = true;
     return;
   }
 
-  let total = selectedRoom.harga;
+  let total = selectedRoom.harga[selectedDurasi];
   let html = `
-    <div>Harga Kamar: Rp ${selectedRoom.harga.toLocaleString("id-ID")}</div>
+    <div>Harga Kamar (${selectedDurasi}): Rp ${total.toLocaleString("id-ID")}</div>
   `;
 
   if (selectedAddons.length) {
-    html += `<div style="margin-top:6px"><b>Add-on:</b></div>`;
+    html += "<div><b>Layanan Tambahan:</b></div>";
     selectedAddons.forEach(a => {
       total += a.harga;
       html += `<div>+ ${a.nama}: Rp ${a.harga.toLocaleString("id-ID")}</div>`;
     });
   }
 
-  html += `
-    <hr style="margin:8px 0">
-    <div><b>Total: Rp ${total.toLocaleString("id-ID")}</b></div>
-  `;
-
+  html += `<hr><b>Total: Rp ${total.toLocaleString("id-ID")}</b>`;
   summaryEl.innerHTML = html;
   btnLanjut.disabled = false;
 }
 
-// ===== LANJUT BOOKING =====
 btnLanjut.onclick = () => {
-  const draft = {
+  localStorage.setItem("bookingDraft", JSON.stringify({
     kostId,
-    roomTypeId: selectedRoom.roomTypeId,
-    roomNama: selectedRoom.nama,
-    hargaKamar: selectedRoom.harga,
-    addons: selectedAddons,
-    total:
-      selectedRoom.harga +
-      selectedAddons.reduce((s, a) => s + a.harga, 0)
-  };
+    roomId: selectedRoom.id,
+    durasi: selectedDurasi,
+    addons: selectedAddons
+  }));
 
-  localStorage.setItem("bookingDraft", JSON.stringify(draft));
-
-  location.href =
-    `/booking/booking-form.html?kostId=${kostId}&roomTypeId=${selectedRoom.roomTypeId}`;
+  location.href = "/booking/booking-form.html";
 };
 
-// INIT
 loadKost();
 loadRooms();
+loadDurasi();
 loadAddons();
-updateSummary();
