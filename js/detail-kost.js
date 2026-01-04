@@ -338,4 +338,4 @@ window.closeMenu = e => {
 
 menuBtn?.addEventListener("click", window.openMenu);
 
-console.log("DATA KOST:", kost);
+
