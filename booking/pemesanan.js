@@ -26,13 +26,50 @@ let selectedAddons = [];
 
 /* ===== ADDON SESUAI DOKUMEN ===== */
 const ADDONS = [
-  { id:"motor", nama:"Garasi Sepeda Motor", harga:0 },
-  { id:"mobil", nama:"Carport Mobil", harga:150000 },
-  { id:"laundry", nama:"Laundry Unlimited", harga:200000 },
-  { id:"listrik", nama:"Token Listrik Unlimited", harga:450000 },
-  { id:"pasangan", nama:"Kost Bersama Pasangan", harga:350000 },
-  { id:"housekeeping", nama:"Housekeeping Ekstra", harga:300000 }
+  {
+    id: "motor",
+    nama: "Garasi Sepeda Motor",
+    harga: 0,
+    hargaLabel: "Gratis",
+    desc: "Parkir motor di garasi khusus tanpa biaya tambahan. Gunakan kunci ganda. Kehilangan menjadi tanggung jawab pemilik."
+  },
+  {
+    id: "mobil",
+    nama: "Carport Mobil",
+    harga: 150000,
+    hargaLabel: "Rp 150.000 / bulan",
+    desc: "Kuota terbatas. Parkir di carport sesuai arahan pengurus. Gunakan alarm & kunci stang."
+  },
+  {
+    id: "laundry",
+    nama: "Laundry Kiloan Unlimited",
+    harga: 200000,
+    hargaLabel: "Rp 200.000 / orang / bulan",
+    desc: "Laundry profesional rekanan Kostory. Pakaian dijemput, dicuci, dan dikembalikan bersih & wangi."
+  },
+  {
+    id: "listrik",
+    nama: "Token Listrik Unlimited",
+    harga: 450000,
+    hargaLabel: "Rp 450.000 / bulan",
+    desc: "Tidak perlu isi token. Listrik selalu aktif tanpa khawatir kehabisan."
+  },
+  {
+    id: "pasangan",
+    nama: "Kost Bersama Pasangan",
+    harga: 350000,
+    hargaLabel: "Rp 350.000 / bulan",
+    desc: "Untuk pasangan resmi / keluarga inti. Wajib menunjukkan dokumen pendukung."
+  },
+  {
+    id: "housekeeping",
+    nama: "Housekeeping Ekstra",
+    harga: 300000,
+    hargaLabel: "Rp 300.000 / bulan",
+    desc: "Kamar dibersihkan setiap 3 hari. Cocok untuk kamu yang super sibuk."
+  }
 ];
+
 
 async function loadKost() {
   const snap = await getDoc(doc(db, "kost", kostId));
@@ -108,21 +145,41 @@ function loadAddons() {
   addonListEl.innerHTML = "";
 
   ADDONS.forEach(a => {
-    const row = document.createElement("label");
-    row.innerHTML = `
-      <input type="checkbox">
-      ${a.nama}
-      <span>Rp ${a.harga.toLocaleString("id-ID")}</span>
+    const card = document.createElement("div");
+    card.className = "addon-card";
+
+    card.innerHTML = `
+      <div class="addon-left">
+        <div class="addon-title">${a.nama}</div>
+        <div class="addon-price">${a.hargaLabel}</div>
+        <div class="addon-desc">${a.desc}</div>
+      </div>
+
+      <div class="addon-right">
+        <input type="checkbox">
+      </div>
     `;
 
-    const cb = row.querySelector("input");
-    cb.onchange = () => {
-      if (cb.checked) selectedAddons.push(a);
-      else selectedAddons = selectedAddons.filter(x => x.id !== a.id);
+    const checkbox = card.querySelector("input");
+
+    card.onclick = () => {
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event("change"));
+    };
+
+    checkbox.onchange = () => {
+      if (checkbox.checked) {
+        card.classList.add("selected");
+        selectedAddons.push(a);
+      } else {
+        card.classList.remove("selected");
+        selectedAddons =
+          selectedAddons.filter(x => x.id !== a.id);
+      }
       updateSummary();
     };
 
-    addonListEl.appendChild(row);
+    addonListEl.appendChild(card);
   });
 }
 
