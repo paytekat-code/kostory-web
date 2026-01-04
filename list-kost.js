@@ -28,10 +28,11 @@ async function loadKost() {
     const k = docSnap.data();
 
     // FILTER KOTA
-    if (k.city !== city) return;
+   if (k.kota !== city) return;
+
 
     // FILTER DURASI
-    if (!k.durasi?.includes(duration)) return;
+    if (!k.durasiTersedia?.includes(duration)) return;
 
     const card = document.createElement("div");
     card.className = "card";
