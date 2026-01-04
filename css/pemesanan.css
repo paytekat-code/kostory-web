@@ -178,3 +178,63 @@
     flex-direction: column;
   }
 }
+
+/* =============================
+   ADDON CARD (PRO STYLE)
+============================= */
+.addon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addon-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid #e5e7eb;
+  cursor: pointer;
+  transition: .2s ease;
+  background: #fff;
+}
+
+.addon-card:hover {
+  border-color: #fb923c;
+  background: #fff7ed;
+}
+
+.addon-card.selected {
+  border-color: #fb923c;
+  background: #fff7ed;
+}
+
+.addon-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addon-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.addon-price {
+  color: #fb923c;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.addon-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.addon-right input {
+  width: 18px;
+  height: 18px;
+  accent-color: #fb923c;
+}
