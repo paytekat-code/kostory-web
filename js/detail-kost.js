@@ -321,7 +321,7 @@ if (btnBook) {
 
 
 roomList.appendChild(card);
-
+});
 
 
   } catch (err) {
