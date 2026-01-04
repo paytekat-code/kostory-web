@@ -15,79 +15,61 @@ summary.textContent =
   `Menampilkan kost di ${city} untuk durasi ${duration}`;
 
 async function getHargaBulananTerendah(kostId) {
-  const roomSnap = await getDocs(
-    collection(db, "kost", kostId, "rooms")
-  );
+  const snap = await getDocs(collection(db, "kost", kostId, "rooms"));
+  let harga = null;
 
-  let hargaTerendah = null;
-
-  roomSnap.forEach(r => {
-    const room = r.data();
-    if (!room.aktif) return;
-    if (!room.hargaBulanan) return;
-
-    if (hargaTerendah === null || room.hargaBulanan < hargaTerendah) {
-      hargaTerendah = room.hargaBulanan;
+  snap.forEach(r => {
+    const d = r.data();
+    if (!d.aktif || !d.hargaBulanan) return;
+    if (harga === null || d.hargaBulanan < harga) {
+      harga = d.hargaBulanan;
     }
   });
 
-  return hargaTerendah;
+  return harga;
 }
 
 async function loadKost() {
   const snap = await getDocs(collection(db, "kost"));
-  kostList.innerHTML = "";
 
-  for (const docSnap of snap.docs) {
-    const k = docSnap.data();
+  for (const doc of snap.docs) {
+    const k = doc.data();
 
     if (k.kota !== city) continue;
     if (!k.durasiTersedia?.includes(duration)) continue;
 
-    const hargaMulai = await getHargaBulananTerendah(docSnap.id);
-    const foto = k.heroImages?.[0] ?? "img/default-kost.jpg";
+    const harga = await getHargaBulananTerendah(doc.id);
+    const foto = k.heroImages?.[0] || "img/default-kost.jpg";
 
     const card = document.createElement("div");
     card.className = "kost-card";
 
     card.innerHTML = `
       <div class="kost-img">
-        <img src="${foto}" alt="${k.nama}">
+        <img src="${foto}">
       </div>
 
       <div class="kost-info">
         <h3>${k.nama}</h3>
 
-        <div class="rating">
-          ⭐ ${k.rating ?? "4.8"}
-          <span>(${k.reviewCount ?? 0})</span>
-        </div>
-
-        <div class="location">
-          📍 ${k.kota}
-        </div>
-
+        <div class="rating">⭐ ${k.rating ?? 4.8} (${k.reviewCount ?? 0})</div>
+        <div class="location">📍 ${k.kota}</div>
         <div class="facility">
           ${(k.fasilitasUmum ?? []).slice(0,3).join(" · ")}
         </div>
 
         <div class="price-row">
           <div class="price">
-            IDR ${hargaMulai
-              ? hargaMulai.toLocaleString("id-ID")
-              : "-"}
+            IDR ${harga ? harga.toLocaleString("id-ID") : "-"}
             <span>/bulan</span>
           </div>
-
-          <button class="btn-detail">
-            Lihat Detail
-          </button>
+          <button class="btn-detail">Lihat Detail</button>
         </div>
       </div>
     `;
 
     card.querySelector(".btn-detail").onclick = () => {
-      location.href = `/detail-kost.html?id=${docSnap.id}`;
+      location.href = `/detail-kost.html?id=${doc.id}`;
     };
 
     kostList.appendChild(card);
