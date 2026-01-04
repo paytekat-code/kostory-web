@@ -1,0 +1,88 @@
+/* =========================
+   PEMESANAN PAGE
+   ========================= */
+
+/* ---------- Room Card ---------- */
+#roomList .card {
+  cursor: pointer;
+  transition: all .2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+#roomList .card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 6px 18px rgba(99,102,241,0.15);
+  transform: translateY(-2px);
+}
+
+#roomList .card.selected {
+  border: 2px solid #6366f1;
+  background: linear-gradient(
+    180deg,
+    #f5f7ff,
+    #ffffff
+  );
+}
+
+/* ---------- Room Title ---------- */
+#roomList strong {
+  font-size: 16px;
+}
+
+#roomList .help {
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ---------- Add-on List ---------- */
+#addonList label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+#addonList label:hover {
+  background: #f9fafb;
+}
+
+#addonList input[type="checkbox"] {
+  accent-color: #6366f1;
+}
+
+/* ---------- Summary Box ---------- */
+#summary {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+#summary b {
+  font-size: 16px;
+  color: #111827;
+}
+
+/* ---------- Button ---------- */
+#btnLanjut {
+  width: 100%;
+}
+
+/* ---------- Disabled State ---------- */
+#btnLanjut:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  #roomList .card {
+    padding: 16px;
+  }
+
+  #addonList label {
+    padding: 10px;
+  }
+}
