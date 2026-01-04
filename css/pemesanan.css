@@ -75,32 +75,42 @@
 }
 
 /* =============================
-   DURASI
+   DURASI – PILL BUTTON
 ============================= */
-.durasi {
+.durasi-pills {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
-.durasi label {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  text-align: center;
-  cursor: pointer;
+.pill {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #e5e7eb;
   font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #111;
+  background: #fff;
+  transition: all .2s ease;
 }
 
-.durasi input {
+.pill input {
   display: none;
 }
 
-.durasi label:has(input:checked) {
-  background: #111827;
-  color: #fff;
-  border-color: #111827;
+.pill:hover {
+  border-color: #fb923c;
+  color: #fb923c;
 }
+
+/* ACTIVE (ORANGE) */
+.pill.active {
+  background: #fb923c;
+  color: #fff;
+  border-color: #fb923c;
+}
+
 
 /* =============================
    ADDON
