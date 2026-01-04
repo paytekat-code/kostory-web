@@ -1,45 +1,65 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Pemesanan Kamar | Kostory</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/booking.css" />
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/pemesanan.css">
-
 </head>
 
 <body>
-<main class="container">
 
-  <h1>Pemesanan Kamar</h1>
-  <p class="help">Pilih tipe kamar dan add-on sesuai kebutuhan</p>
-
-  <!-- INFO KOST -->
-  <div class="card" style="margin-bottom:16px">
-    <strong id="kostNama">-</strong>
+<!-- ===== HEADER (SAMA KAYAK INDEX) ===== -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-wrap" onclick="location.href='../index.html'">
+      <div class="logo">KOSTORY</div>
+      <div class="tagline">Where Stories Find a Home</div>
+    </div>
+    <div class="menu-btn">☰</div>
   </div>
+</div>
 
-  <!-- TIPE KAMAR -->
-  <div id="roomList"></div>
+<main class="page">
 
-  <!-- ADD-ON -->
-  <div class="card" style="margin-top:20px">
-    <h3>Add-on (Opsional)</h3>
+  <section class="page-header">
+    <h1>Pemesanan Kamar</h1>
+    <p id="kostNama" class="help">-</p>
+  </section>
+
+  <!-- KAMAR -->
+  <section>
+    <h3>Pilih Kamar</h3>
+    <div id="roomList"></div>
+  </section>
+
+  <!-- DURASI -->
+  <section class="card">
+    <h3>Pilih Durasi Sewa</h3>
+    <div class="durasi">
+      <label><input type="radio" name="durasi" value="Bulanan" checked> Bulanan</label>
+      <label><input type="radio" name="durasi" value="Mingguan"> Mingguan</label>
+      <label><input type="radio" name="durasi" value="Harian"> Harian</label>
+    </div>
+  </section>
+
+  <!-- ADDON -->
+  <section class="card">
+    <h3>Layanan Tambahan (Opsional)</h3>
     <div id="addonList"></div>
-  </div>
+  </section>
 
-  <!-- RINGKASAN -->
-  <div class="card" style="margin-top:20px">
-    <h3>Ringkasan Harga</h3>
-    <div id="summary">-</div>
+  <!-- SUMMARY -->
+  <section class="card">
+    <h3>Ringkasan Biaya</h3>
+    <div id="summary">Pilih kamar terlebih dahulu</div>
 
-    <button id="btnLanjut" class="primary" disabled style="margin-top:14px">
-      Lanjut Booking
+    <button id="btnLanjut" class="primary" disabled>
+      Lanjut ke Pemesanan
     </button>
-  </div>
+  </section>
 
 </main>
 
