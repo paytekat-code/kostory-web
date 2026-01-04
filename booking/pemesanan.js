@@ -31,42 +31,42 @@ const ADDONS = [
     nama: "Garasi Sepeda Motor",
     harga: 0,
     hargaLabel: "Gratis",
-    desc: "Kamu bisa parkir motor di garasi khusus tanpa biaya tambahan. Pastikan saja motor dikunci ganda ya, biar aman. Kalau ada apa-apa, tanggung jawabnya tetap di pemilik kendaraan.."
+    desc: "Pakai garasi motor tanpa tambahan biaya, jangan lupa dikunci ganda, tanggung jawabnya tetap di pemilik kendaraan."
   },
   {
     id: "mobil",
     nama: "Carport Mobil",
     harga: 150000,
     hargaLabel: "Rp 150.000 / bulan",
-    desc: "Parkir mobil di carport yang sudah disediakan. Ikuti petunjuk dari pengurus kost supaya semua nyaman bareng-bareng. Jangan lupa nyalakan alarm dan pakai kunci stang untuk keamanan ekstra. Kehilangan tetap jadi tanggung jawab pemilik kendaraan"
+    desc: "Jika kamu bawa mobil, jangan lupa amankan slot parkirmu, karena slot parkir mobil terbatas."
   },
   {
     id: "laundry",
     nama: "Laundry Kiloan Unlimited",
     harga: 200000,
     hargaLabel: "Rp 200.000 / orang / bulan",
-    desc: "Nggak perlu ribet mikirin cucian menumpuk. Pakaian kotor kamu bakal dijemput, dicuci di laundry profesional yang kerja sama sama Kostory, lalu dikembalikan sudah wangi dan rapi banget.."
+    desc: "Pakean kotormu akan diambil dan dicuciin oleh laundry Profesional, cukup tarok aja, besok lusa udah wangi."
   },
   {
     id: "listrik",
     nama: "Token Listrik Unlimited",
     harga: 450000,
     hargaLabel: "Rp 450.000 / bulan",
-    desc: "Listrik selalu full, nggak perlu deg-degan kehabisan token pas tengah malam hujan deras. Santai aja, kayak semangat kamu yang nggak pernah padam."
+    desc: "Listrik selalu nyala, kayak semangat kamu yang nggak pernah padam."
   },
   {
     id: "pasangan",
     nama: "Kost Bersama Pasangan",
     harga: 350000,
     hargaLabel: "Rp 350.000 / bulan",
-    desc: "Mau tinggal bareng pasangan di Kostory? Bisa banget, satu kamar cukup. Pilih double bed atau twin bed sesuai kebutuhan. Layanan ini hanya untuk pasangan yang sudah resmi menikah (tunjukkan surat nikah) atau bersama saudara kandung/orang tua (tunjukkan Kartu Keluarga)."
+    desc: "Tinggal bareng sama yang tersayang (suami, istri, anak, kakak, adik, orangtua) cukup tunjukan dokumen pendukung."
   },
   {
     id: "housekeeping",
     nama: "Housekeeping Ekstra",
     harga: 300000,
     hargaLabel: "Rp 300.000 / bulan",
-    desc: "Pulang kerja atau kuliah langsung bisa selonjoran di kamar yang rapi dan bersih? Enak banget kan. Setiap 3 hari kamar dibersihkan dan dirapikan seperti baru check-in. Plus, kalau butuh bantuan ekstra untuk bersih-bersih, tinggal bilang aja."
+    desc: "Kamar kamu dibersihin dan dirawat 5x lebih sering ketimbang yang biasanya, bersih sampe kinclong"
   }
 ];
 
