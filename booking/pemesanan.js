@@ -83,11 +83,18 @@ async function loadRooms() {
 }
 
 function loadDurasi() {
-  document.querySelectorAll("input[name='durasi']").forEach(r => {
-    r.onchange = () => {
-      selectedDurasi = r.value;
+  const pills = document.querySelectorAll(".pill input");
+
+  pills.forEach(input => {
+    input.addEventListener("change", () => {
+      document.querySelectorAll(".pill")
+        .forEach(p => p.classList.remove("active"));
+
+      input.closest(".pill").classList.add("active");
+
+      selectedDurasi = input.value;
       updateSummary();
-    };
+    });
   });
 }
 
