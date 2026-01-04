@@ -17,7 +17,7 @@ const kostId = params.get("kostId");
 const roomTypeId = params.get("roomTypeId");
 
 if (!kostId || !roomTypeId) {
-  alert("Parameter tidak lengkap");
+  alert("Parameter booking tidak lengkap");
   throw new Error("missing param");
 }
 
@@ -26,14 +26,19 @@ const kostNamaEl = document.getElementById("kostNama");
 const roomTypeNamaEl = document.getElementById("roomTypeNama");
 const bookerNama = document.getElementById("bookerNama");
 const bookerEmail = document.getElementById("bookerEmail");
+
 const untukSiapa = document.getElementById("untukSiapa");
 const penghuniBox = document.getElementById("penghuniBox");
 const penghuniNama = document.getElementById("penghuniNama");
 const penghuniHp = document.getElementById("penghuniHp");
+
 const hargaBox = document.getElementById("hargaBox");
+const agreeTnc = document.getElementById("agreeTnc");
+const submitBtn = document.getElementById("submitBtn");
+
 const form = document.getElementById("bookingForm");
 
-// ===== LOAD KOST & TIPE =====
+// ===== LOAD INFO KOST =====
 async function loadInfo() {
   const kostSnap = await getDoc(doc(db, "kost", kostId));
   const roomSnap = await getDoc(
@@ -48,9 +53,10 @@ async function loadInfo() {
     const room = roomSnap.data();
     roomTypeNamaEl.textContent = room.nama;
 
-    hargaBox.innerHTML = `
-      Bulanan: Rp ${room.hargaBulanan?.toLocaleString("id-ID")}
-    `;
+    if (room.hargaBulanan) {
+      hargaBox.innerHTML =
+        `Harga Bulanan: Rp ${room.hargaBulanan.toLocaleString("id-ID")}`;
+    }
   }
 }
 
@@ -59,7 +65,7 @@ loadInfo();
 // ===== AUTH =====
 onAuthStateChanged(auth, user => {
   if (!user) {
-    alert("Silakan login dulu");
+    alert("Silakan login terlebih dahulu");
     location.href = "/login.html";
     return;
   }
@@ -69,16 +75,24 @@ onAuthStateChanged(auth, user => {
 });
 
 // ===== UNTUK SIAPA =====
-untukSiapa.onchange = () => {
+untukSiapa.addEventListener("change", () => {
   penghuniBox.style.display =
-    untukSiapa.value === "orang_lain"
-      ? "block"
-      : "none";
-};
+    untukSiapa.value === "orang_lain" ? "block" : "none";
+});
 
-// ===== SUBMIT BOOKING =====
-form.onsubmit = async e => {
+// ===== T&C CHECK =====
+agreeTnc.addEventListener("change", () => {
+  submitBtn.disabled = !agreeTnc.checked;
+});
+
+// ===== SUBMIT =====
+form.addEventListener("submit", async e => {
   e.preventDefault();
+
+  if (!agreeTnc.checked) {
+    alert("Anda harus menyetujui Syarat & Ketentuan.");
+    return;
+  }
 
   const user = auth.currentUser;
   if (!user) return;
@@ -99,13 +113,19 @@ form.onsubmit = async e => {
         untukSiapa.value === "orang_lain"
           ? penghuniNama.value
           : bookerNama.value,
-      noHp: penghuniHp.value || ""
+      noHp:
+        untukSiapa.value === "orang_lain"
+          ? penghuniHp.value
+          : ""
     },
 
     kostId,
     roomTypeId,
 
     status: "submitted",
+
+    termsAccepted: true,
+    termsAcceptedAt: new Date().toISOString(),
 
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp()
@@ -119,4 +139,4 @@ form.onsubmit = async e => {
     console.error(err);
     alert("Gagal mengirim booking");
   }
-};
+});
