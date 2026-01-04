@@ -66,20 +66,20 @@ async function loadRooms() {
     `;
 
     card.onclick = () => {
-      document
-        .querySelectorAll("#roomList .card")
-        .forEach(c => c.style.border = "1px solid #e5e7eb");
+  document
+    .querySelectorAll("#roomList .card")
+    .forEach(c => c.classList.remove("selected"));
 
-      card.style.border = "2px solid #6366f1";
+  card.classList.add("selected");
 
-      selectedRoom = {
-        roomTypeId,
-        nama: r.nama,
-        harga: r.hargaBulanan || 0
-      };
+  selectedRoom = {
+    roomTypeId,
+    nama: r.nama,
+    harga: r.hargaBulanan || 0
+  };
 
-      updateSummary();
-    };
+  updateSummary();
+};
 
     roomListEl.appendChild(card);
   });
