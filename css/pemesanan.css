@@ -1,28 +1,61 @@
+/* =============================
+   BASE
+============================= */
 .page {
-  max-width: 900px;
-  margin: auto;
+  max-width: 720px;
+  margin: 0 auto;
   padding: 20px 16px 40px;
 }
 
-.page-header {
-  margin-bottom: 16px;
+.section {
+  margin-bottom: 20px;
 }
 
+.section-header h1 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.subtext {
+  font-size: 14px;
+  color: #555;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* =============================
+   CARD
+============================= */
 .card {
   background: #fff;
   border-radius: 14px;
   padding: 16px;
-  margin-bottom: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
 }
 
+/* =============================
+   ROOM LIST
+============================= */
+.room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .room {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
   transition: .2s;
 }
 
 .room:hover {
-  border: 1px solid #6366f1;
+  border-color: #6366f1;
 }
 
 .room.selected {
@@ -30,26 +63,86 @@
   background: #f5f7ff;
 }
 
-.durasi label,
-#addonList label {
+.room strong {
+  font-size: 15px;
+}
+
+.room .help {
+  font-size: 13px;
+  color: #555;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* =============================
+   DURASI
+============================= */
+.durasi {
+  display: flex;
+  gap: 10px;
+}
+
+.durasi label {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.durasi input {
+  display: none;
+}
+
+.durasi label:has(input:checked) {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+/* =============================
+   ADDON
+============================= */
+.addon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addon-list label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: 10px;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
+  font-size: 14px;
 }
 
-#addonList label:hover {
-  background: #f9fafb;
+.addon-list input {
+  margin-right: 8px;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-  accent-color: #6366f1;
+/* =============================
+   SUMMARY
+============================= */
+.summary-card {
+  border: 2px solid #111827;
 }
 
-.primary {
+.summary {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+/* =============================
+   BUTTON
+============================= */
+.btn-primary {
   width: 100%;
   padding: 12px;
   border-radius: 12px;
@@ -57,8 +150,20 @@ input[type="checkbox"] {
   background: #111827;
   color: #fff;
   font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.primary:disabled {
+.btn-primary:disabled {
   background: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* =============================
+   MOBILE TWEAK
+============================= */
+@media (max-width: 480px) {
+  .durasi {
+    flex-direction: column;
+  }
 }
