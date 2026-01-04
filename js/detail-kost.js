@@ -307,6 +307,13 @@ const hargaBulanan  = room.hargaBulanan ?? null;
 `;
 
   card.appendChild(title);
+const btnBook = card.querySelector(".btn-book");
+
+btnBook.addEventListener("click", () => {
+  window.location.href =
+    `/booking/pemesanan.html?kostId=${kostId}&roomTypeId=${room.id}`;
+});
+      
   card.appendChild(hero);
   card.appendChild(info);
   roomList.appendChild(card);
