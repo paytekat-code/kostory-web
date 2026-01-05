@@ -17,10 +17,11 @@ const checkin = params.get("checkin");
 if (!kostId || !roomId || !durasi || !checkin) {
   alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
   window.location.href = "/index.html";
+  return;
 }
 
 const kostNamaEl = document.getElementById("kostNama");
-const roomListEl = document.getElementById("roomList");
+
 const addonListEl = document.getElementById("addonList");
 const summaryEl = document.getElementById("summary");
 const btnLanjut = document.getElementById("btnLanjut");
@@ -163,8 +164,6 @@ function updateSummary() {
   btnLanjut.disabled = true;
   return;
 }
-  
-  const checkout = hitungCheckout(checkin, selectedDurasi);
 
 let total = selectedRoom.harga[selectedDurasi];
 let html = `
