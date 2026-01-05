@@ -8,6 +8,14 @@ import {
 
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("kostId");
+const durasi = params.get("durasi");       // Bulanan | Mingguan | Harian
+const checkin = params.get("checkin");     // YYYY-MM-DD
+
+if (!durasi || !checkin) {
+  alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
+  location.href = "/index.html";
+  throw new Error("missing durasi/checkin");
+}
 
 if (!kostId) {
   alert("kostId tidak ditemukan");
@@ -21,7 +29,7 @@ const summaryEl = document.getElementById("summary");
 const btnLanjut = document.getElementById("btnLanjut");
 
 let selectedRoom = null;
-let selectedDurasi = "Bulanan";
+let selectedDurasi = durasi;
 let selectedAddons = [];
 
 /* ===== ADDON SESUAI DOKUMEN ===== */
@@ -190,10 +198,18 @@ function updateSummary() {
     return;
   }
 
-  let total = selectedRoom.harga[selectedDurasi];
-  let html = `
-    <div>Harga Kamar (${selectedDurasi}): Rp ${total.toLocaleString("id-ID")}</div>
-  `;
+  const checkout = hitungCheckout(checkin, selectedDurasi);
+
+let total = selectedRoom.harga[selectedDurasi];
+let html = `
+  <div><b>Kamar</b>: ${selectedRoom.nama}</div>
+  <div><b>Durasi</b>: ${selectedDurasi}</div>
+  <div><b>Check-in</b>: ${checkin}</div>
+  <div><b>Check-out</b>: ${checkout}</div>
+  <div style="margin-top:6px">
+    <b>Harga Kamar</b>: Rp ${total.toLocaleString("id-ID")}
+  </div>
+`;
 
   if (selectedAddons.length) {
     html += "<div><b>Layanan Tambahan:</b></div>";
@@ -221,5 +237,14 @@ btnLanjut.onclick = () => {
 
 loadKost();
 loadRooms();
-loadDurasi();
 loadAddons();
+
+function hitungCheckout(checkin, durasi) {
+  const d = new Date(checkin);
+
+  if (durasi === "Harian") d.setDate(d.getDate() + 1);
+  if (durasi === "Mingguan") d.setDate(d.getDate() + 7);
+  if (durasi === "Bulanan") d.setMonth(d.getMonth() + 1);
+
+  return d.toISOString().split("T")[0];
+}
