@@ -110,6 +110,8 @@ async function loadKost() {
   document.getElementById("sumRoom").textContent = r.nama;
   document.getElementById("sumDurasi").textContent = durasi;
   document.getElementById("sumCheckin").textContent = checkin;
+const checkout = hitungCheckout(checkin, durasi);
+document.getElementById("sumCheckout").textContent = checkout;
 
   updateSummary(); // ⬅️ WAJIB
 }
@@ -166,14 +168,11 @@ function updateSummary() {
 
 let total = selectedRoom.harga[selectedDurasi];
 let html = `
-  <div><b>Kamar</b>: ${selectedRoom.nama}</div>
-  <div><b>Durasi</b>: ${selectedDurasi}</div>
-  <div><b>Check-in</b>: ${checkin}</div>
-  <div><b>Check-out</b>: ${checkout}</div>
   <div style="margin-top:6px">
     <b>Harga Kamar</b>: Rp ${total.toLocaleString("id-ID")}
   </div>
 `;
+
 
   if (selectedAddons.length) {
     html += "<div><b>Layanan Tambahan:</b></div>";
