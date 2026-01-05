@@ -220,17 +220,33 @@ let html = `
   }
 
   html += `<hr><b>Total: Rp ${total.toLocaleString("id-ID")}</b>`;
+
+  const autoRenewEl = document.getElementById("autoRenew");
+const autoRenew = autoRenewEl ? autoRenewEl.checked : false;
+
+html += `
+  <div style="margin-top:8px">
+    <b>Perpanjangan Otomatis</b> :
+    ${autoRenew ? "Aktif" : "Tidak Aktif"}
+  </div>
+`;
+
   summaryEl.innerHTML = html;
   btnLanjut.disabled = false;
 }
 
 btnLanjut.onclick = () => {
   localStorage.setItem("bookingDraft", JSON.stringify({
-    kostId,
-    roomId: selectedRoom.id,
-    durasi: selectedDurasi,
-    addons: selectedAddons
-  }));
+  kostId,
+  roomId: selectedRoom.id,
+  roomNama: selectedRoom.nama,
+  durasi: selectedDurasi,
+  checkin,
+  checkout: hitungCheckout(checkin, selectedDurasi),
+  autoRenew: document.getElementById("autoRenew")?.checked || false,
+  addons: selectedAddons
+}));
+
 
   location.href = "/booking/booking-form.html";
 };
