@@ -14,6 +14,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ambil ID
+const duration = params.get("duration");
+const checkin = params.get("checkin");
+
+if (!duration || !checkin) {
+  alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
+  location.href = "/index.html";
+}
+
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("id");
 if (!kostId) {
@@ -315,7 +323,12 @@ const btnBook = card.querySelector(".btn-book");
 if (btnBook) {
   btnBook.addEventListener("click", () => {
     window.location.href =
-      `/booking/pemesanan.html?kostId=${kostId}&roomTypeId=${r.id}`;
+  `/booking/pemesanan.html` +
+  `?kostId=${kostId}` +
+  `&roomId=${r.id}` +
+  `&duration=${duration}` +
+  `&checkin=${checkin}`;
+
   });
 }
 
