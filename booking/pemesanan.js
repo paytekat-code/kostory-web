@@ -1,10 +1,3 @@
-// langsung render ringkasan (read-only)
-document.getElementById("sumKost").textContent = kostNama;
-document.getElementById("sumRoom").textContent = roomNama;
-document.getElementById("sumDurasi").textContent = durasi;
-document.getElementById("sumCheckin").textContent = checkin;
-document.getElementById("sumCheckout").textContent = checkout;
-
 
 import { db } from "../js/firebase.js";
 import {
@@ -15,15 +8,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const params = new URLSearchParams(window.location.search);
-const kostId = params.get("kostId");
-const durasi = params.get("durasi");       // Bulanan | Mingguan | Harian
-const checkin = params.get("checkin");     // YYYY-MM-DD
 
-if (!durasi || !checkin) {
+const kostId = params.get("kostId");
+const roomId = params.get("roomId"); // ⬅️ TAMBAH INI
+const durasi = params.get("durasi");
+const checkin = params.get("checkin");
+
+if (!kostId || !roomId || !durasi || !checkin) {
   alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
-  location.href = "/index.html";
-  throw new Error("missing durasi/checkin");
+  window.location.href = "/index.html";
 }
+
 
 if (!kostId) {
   alert("kostId tidak ditemukan");
@@ -88,33 +83,42 @@ const ADDONS = [
 
 
 async function loadKost() {
-  const snap = await getDoc(doc(db, "kost", kostId));
-  if (snap.exists()) {
-    kostNamaEl.textContent = snap.data().nama;
+  // ambil data kost
+  const kostSnap = await getDoc(doc(db, "kost", kostId));
+  if (kostSnap.exists()) {
+    document.getElementById("sumKost").textContent = kostSnap.data().nama;
   }
-}
 
-function loadDurasi() {
-  const pills = document.querySelectorAll(".pill input");
+  // ambil data kamar (INI YANG SEBELUMNYA HILANG)
+  const roomSnap = await getDoc(
+    doc(db, "kost", kostId, "rooms", roomId)
+  );
 
-  pills.forEach(input => {
-    // INIT STATE (INI YANG KURANG SEBELUMNYA)
-    if (input.checked) {
-      input.closest(".pill").classList.add("active");
-      selectedDurasi = input.value;
+  if (!roomSnap.exists()) {
+    alert("Data kamar tidak ditemukan");
+    throw new Error("room not found");
+  }
+
+  const r = roomSnap.data();
+
+  // ⬇️ ISI selectedRoom SECARA OTOMATIS
+  selectedRoom = {
+    id: roomId,
+    nama: r.nama,
+    harga: {
+      Bulanan: r.hargaBulanan || 0,
+      Mingguan: r.hargaMingguan || 0,
+      Harian: r.hargaHarian || 0
     }
+  };
 
-    input.addEventListener("change", () => {
-      document.querySelectorAll(".pill")
-        .forEach(p => p.classList.remove("active"));
+  // tampilkan ke ringkasan
+  document.getElementById("sumRoom").textContent = r.nama;
+  document.getElementById("sumDurasi").textContent = durasi;
+  document.getElementById("sumCheckin").textContent = checkin;
 
-      input.closest(".pill").classList.add("active");
-      selectedDurasi = input.value;
-      updateSummary();
-    });
-  });
+  updateSummary(); // ⬅️ WAJIB
 }
-
 
 function loadAddons() {
   addonListEl.innerHTML = "";
