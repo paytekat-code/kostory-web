@@ -35,6 +35,7 @@
   border-radius: 14px;
   padding: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  margin-bottom: 20px; /* ⬅️ TAMBAH DI SINI */ 
 }
 
 /* =============================
