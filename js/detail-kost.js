@@ -330,11 +330,11 @@ const btnBook = card.querySelector(".btn-book");
 
 if (btnBook) {
   btnBook.addEventListener("click", () => {
-    window.location.href =
+   window.location.href =
   `/booking/pemesanan.html` +
   `?kostId=${kostId}` +
   `&roomId=${r.id}` +
-  `&duration=${duration}` +
+  `&durasi=${duration}` +
   `&checkin=${checkin}`;
 
   });
