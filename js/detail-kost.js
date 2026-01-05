@@ -14,16 +14,24 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ambil ID
+// ===== URL PARAMS (WAJIB DI ATAS) =====
+const params = new URLSearchParams(window.location.search);
+const kostId = params.get("id");
 const duration = params.get("duration");
 const checkin = params.get("checkin");
+
+if (!kostId) {
+  alert("ID kost tidak ditemukan");
+  location.href = "/index.html";
+  throw new Error("missing kostId");
+}
 
 if (!duration || !checkin) {
   alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
   location.href = "/index.html";
+  throw new Error("missing duration/checkin");
 }
 
-const params = new URLSearchParams(window.location.search);
-const kostId = params.get("id");
 if (!kostId) {
   alert("ID kost tidak ditemukan");
 } else {
