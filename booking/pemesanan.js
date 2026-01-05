@@ -1,3 +1,11 @@
+// langsung render ringkasan (read-only)
+document.getElementById("sumKost").textContent = kostNama;
+document.getElementById("sumRoom").textContent = roomNama;
+document.getElementById("sumDurasi").textContent = durasi;
+document.getElementById("sumCheckin").textContent = checkin;
+document.getElementById("sumCheckout").textContent = checkout;
+
+
 import { db } from "../js/firebase.js";
 import {
   collection,
@@ -84,47 +92,6 @@ async function loadKost() {
   if (snap.exists()) {
     kostNamaEl.textContent = snap.data().nama;
   }
-}
-
-async function loadRooms() {
-  const snap = await getDocs(collection(db, "kost", kostId, "rooms"));
-  roomListEl.innerHTML = "";
-
-  snap.forEach(docSnap => {
-    const r = docSnap.data();
-
-    if (!r.aktif) return;
-
-    const card = document.createElement("div");
-    card.className = "card room";
-
-    card.innerHTML = `
-      <strong>${r.nama}</strong>
-      <div class="help">
-        Bulanan: Rp ${r.hargaBulanan?.toLocaleString("id-ID") ?? "-"}<br>
-        Mingguan: Rp ${r.hargaMingguan?.toLocaleString("id-ID") ?? "-"}<br>
-        Harian: Rp ${r.hargaHarian?.toLocaleString("id-ID") ?? "-"}
-      </div>
-    `;
-
-    card.onclick = () => {
-      document.querySelectorAll(".room").forEach(c => c.classList.remove("selected"));
-      card.classList.add("selected");
-
-      selectedRoom = {
-        id: docSnap.id,
-        nama: r.nama,
-        harga: {
-          Bulanan: r.hargaBulanan || 0,
-          Mingguan: r.hargaMingguan || 0,
-          Harian: r.hargaHarian || 0
-        }
-      };
-      updateSummary();
-    };
-
-    roomListEl.appendChild(card);
-  });
 }
 
 function loadDurasi() {
@@ -252,7 +219,7 @@ btnLanjut.onclick = () => {
 };
 
 loadKost();
-loadRooms();
+
 loadAddons();
 
 function hitungCheckout(checkin, durasi) {
