@@ -17,7 +17,7 @@ const checkin = params.get("checkin");
 if (!kostId || !roomId || !durasi || !checkin) {
   alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
   window.location.href = "/index.html";
-  return;
+  throw new Error("Missing required booking params");
 }
 
 const kostNamaEl = document.getElementById("kostNama");
@@ -212,7 +212,7 @@ btnLanjut.onclick = () => {
   durasi: selectedDurasi,
   checkin,
   checkout: hitungCheckout(checkin, selectedDurasi),
-  autoRenew: document.getElementById("autoRenew")?.checked || false,
+  autoRenew: selectedAddons.some(a => a.id === "autoRenew"),
   addons: selectedAddons
 }));
 
