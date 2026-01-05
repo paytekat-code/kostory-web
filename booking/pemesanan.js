@@ -33,6 +33,14 @@ let selectedAddons = [];
 /* ===== ADDON SESUAI DOKUMEN ===== */
 const ADDONS = [
   {
+  id: "autoRenew",
+  nama: "Perpanjangan Otomatis",
+  harga: 0,
+  hargaLabel: "Gratis",
+  desc: "Kamar akan otomatis diperpanjang dan nggak di open sampe ada konfirmasi check-out."
+},
+
+  {
     id: "motor",
     nama: "Garasi Sepeda Motor",
     harga: 0,
@@ -41,17 +49,17 @@ const ADDONS = [
   },
   {
     id: "mobil",
-    nama: "Carport Mobil",
+    nama: "Parkir Mobil",
     harga: 150000,
     hargaLabel: "Rp 150.000 / bulan",
-    desc: "Jika kamu bawa mobil, jangan lupa amankan slot parkirmu, karena slot parkir mobil terbatas."
+    desc: "Jika kamu bawa mobil, jangan lupa amankan slot parkirmu, supaya kamu bisa parkir mobil di area Kostory."
   },
   {
     id: "laundry",
     nama: "Laundry Kiloan Unlimited",
     harga: 200000,
     hargaLabel: "Rp 200.000 / orang / bulan",
-    desc: "Pakean kotormu akan diambil dan dicuciin oleh laundry Profesional, cukup tarok aja, besok lusa udah wangi."
+    desc: "Pakean kotormu akan diambil, besok lusa kembali dalam keadaan bersih dan wangi."
   },
   {
     id: "listrik",
@@ -65,7 +73,7 @@ const ADDONS = [
     nama: "Kost Bersama Pasangan",
     harga: 350000,
     hargaLabel: "Rp 350.000 / bulan",
-    desc: "Tinggal bareng sama yang tersayang (suami, istri, anak, kakak, adik, orangtua) cukup tunjukan dokumen pendukung."
+    desc: "Tinggal bareng sama yang tersayang (suami, istri, anak, kakak, adik, orangtua) Wajib! tunjukan dokumen pendukung."
   },
   {
     id: "housekeeping",
@@ -183,8 +191,7 @@ let html = `
 
   html += `<hr><b>Total: Rp ${total.toLocaleString("id-ID")}</b>`;
 
-  const autoRenewEl = document.getElementById("autoRenew");
-const autoRenew = autoRenewEl ? autoRenewEl.checked : false;
+const autoRenew = selectedAddons.some(a => a.id === "autoRenew");
 
 html += `
   <div style="margin-top:8px">
