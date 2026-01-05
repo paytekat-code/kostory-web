@@ -1,19 +1,22 @@
-const checkin = params.get("checkin");
-
-if (!duration || !checkin) {
-  alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
-  location.href = "/index.html";
-}
-
+// 1️⃣ IMPORT HARUS PALING ATAS
 import { db } from "./js/firebase.js";
 import {
   collection,
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+// 2️⃣ BARU BOLEH BACA URL PARAMS
 const params = new URLSearchParams(window.location.search);
 const city = params.get("city");
 const duration = params.get("duration");
+const checkin = params.get("checkin");
+
+// 3️⃣ VALIDASI SETELAH SEMUA ADA
+if (!city || !duration || !checkin) {
+  alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
+  location.href = "/index.html";
+  throw new Error("missing params");
+}
 
 const kostList = document.getElementById("kostList");
 const summary = document.getElementById("summary");
