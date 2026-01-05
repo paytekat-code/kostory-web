@@ -19,12 +19,6 @@ if (!kostId || !roomId || !durasi || !checkin) {
   window.location.href = "/index.html";
 }
 
-
-if (!kostId) {
-  alert("kostId tidak ditemukan");
-  throw new Error("missing kostId");
-}
-
 const kostNamaEl = document.getElementById("kostNama");
 const roomListEl = document.getElementById("roomList");
 const addonListEl = document.getElementById("addonList");
@@ -164,11 +158,10 @@ function loadAddons() {
 
 function updateSummary() {
   if (!selectedRoom) {
-    summaryEl.textContent = "Pilih kamar terlebih dahulu";
-    btnLanjut.disabled = true;
-    return;
-  }
-
+  btnLanjut.disabled = true;
+  return;
+}
+  
   const checkout = hitungCheckout(checkin, selectedDurasi);
 
 let total = selectedRoom.harga[selectedDurasi];
