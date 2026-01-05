@@ -127,6 +127,7 @@
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
+   margin-top: 20px;
 }
 
 .btn-primary:disabled {
