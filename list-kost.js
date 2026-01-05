@@ -1,3 +1,10 @@
+const checkin = params.get("checkin");
+
+if (!duration || !checkin) {
+  alert("Durasi atau tanggal check-in tidak ditemukan. Silakan ulangi dari halaman awal.");
+  location.href = "/index.html";
+}
+
 import { db } from "./js/firebase.js";
 import {
   collection,
@@ -69,7 +76,9 @@ async function loadKost() {
     `;
 
     card.querySelector(".btn-detail").onclick = () => {
-      location.href = `/detail-kost.html?id=${doc.id}`;
+      location.href =
+  `/detail-kost.html?id=${doc.id}&duration=${duration}&checkin=${checkin}`;
+
     };
 
     kostList.appendChild(card);
