@@ -35,28 +35,45 @@
     <div id="roomList"></div>
   </section>
 
-  <!-- DURASI -->
-  <section class="section">
-  <h3 class="section-title">Durasi Sewa</h3>
+  <section class="card">
+  <h3>Ringkasan Pemesanan</h3>
 
-  <div class="durasi-pills">
-  <label class="pill">
-    <input type="radio" name="durasi" value="Bulanan" checked>
-    Bulanan
-  </label>
+  <div class="summary-row">
+    <span>Kost</span>
+    <b id="sumKost">-</b>
+  </div>
 
-  <label class="pill">
-    <input type="radio" name="durasi" value="Mingguan">
-    Mingguan
-  </label>
+  <div class="summary-row">
+    <span>Kamar</span>
+    <b id="sumRoom">-</b>
+  </div>
 
-  <label class="pill">
-    <input type="radio" name="durasi" value="Harian">
-    Harian
-  </label>
-</div>
+  <div class="summary-row">
+    <span>Durasi</span>
+    <b id="sumDurasi">-</b>
+  </div>
 
+  <div class="summary-row">
+    <span>Check-in</span>
+    <b id="sumCheckin">-</b>
+  </div>
+
+  <div class="summary-row">
+    <span>Check-out</span>
+    <b id="sumCheckout">-</b>
+  </div>
+
+  <div class="auto-renew">
+    <label>
+      <input type="checkbox" id="autoRenew">
+      Aktifkan perpanjangan otomatis
+    </label>
+    <small>
+      Jika aktif, kamar tidak akan dibuka otomatis saat jatuh tempo.
+    </small>
+  </div>
 </section>
+
 
   <!-- ADDON -->
   <section class="card">
