@@ -74,43 +74,6 @@
   line-height: 1.4;
 }
 
-/* =============================
-   DURASI – PILL BUTTON
-============================= */
-.durasi-pills {
-  display: flex;
-   justify-content: center;   /* ⬅️ INI KUNCINYA */
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.pill {
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: 1.5px solid #e5e7eb;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  color: #111;
-  background: #fff;
-  transition: all .2s ease;
-}
-
-.pill input {
-  display: none;
-}
-
-.pill:hover {
-  border-color: #fb923c;
-  color: #fb923c;
-}
-
-/* ACTIVE (ORANGE) */
-.pill.active {
-  background: #fb923c;
-  color: #fff;
-  border-color: #fb923c;
-}
 
 
 /* =============================
