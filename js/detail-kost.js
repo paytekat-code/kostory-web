@@ -94,7 +94,7 @@ kostJenis.textContent = teks;
     
     kostAlamat.textContent = kost.alamat;
     kostRating.textContent =
-      `⭐⭐⭐⭐⭐ ${kost.rating} (${kost.reviewCount} reviews)`;
+      `⭐⭐⭐⭐⭐ ${kost.rating} (${kost.reviewCount} Google reviews)`;
 
     if (kost.location) {
       mapLink.href =
