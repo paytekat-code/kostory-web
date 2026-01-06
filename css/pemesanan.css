@@ -113,9 +113,8 @@
 .summary {
   font-size: 14px;
   line-height: 1.6;
-  margin-bottom: 14px;
+  margin: 12px 0; /* ⬅️ KUNCI: ATAS = BAWAH */
 }
-
 /* =============================
    BUTTON
 ============================= */
