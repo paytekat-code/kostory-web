@@ -103,7 +103,26 @@ allCards.push({ card, data: k });
 }
 
 loadKost();
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener("input", applyFilter);
+function applyFilter() {
+  const keyword = searchInput.value.toLowerCase();
+
+  allCards.forEach(({ card, data }) => {
+    const nama = data.nama?.toLowerCase() || "";
+    const landmark = data.landmark?.toLowerCase() || "";
+    const jenis = data.jenisKost || "";
+
+    const cocokSearch =
+      nama.includes(keyword) || landmark.includes(keyword);
+
+    const cocokJenis =
+      selectedJenis === "all" || jenis === selectedJenis;
+
+    card.style.display =
+      cocokSearch && cocokJenis ? "flex" : "none";
+  });
+}
+
   const keyword = searchInput.value.toLowerCase();
 
   allCards.forEach(({ card, data }) => {
