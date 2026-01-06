@@ -582,19 +582,20 @@ footer{
    ========================= */
 
 .kostory-manifesto{
-  grid-column: 1 / -1;      /* span semua kolom grid */
-  max-width: 760px;         /* lebar enak di laptop */
-  margin: 24px auto 0;      /* center + jarak atas */
-  padding: 28px 26px;
+  grid-column: 1 / -1;
+  max-width: 760px;
+  margin: 24px auto 0;
+  padding: 22px 24px;   /* lebih padat */
   text-align: center;
 }
 
 .kostory-manifesto p{
-  margin: 0 0 18px;
+  margin: 0 0 10px;     /* RAPATIN antar paragraf */
   font-size: 15px;
-  line-height: 1.9;
+  line-height: 1.55;    /* lebih natural & enak dibaca */
   color: #333;
 }
+
 
 .kostory-manifesto strong{
   color: var(--primary);
