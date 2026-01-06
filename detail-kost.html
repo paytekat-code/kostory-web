@@ -17,14 +17,18 @@
   }
 
   .detail-hero-slider {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    min-height: 220px;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #000;
-  }
+  position: relative;
+  width: 100%;
+  max-width: 1200px;   /* BATAS LAPTOP */
+  margin: 0 auto;      /* CENTER */
+  aspect-ratio: 16 / 9;
+  min-height: 220px;
+  max-height: 520px;   /* BATAS TINGGI */
+  overflow: hidden;
+  border-radius: 16px;
+  background: #000;
+}
+
 
   .detail-hero-track {
     display: flex;
@@ -46,11 +50,12 @@
   }
 
   .detail-hero-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  width: 100%;
+  height: 100%;
+  max-height: 520px;   /* TAMBAHAN DI SINI */
+  object-fit: cover;
+  display: block;
+}
 
   .detail-hero-dots {
     position: absolute;
