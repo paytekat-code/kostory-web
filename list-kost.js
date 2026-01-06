@@ -64,8 +64,12 @@ async function loadKost() {
 
         <div class="rating">⭐ ${k.rating ?? 4.8} (${k.reviewCount ?? 0})</div>
         <div class="location">📍 ${k.kota}</div>
-        <div class="facility">
-          ${(k.fasilitasUmum ?? []).slice(0,3).join(" · ")}
+        <div class="landmark">
+            🗺️ ${k.landmark ?? "-"}
+        </div>
+
+        <div class="jenis-kost">
+            ${k.jenisKost ?? ""}
         </div>
 
         <div class="price-row">
