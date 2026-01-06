@@ -177,9 +177,9 @@
   gap: 10px;
   margin-top: 12px;
   align-items: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;          /* ⬅️ desktop: jejer, turun kalau perlu */
 }
+
 
 .filter-btn {
   flex: 0 0 auto;          /* ⬅️ INI KUNCI */
@@ -203,4 +203,16 @@
   background: #111827;
   color: #fff;
   border-color: #111827;
+}
+
+@media (max-width: 640px) {
+  .filter-wrap {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-wrap::-webkit-scrollbar {
+    display: none;          /* ⬅️ hilangkan slider */
+  }
 }
