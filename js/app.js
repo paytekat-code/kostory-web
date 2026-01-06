@@ -4,7 +4,8 @@ import {
   collection,
   getDocs,
   query,
-  where
+  where,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 /**
@@ -49,6 +50,43 @@ async function loadKost() {
     console.error("Firestore error:", err);
   }
 }
+async function loadKostorianExperience() {
+  const slider = document.getElementById("experienceSlider");
+  if (!slider) return;
+
+  slider.innerHTML = "";
+
+  try {
+    const q = query(
+      collection(db, "kostorian_experience"),
+      where("active", "==", true),
+      orderBy("order", "asc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(doc => {
+      const data = doc.data();
+
+      const item = document.createElement("div");
+      item.className = "exp-item";
+
+      item.innerHTML = `
+        <img src="${data.photoUrl}" alt="${data.nama}">
+        <div class="exp-text">
+          <strong>${data.nama}</strong><br>
+          <small>${data.role}</small>
+          <p>"${data.quote}"</p>
+        </div>
+      `;
+
+      slider.appendChild(item);
+    });
+
+  } catch (err) {
+    console.error("Experience error:", err);
+  }
+}
 
 /**
  * Hook tombol "Cari Kamar"
@@ -84,4 +122,6 @@ function bindSearchButton() {
 // Init saat halaman siap
 document.addEventListener("DOMContentLoaded", () => {
   bindSearchButton();
+  loadKostorianExperience();
 });
+
