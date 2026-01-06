@@ -47,6 +47,7 @@ const kostJenis = document.getElementById("kostJenis");
 const kostAlamat = document.getElementById("kostAlamat");
 const kostRating = document.getElementById("kostRating");
 const mapLink = document.getElementById("mapLink");
+const kostLandmark = document.getElementById("kostLandmark");
 
 const fasilitasUmum = document.getElementById("fasilitasUmum");
 const kebijakan = document.getElementById("kebijakan");
