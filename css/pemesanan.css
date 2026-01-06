@@ -203,3 +203,7 @@
   height: 18px;
   accent-color: #fb923c;
 }
+
+#summary {
+  margin-bottom: 20px; /* ⬅️ INI JARAK YANG KURANG */
+}
