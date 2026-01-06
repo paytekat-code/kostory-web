@@ -62,7 +62,11 @@ async function loadKost() {
       <div class="kost-info">
         <h3>${k.nama}</h3>
 
-        <div class="rating">⭐ ${k.rating ?? 4.8} (${k.reviewCount ?? 0})</div>
+        <div class="rating">
+          ⭐⭐⭐⭐⭐ ${(k.rating ?? 4.8).toString().replace(".", ",")}/5
+          (${k.reviewCount ?? 0} Google Review)
+        </div>
+
         <div class="location">📍 ${k.kota}</div>
         <div class="landmark">
             🗺️ Near ${k.landmark ?? "-"}
