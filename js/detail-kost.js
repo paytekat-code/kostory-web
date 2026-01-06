@@ -94,6 +94,14 @@ else if (statusSI) teks = statusSI;
 kostJenis.textContent = teks;
     
     kostAlamat.textContent = kost.alamat;
+
+    // ===== LANDMARK =====
+if (kost.landmark) {
+  kostLandmark.textContent = `📍 ${kost.landmark}`;
+} else {
+  kostLandmark.style.display = "none";
+}
+
     kostRating.textContent =
       `⭐⭐⭐⭐⭐ ${kost.rating} (${kost.reviewCount} Google reviews)`;
 
