@@ -20,6 +20,8 @@ if (!city || !duration || !checkin) {
 
 const kostList = document.getElementById("kostList");
 const summary = document.getElementById("summary");
+const searchInput = document.getElementById("searchInput");
+let allCards = [];
 
 summary.textContent =
   `Menampilkan kost di ${city} untuk durasi ${duration}`;
@@ -93,7 +95,22 @@ async function loadKost() {
     };
 
     kostList.appendChild(card);
+allCards.push({ card, data: k });
+
   }
 }
 
 loadKost();
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase();
+
+  allCards.forEach(({ card, data }) => {
+    const nama = data.nama?.toLowerCase() || "";
+    const landmark = data.landmark?.toLowerCase() || "";
+
+    const cocok =
+      nama.includes(keyword) || landmark.includes(keyword);
+
+    card.style.display = cocok ? "block" : "none";
+  });
+});
