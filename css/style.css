@@ -577,37 +577,34 @@ footer{
   margin: 0 0 8px 0;   /* HILANGKAN margin atas */
 }
 
-.kostory-manifesto {
-  text-align: center;
-  padding: 28px 22px;
-}
-
-.kostory-manifesto p {
-  text-align: center;   /* ⬅️ TAMBAH DI SINI */
-  font-size: 15px;
-  line-height: 1.8;
-  color: #333;
-  margin-bottom: 16px;
-}
-
-.kostory-manifesto strong {
-  color: var(--primary);
-}
-
-.kostory-manifesto em {
-  display: block;
-  text-align: center;   /* ⬅️ TAMBAH DI SINI */
-  font-size: 13px;
-  color: #666;
-  letter-spacing: .4px;
-  font-style: italic;
-}
 /* =========================
-   FIX MANIFESTO DI DESKTOP
+   KOSTORY MANIFESTO (FINAL)
    ========================= */
 
-.kostory-manifesto {
-  grid-column: 1 / -1;   /* ⬅️ MAKAN SEMUA KOLOM GRID */
-  max-width: 720px;      /* biar ga kepanjangan */
-  margin: 0 auto;        /* center horizontal */
+.kostory-manifesto{
+  grid-column: 1 / -1;      /* span semua kolom grid */
+  max-width: 760px;         /* lebar enak di laptop */
+  margin: 24px auto 0;      /* center + jarak atas */
+  padding: 28px 26px;
+  text-align: center;
+}
+
+.kostory-manifesto p{
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #333;
+}
+
+.kostory-manifesto strong{
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.kostory-manifesto em{
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+  color: #222;
+  margin-top: 6px;
 }
