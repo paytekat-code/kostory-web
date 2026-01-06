@@ -111,6 +111,7 @@ searchInput.addEventListener("input", () => {
     const cocok =
       nama.includes(keyword) || landmark.includes(keyword);
 
-    card.style.display = cocok ? "block" : "none";
+   card.style.display = cocok ? "flex" : "none";
+
   });
 });
