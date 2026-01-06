@@ -216,3 +216,24 @@
     display: none;          /* ⬅️ hilangkan slider */
   }
 }
+
+/* FORCE FILTER BUTTON JADI CHIP */
+.filter-wrap {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.filter-btn {
+  width: auto !important;      /* ⬅️ LAWAN CSS GLOBAL */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+}
