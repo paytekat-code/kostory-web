@@ -608,3 +608,18 @@ footer{
   color: #222;
   margin-top: 6px;
 }
+
+/* Kostory Experience - Quote styling */
+.exp-item .exp-text p {
+  font-size: 13px;          /* lebih kecil */
+  font-weight: 400;         /* normal, tidak bold */
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85); /* lembut, tidak mencolok */
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-style: normal;       /* bukan italic */
+}
+
+.exp-item .exp-text p {
+  opacity: 0.85;
+}
