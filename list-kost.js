@@ -137,4 +137,3 @@ function applyFilter() {
       cocokSearch && cocokJenis ? "flex" : "none";
   });
 }
-
