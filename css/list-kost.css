@@ -150,3 +150,21 @@
     font-size: 18px;
   }
 }
+
+.search-wrap {
+  margin-top: 16px;
+  max-width: 520px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  outline: none;
+}
+
+.search-wrap input:focus {
+  border-color: #111;
+}
