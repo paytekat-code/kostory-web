@@ -209,3 +209,11 @@
 #summary {
   margin-bottom: 20px; /* ⬅️ INI JARAK YANG KURANG */
 }
+
+#summary > div:first-child {
+  margin-top: 0;
+}
+
+#summary > div:last-child {
+  margin-bottom: 0;
+}
