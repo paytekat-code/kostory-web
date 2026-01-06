@@ -602,3 +602,12 @@ footer{
   letter-spacing: .4px;
   font-style: italic;
 }
+/* =========================
+   FIX MANIFESTO DI DESKTOP
+   ========================= */
+
+.kostory-manifesto {
+  grid-column: 1 / -1;   /* ⬅️ MAKAN SEMUA KOLOM GRID */
+  max-width: 720px;      /* biar ga kepanjangan */
+  margin: 0 auto;        /* center horizontal */
+}
