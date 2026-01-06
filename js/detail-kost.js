@@ -97,7 +97,7 @@ kostJenis.textContent = teks;
 
     // ===== LANDMARK =====
 if (kost.landmark) {
-  kostLandmark.textContent = `📍 ${kost.landmark}`;
+  kostLandmark.textContent = `📍Near ${kost.landmark}`;
 } else {
   kostLandmark.style.display = "none";
 }
