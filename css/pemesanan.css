@@ -39,6 +39,17 @@
   box-shadow: 0 6px 20px rgba(0,0,0,.08);
   margin-bottom: 20px; /* ⬅️ TAMBAH DI SINI */ 
 }
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 6px 0;
+}
 
 /* =============================
    ROOM LIST
