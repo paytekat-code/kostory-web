@@ -103,7 +103,22 @@ allCards.push({ card, data: k });
 }
 
 loadKost();
+
+/* SEARCH */
 searchInput.addEventListener("input", applyFilter);
+
+/* FILTER BUTTON */
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    selectedJenis = btn.dataset.jenis;
+    applyFilter();
+  });
+});
+
+/* GABUNGAN SEARCH + FILTER */
 function applyFilter() {
   const keyword = searchInput.value.toLowerCase();
 
@@ -123,25 +138,3 @@ function applyFilter() {
   });
 }
 
-  const keyword = searchInput.value.toLowerCase();
-
-  allCards.forEach(({ card, data }) => {
-    const nama = data.nama?.toLowerCase() || "";
-    const landmark = data.landmark?.toLowerCase() || "";
-
-    const cocok =
-      nama.includes(keyword) || landmark.includes(keyword);
-
-   card.style.display = cocok ? "flex" : "none";
-
-  });
-});
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    selectedJenis = btn.dataset.jenis;
-    applyFilter();
-  });
-});
