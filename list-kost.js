@@ -22,6 +22,8 @@ const kostList = document.getElementById("kostList");
 const summary = document.getElementById("summary");
 const searchInput = document.getElementById("searchInput");
 let allCards = [];
+const filterButtons = document.querySelectorAll(".filter-btn");
+let selectedJenis = "all";
 
 summary.textContent =
   `Menampilkan kost di ${city} untuk durasi ${duration}`;
@@ -113,5 +115,14 @@ searchInput.addEventListener("input", () => {
 
    card.style.display = cocok ? "flex" : "none";
 
+  });
+});
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    selectedJenis = btn.dataset.jenis;
+    applyFilter();
   });
 });
