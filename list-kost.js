@@ -65,11 +65,11 @@ async function loadKost() {
         <div class="rating">⭐ ${k.rating ?? 4.8} (${k.reviewCount ?? 0})</div>
         <div class="location">📍 ${k.kota}</div>
         <div class="landmark">
-            🗺️ ${k.landmark ?? "-"}
+            🗺️ Near ${k.landmark ?? "-"}
         </div>
 
         <div class="jenis-kost">
-            ${k.jenisKost ?? ""}
+            Kost ${k.jenisKost ?? ""}
         </div>
 
         <div class="price-row">
