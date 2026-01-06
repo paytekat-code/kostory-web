@@ -170,29 +170,35 @@
 }
 
 /* ===============================
-   FILTER JENIS KOST
+   FILTER JENIS KOST (FIX)
 ================================ */
 .filter-wrap {
   display: flex;
   gap: 10px;
   margin-top: 12px;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .filter-btn {
-  padding: 8px 18px;
+  flex: 0 0 auto;          /* ⬅️ INI KUNCI */
+  padding: 8px 16px;
   border-radius: 999px;
   border: 1px solid #ddd;
   background: #fff;
   font-size: 14px;
   cursor: pointer;
-  transition: .2s ease;
+  white-space: nowrap;     /* ⬅️ teks gak turun */
+  color: #111;
 }
 
+/* hover */
 .filter-btn:hover {
   border-color: #111;
 }
 
+/* active */
 .filter-btn.active {
   background: #111827;
   color: #fff;
