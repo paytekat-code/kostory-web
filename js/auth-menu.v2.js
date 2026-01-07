@@ -1,25 +1,10 @@
-import { auth } from "./firebase.js";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-const menuContent = document.getElementById("menuContent");
-const provider = new GoogleAuthProvider();
-
-if (!menuContent) {
-  console.error("menuContent TIDAK DITEMUKAN");
-}
-
-/* ========== RENDER MENU ========== */
 function renderMenu(user) {
   if (!menuContent) return;
 
   if (user) {
     menuContent.innerHTML = `
       <a href="/member/profile.html">Profile</a>
+      <a href="/admin/kost-dashboard.html">Admin</a>
       <button id="logoutBtn">Logout</button>
     `;
 
@@ -31,23 +16,13 @@ function renderMenu(user) {
   } else {
     menuContent.innerHTML = `
       <button id="loginGoogle" class="login-google">
-        Login Google
+        Login (via Google)
       </button>
     `;
 
     document.getElementById("loginGoogle").onclick = async () => {
-      try {
-        await signInWithPopup(auth, provider);
-        location.reload();
-      } catch (err) {
-        console.error("LOGIN ERROR:", err);
-      }
+      await signInWithPopup(auth, provider);
+      location.reload();
     };
   }
 }
-
-/* ========== AUTH LISTENER ========== */
-onAuthStateChanged(auth, (user) => {
-  console.log("AUTH STATE:", user);
-  renderMenu(user);
-});
