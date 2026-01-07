@@ -7,20 +7,10 @@ import {
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-getRedirectResult(auth)
-  .then((result) => {
-    if (result?.user) {
-      renderMenu(result.user);
-    }
-  })
-  .catch((err) => {
-    console.error("Redirect error:", err);
-  });
-
-
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
+/* ===== RENDER MENU ===== */
 function renderMenu(user) {
   if (!menuContent) return;
 
@@ -31,7 +21,7 @@ function renderMenu(user) {
 
     document
       .getElementById("loginGoogle")
-      .addEventListener("click", loginGoogle);
+      .onclick = loginGoogle;
 
   } else {
     menuContent.innerHTML = `
@@ -41,26 +31,36 @@ function renderMenu(user) {
 
     document
       .getElementById("logoutBtn")
-      .addEventListener("click", logout);
+      .onclick = logout;
   }
 }
 
+/* ===== LOGIN ===== */
 async function loginGoogle(e) {
   e.preventDefault();
-  e.stopPropagation();
   await signInWithRedirect(auth, provider);
 }
 
-
+/* ===== LOGOUT ===== */
 async function logout(e) {
   e.preventDefault();
   await signOut(auth);
-  window.location.reload();
+  location.reload();
 }
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    renderMenu(user);
-  }
-});
-
+/* ===== INIT AUTH (INI KUNCI NYA) ===== */
+getRedirectResult(auth)
+  .then((result) => {
+    if (result?.user) {
+      renderMenu(result.user);
+    } else {
+      onAuthStateChanged(auth, (user) => {
+        renderMenu(user);
+      });
+    }
+  })
+  .catch(() => {
+    onAuthStateChanged(auth, (user) => {
+      renderMenu(user);
+    });
+  });
