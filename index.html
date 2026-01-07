@@ -85,7 +85,7 @@
   </div>
 
   <!-- JS -->
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.hero-slider img');
   let index = 0;
@@ -102,6 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
     slides[index].classList.add('active');
   }, 4000);
 });
+
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("active");
+}
+
+function closeMenu(e) {
+  if (e.target.id === "menu") {
+    document.getElementById("menu").classList.remove("active");
+  }
+}
 </script>
 <script type="module" src="js/auth-menu.js"></script>
 <script type="module" src="js/app.js"></script>
