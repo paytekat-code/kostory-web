@@ -1,6 +1,6 @@
 import { auth } from "./firebase.js";
 import {
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider
@@ -36,8 +36,8 @@ function renderMenu(user) {
 async function loginGoogle(e) {
   e.preventDefault();
   try {
-    await signInWithPopup(auth, provider);
-    closeMenu(); // pakai fungsi menu yang sudah ada
+   await signInWithRedirect(auth, provider);
+
   } catch (err) {
     alert("Login Google gagal");
     console.error(err);
