@@ -38,14 +38,10 @@ function renderMenu(user) {
 
 async function loginGoogle(e) {
   e.preventDefault();
-  try {
-   await signInWithRedirect(auth, provider);
-
-  } catch (err) {
-    alert("Login Google gagal");
-    console.error(err);
-  }
+  e.stopPropagation();
+  await signInWithRedirect(auth, provider);
 }
+
 
 async function logout(e) {
   e.preventDefault();
