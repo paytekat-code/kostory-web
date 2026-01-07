@@ -65,12 +65,15 @@ img{width:100%;display:block}
 
 /* MENU POPUP */
 .menu-overlay{
-  display:block;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.4);
   display:none;
   z-index:1000;
+}
+
+.menu-overlay.active{
+  display:block;
 }
 
 .menu-panel{
