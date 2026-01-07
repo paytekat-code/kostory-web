@@ -23,7 +23,7 @@ img{width:100%;display:block}
   top:0;
   background:#fff;
   border-bottom:1px solid var(--border);
-  z-index:20;
+  z-index:1001;
 }
 
 .header-inner{
