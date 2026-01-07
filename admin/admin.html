@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Kostory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f9fafb;
+      padding: 40px 16px;
+    }
+    .admin-box {
+      max-width: 480px;
+      margin: auto;
+      background: #fff;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    }
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .menu a {
+      display: block;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: #111827;
+      color: #fff;
+      margin-bottom: 12px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .menu a:hover {
+      background: #000;
+    }
+    .logout {
+      margin-top: 20px;
+      text-align: center;
+      cursor: pointer;
+      color: #dc2626;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-box">
+    <h1>Admin Kostory</h1>
+
+    <div class="menu">
+      <a href="./kost-dashboard.html">Dashboard Kost</a>
+      <a href="./kost-list.html">Daftar Kost</a>
+      <a href="./form-kostory-experience.html">Kostory Experience</a>
+    </div>
+
+    <div class="logout" id="logoutBtn">Logout</div>
+  </div>
+
+  <!-- WAJIB: cek auth dulu -->
+  <script type="module" src="../js/admin-auth.js"></script>
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>
