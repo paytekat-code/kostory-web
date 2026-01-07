@@ -1,7 +1,6 @@
 import { auth } from "./firebase.js";
 import {
   signInWithRedirect,
-  getRedirectResult,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider
@@ -10,57 +9,35 @@ import {
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
-/* ===== RENDER MENU ===== */
+/* RENDER MENU */
 function renderMenu(user) {
   if (!menuContent) return;
 
-  if (!user) {
-    menuContent.innerHTML = `
-      <button id="loginGoogle" type="button">Login Google</button>
-    `;
-
-    document
-      .getElementById("loginGoogle")
-      .onclick = loginGoogle;
-
-  } else {
+  if (user) {
     menuContent.innerHTML = `
       <a href="/member/profile.html">Profile</a>
       <a href="#" id="logoutBtn">Logout</a>
     `;
 
-    document
-      .getElementById("logoutBtn")
-      .onclick = logout;
+    document.getElementById("logoutBtn").onclick = async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+      location.reload();
+    };
+
+  } else {
+    menuContent.innerHTML = `
+      <button id="loginGoogle" type="button">Login Google</button>
+    `;
+
+    document.getElementById("loginGoogle").onclick = async (e) => {
+      e.preventDefault();
+      await signInWithRedirect(auth, provider);
+    };
   }
 }
 
-/* ===== LOGIN ===== */
-async function loginGoogle(e) {
-  e.preventDefault();
-  await signInWithRedirect(auth, provider);
-}
-
-/* ===== LOGOUT ===== */
-async function logout(e) {
-  e.preventDefault();
-  await signOut(auth);
-  location.reload();
-}
-
-/* ===== INIT AUTH (INI KUNCI NYA) ===== */
-getRedirectResult(auth)
-  .then((result) => {
-    if (result?.user) {
-      renderMenu(result.user);
-    } else {
-      onAuthStateChanged(auth, (user) => {
-        renderMenu(user);
-      });
-    }
-  })
-  .catch(() => {
-    onAuthStateChanged(auth, (user) => {
-      renderMenu(user);
-    });
-  });
+/* SATU-SATUNYA AUTH LISTENER */
+onAuthStateChanged(auth, (user) => {
+  renderMenu(user);
+});
