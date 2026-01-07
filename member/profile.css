@@ -1,0 +1,26 @@
+/* ================================
+   MEMBER HEADER
+   ================================ */
+
+.member-header {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+  z-index: 10;
+}
+
+.member-logo {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #222;
+}
+.member-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 6px;
+  color: #888;
+}
