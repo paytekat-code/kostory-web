@@ -14,15 +14,13 @@ function renderMenu(user) {
   if (!menuContent) return;
 
   if (!user) {
-  menuContent.innerHTML = `
-    <button id="loginGoogle" type="button">Login Google</button>
-  `;
+    menuContent.innerHTML = `
+      <button id="loginGoogle" type="button">Login Google</button>
+    `;
 
-  document
-    .getElementById("loginGoogle")
-    .addEventListener("click", loginGoogle);
-}
-
+    document
+      .getElementById("loginGoogle")
+      .addEventListener("click", loginGoogle);
 
   } else {
     menuContent.innerHTML = `
