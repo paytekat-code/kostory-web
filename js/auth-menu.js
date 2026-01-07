@@ -9,6 +9,9 @@ import {
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
+// 🔑 SET PERSISTENCE DI SINI
+await setPersistence(auth, browserLocalPersistence);
+
 /* JAGA-JAGA */
 if (!menuContent) {
   console.error("menuContent NOT FOUND");
