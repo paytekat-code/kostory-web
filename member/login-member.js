@@ -6,17 +6,19 @@ import {
 
 const googleBtn = document.querySelector(".google-btn");
 
-googleBtn.addEventListener("click", async () => {
-  const provider = new GoogleAuthProvider();
+if (googleBtn) {
+  googleBtn.addEventListener("click", async () => {
+    const provider = new GoogleAuthProvider();
 
-  try {
-    await signInWithPopup(auth, provider);
+    try {
+      await signInWithPopup(auth, provider);
 
-    // ✅ LOGIN BERHASIL → LANGSUNG KE PROFILE
-    window.location.href = "profile.html";
+      // login sukses → langsung ke profile
+      window.location.href = "profile.html";
 
-  } catch (error) {
-    console.error("Google login error:", error);
-    alert("Login gagal, coba lagi");
-  }
-});
+    } catch (error) {
+      console.error("Google login error:", error);
+      alert("Login gagal, coba lagi");
+    }
+  });
+}
