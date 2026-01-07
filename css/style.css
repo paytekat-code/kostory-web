@@ -58,15 +58,19 @@ img{width:100%;display:block}
   font-size:22px;
   cursor:pointer;
   user-select:none;
+  position:relative;  /* ⬅️ TAMBAH */
+  z-index:1002;       /* ⬅️ TAMBAH */
 }
+
 
 /* MENU POPUP */
 .menu-overlay{
+  display:block;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.4);
   display:none;
-  z-index:30;
+  z-index:1000;
 }
 
 .menu-panel{
