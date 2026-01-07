@@ -2,15 +2,41 @@ import { auth } from "./firebase.js";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const provider = new GoogleAuthProvider();
+/* ELEMENT */
 const menuContent = document.getElementById("menuContent");
+const loginBtn = document.getElementById("loginGoogleBtn");
 
-/* ========= RENDER MENU ========= */
+/* GUARD */
+if (!menuContent) {
+  console.error("menuContent NOT FOUND");
+}
+
+/* PROVIDER */
+const provider = new GoogleAuthProvider();
+
+/* LOGIN */
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    signInWithRedirect(auth, provider);
+  });
+}
+
+/* LOGOUT */
+function bindLogout() {
+  const btn = document.getElementById("logoutBtn");
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      await signOut(auth);
+      location.reload();
+    });
+  }
+}
+
+/* RENDER MENU */
 function renderMenu(user) {
   if (!menuContent) return;
 
@@ -19,27 +45,21 @@ function renderMenu(user) {
       <a href="/member/profile.html">Profile</a>
       <a href="#" id="logoutBtn">Logout</a>
     `;
-
-    document.getElementById("logoutBtn").onclick = async (e) => {
-      e.preventDefault();
-      await signOut(auth);
-      location.reload();
-    };
+    bindLogout();
   } else {
     menuContent.innerHTML = `
-      <button id="loginGoogle">Login Google</button>
+      <button id="loginGoogleBtn" class="login-btn">Login Google</button>
     `;
-
-    document.getElementById("loginGoogle").onclick = () => {
-      signInWithRedirect(auth, provider);
-    };
+    document
+      .getElementById("loginGoogleBtn")
+      .addEventListener("click", () => {
+        signInWithRedirect(auth, provider);
+      });
   }
 }
 
-/* ========= FINALIZE REDIRECT (WAJIB) ========= */
-getRedirectResult(auth).catch(() => {});
-
-/* ========= AUTH LISTENER ========= */
+/* AUTH LISTENER */
 onAuthStateChanged(auth, (user) => {
+  console.log("AUTH STATE:", user);
   renderMenu(user);
 });
