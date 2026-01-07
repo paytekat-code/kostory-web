@@ -1,35 +1,29 @@
-console.log("AUTH MENU V2 LOADED");
-
 import { auth } from "./firebase.js";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
   getRedirectResult,
-  signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const menuContent = document.getElementById("menuContent");
+const loginBtn = document.getElementById("loginGoogle");
+
 const provider = new GoogleAuthProvider();
 
-/* SAFETY */
-if (!menuContent) {
-  console.error("menuContent NOT FOUND");
-}
+// LOGIN
+loginBtn?.addEventListener("click", () => {
+  signInWithRedirect(auth, provider);
+});
 
-/* HANDLE REDIRECT RESULT (INI YANG KAMU BELUM PUNYA) */
-getRedirectResult(auth)
-  .then((result) => {
-    if (result?.user) {
-      console.log("REDIRECT LOGIN SUCCESS:", result.user.email);
-    }
-  })
-  .catch((error) => {
-    console.error("REDIRECT ERROR:", error);
-  });
+// HANDLE REDIRECT RESULT
+getRedirectResult(auth).catch(() => {});
 
-/* RENDER MENU */
-function renderMenu(user) {
+// AUTH STATE
+onAuthStateChanged(auth, (user) => {
+  console.log("AUTH STATE:", user);
+
   if (!menuContent) return;
 
   if (user) {
@@ -44,17 +38,7 @@ function renderMenu(user) {
     };
   } else {
     menuContent.innerHTML = `
-      <button id="loginGoogleBtn" class="login-btn">Login Google</button>
+      <button id="loginGoogle">Login Google</button>
     `;
-
-    document.getElementById("loginGoogleBtn").onclick = () => {
-      signInWithRedirect(auth, provider);
-    };
   }
-}
-
-/* AUTH STATE */
-onAuthStateChanged(auth, (user) => {
-  console.log("AUTH STATE:", user);
-  renderMenu(user);
 });
