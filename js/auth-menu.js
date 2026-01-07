@@ -1,11 +1,15 @@
 import { auth } from "./firebase.js";
 import {
   signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+getRedirectResult(auth).catch(err => {
+  console.error("Redirect error:", err);
+});
 
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
@@ -46,6 +50,10 @@ async function logout(e) {
   await signOut(auth);
   window.location.reload();
 }
+
+onAuthStateChanged(auth, (user) => {
+  renderMenu(user);
+});
 
 onAuthStateChanged(auth, user => {
   renderMenu(user);
