@@ -22,14 +22,10 @@
 
  <!-- MENU -->
 <div class="menu-overlay" id="menu" onclick="closeMenu(event)">
-  <div class="menu-panel">
-    <a href="#">Tentang Kami</a>
-    <a href="#">Kerjasama Bisnis</a>
-    <a href="#">Lowongan Kerja</a>
-    <a href="#">Masuk</a>
-    <a href="#">Daftar</a>
-  </div>
+  <div class="menu-panel" id="menuContent">
+  <!-- Diisi otomatis oleh auth-menu.js -->
 </div>
+
 
   <div class="container">
 
@@ -107,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 4000);
 });
 </script>
-
+<script type="module" src="js/auth-menu.js"></script>
 <script type="module" src="js/app.js"></script>
 
 
