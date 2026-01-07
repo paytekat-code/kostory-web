@@ -3,21 +3,17 @@ import {
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
-// 🔑 SET PERSISTENCE DI SINI
-await setPersistence(auth, browserLocalPersistence);
-
-/* JAGA-JAGA */
-if (!menuContent) {
-  console.error("menuContent NOT FOUND");
-}
-
-/* RENDER */
+/* =========================
+   RENDER MENU
+   ========================= */
 function renderMenu(user) {
   if (!menuContent) return;
 
@@ -32,23 +28,27 @@ function renderMenu(user) {
       await signOut(auth);
       location.reload();
     };
-
   } else {
     menuContent.innerHTML = `
       <button id="loginGoogle" type="button">Login Google</button>
     `;
 
-    document.getElementById("loginGoogle").onclick = async (e) => {
-      e.preventDefault();
+    document.getElementById("loginGoogle").onclick = async () => {
       await signInWithRedirect(auth, provider);
     };
   }
 }
 
-/* 🔑 PAKSA RENDER SEKALI */
-renderMenu(null);
+/* =========================
+   INIT AUTH (URUTAN BENAR)
+   ========================= */
+(async () => {
+  // 1️⃣ pastikan session disimpan
+  await setPersistence(auth, browserLocalPersistence);
 
-/* 🔑 AUTH LISTENER */
-onAuthStateChanged(auth, (user) => {
-  renderMenu(user);
-});
+  // 2️⃣ dengarkan status auth
+  onAuthStateChanged(auth, (user) => {
+    console.log("AUTH STATE:", user);
+    renderMenu(user);
+  });
+})();
