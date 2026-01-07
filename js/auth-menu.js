@@ -3,10 +3,20 @@ import {
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  getRedirectResult
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const provider = new GoogleAuthProvider();
+getRedirectResult(auth)
+  .then(() => {
+    // tidak perlu apa-apa, onAuthStateChanged yang handle
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Login Google gagal");
+  });
+
 const menuContent = document.getElementById("menuContent");
 
 function renderMenu(user) {
