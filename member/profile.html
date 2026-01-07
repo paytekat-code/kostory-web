@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Member</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+
+<div class="profile-card">
+  <h2>Profile Member</h2>
+
+  <form id="profileForm">
+    <label>Email</label>
+    <input type="email" id="email" disabled>
+
+    <label>Nama</label>
+    <input type="text" id="nama">
+
+    <label>No WhatsApp</label>
+    <input type="text" id="wa">
+
+    <label>Tanggal Lahir</label>
+    <input type="date" id="dob">
+
+    <label>Instansi / Sekolah</label>
+    <input type="text" id="instansi">
+
+    <label>Alamat</label>
+    <textarea id="alamat"></textarea>
+
+    <div class="btn-group">
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<script type="module" src="profile.js"></script>
+</body>
+</html>
