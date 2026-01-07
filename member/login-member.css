@@ -83,3 +83,27 @@ button.google-btn img {
 .back-home a:hover {
   text-decoration: underline;
 }
+
+button.google-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background-color: #ffffff;
+  border: 1px solid #dadce0;
+
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+
+  color: #3c4043;
+  -webkit-text-fill-color: #3c4043;
+
+  line-height: 1.2;
+  cursor: pointer;
+}
