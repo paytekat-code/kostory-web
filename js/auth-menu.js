@@ -54,7 +54,3 @@ async function logout(e) {
 onAuthStateChanged(auth, (user) => {
   renderMenu(user);
 });
-
-onAuthStateChanged(auth, user => {
-  renderMenu(user);
-});
