@@ -5,7 +5,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebas
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5YXuylAdRRj5XptsWcfbIzuT8YRf179E",
-  authDomain: "kostory.id",
+  authDomain: "kostory-web.firebaseapp.com",
   projectId: "kostory-web",
   storageBucket: "kostory-web.appspot.com",
   messagingSenderId: "139221477956",
