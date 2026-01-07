@@ -13,6 +13,7 @@ const email = document.getElementById("email");
 const nama = document.getElementById("nama");
 const wa = document.getElementById("wa");
 const dob = document.getElementById("dob");
+const gender = document.getElementById("gender");
 const instansi = document.getElementById("instansi");
 const alamat = document.getElementById("alamat");
 
