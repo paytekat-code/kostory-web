@@ -1,6 +1,10 @@
 // js/firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // Firebase configuration
@@ -16,8 +20,11 @@ const firebaseConfig = {
 // Init Firebase
 export const app = initializeApp(firebaseConfig);
 
-// 🔑 INI YANG KURANG
+// Init Auth
 export const auth = getAuth(app);
+
+// 🔑 PAKSA SIMPAN SESSION DI LOCAL STORAGE
+await setPersistence(auth, browserLocalPersistence);
 
 // Database
 export const db = getFirestore(app);
