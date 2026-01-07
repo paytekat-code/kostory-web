@@ -15,4 +15,9 @@ const firebaseConfig = {
 
 // Init Firebase
 export const app = initializeApp(firebaseConfig);
+
+// 🔑 INI YANG KURANG
+export const auth = getAuth(app);
+
+// Database
 export const db = getFirestore(app);
