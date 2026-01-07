@@ -19,6 +19,6 @@ document.getElementById("loginGoogle").onclick = async () => {
 onAuthStateChanged(auth, user => {
   if (user) {
     console.log("Login sukses:", user.email);
-    location.href = "/admin.html"; // arahkan ke dashboard kamu
+    location.href = "/admin/admin.html"; // arahkan ke dashboard kamu
   }
 });
