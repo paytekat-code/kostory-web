@@ -10,9 +10,7 @@ import {
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
-/* =====================
-   RENDER MENU
-   ===================== */
+/* ========= RENDER MENU ========= */
 function renderMenu(user) {
   if (!menuContent) return;
 
@@ -29,7 +27,7 @@ function renderMenu(user) {
     };
   } else {
     menuContent.innerHTML = `
-      <button id="loginGoogle" type="button">Login Google</button>
+      <button id="loginGoogle">Login Google</button>
     `;
 
     document.getElementById("loginGoogle").onclick = () => {
@@ -38,14 +36,10 @@ function renderMenu(user) {
   }
 }
 
-/* =====================
-   FINALIZE REDIRECT
-   ===================== */
+/* ========= FINALIZE REDIRECT (WAJIB) ========= */
 getRedirectResult(auth).catch(() => {});
 
-/* =====================
-   AUTH LISTENER
-   ===================== */
+/* ========= AUTH LISTENER ========= */
 onAuthStateChanged(auth, (user) => {
   renderMenu(user);
 });
