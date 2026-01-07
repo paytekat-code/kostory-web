@@ -1,44 +1,53 @@
 import { auth } from "./firebase.js";
 import {
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const menuContent = document.getElementById("menuContent");
-const loginBtn = document.getElementById("loginGoogle");
-
 const provider = new GoogleAuthProvider();
 
-// LOGIN
-loginBtn?.addEventListener("click", () => {
-  signInWithRedirect(auth, provider);
-});
+if (!menuContent) {
+  console.error("menuContent TIDAK DITEMUKAN");
+}
 
-// HANDLE REDIRECT RESULT
-getRedirectResult(auth).catch(() => {});
-
-// AUTH STATE
-onAuthStateChanged(auth, (user) => {
-  console.log("AUTH STATE:", user);
-
+/* ========== RENDER MENU ========== */
+function renderMenu(user) {
   if (!menuContent) return;
 
   if (user) {
     menuContent.innerHTML = `
       <a href="/member/profile.html">Profile</a>
-      <a href="#" id="logoutBtn">Logout</a>
+      <button id="logoutBtn">Logout</button>
     `;
 
     document.getElementById("logoutBtn").onclick = async () => {
       await signOut(auth);
       location.reload();
     };
+
   } else {
     menuContent.innerHTML = `
-      <button id="loginGoogle">Login Google</button>
+      <button id="loginGoogle" class="login-google">
+        Login Google
+      </button>
     `;
+
+    document.getElementById("loginGoogle").onclick = async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        location.reload();
+      } catch (err) {
+        console.error("LOGIN ERROR:", err);
+      }
+    };
   }
+}
+
+/* ========== AUTH LISTENER ========== */
+onAuthStateChanged(auth, (user) => {
+  console.log("AUTH STATE:", user);
+  renderMenu(user);
 });
