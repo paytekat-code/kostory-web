@@ -79,10 +79,13 @@ img{width:100%;display:block}
 .menu-panel{
   background:#fff;
   border-radius:16px;
-  margin:80px 20px;
+  margin:80px auto;
   padding:16px;
+  width:calc(100% - 40px);
+  max-width:360px;
   animation:slideUp .2s ease;
 }
+
 
 @keyframes slideUp{
   from{transform:translateY(20px);opacity:0}
