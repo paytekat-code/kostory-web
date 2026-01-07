@@ -1,3 +1,5 @@
+console.log("AUTH MENU V2 LOADED");
+
 import { auth } from "./firebase.js";
 import {
   GoogleAuthProvider,
