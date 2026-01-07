@@ -33,13 +33,10 @@ body {
 }
 
 /* ================================
-   GOOGLE LOGIN BUTTON – HARD OVERRIDE
+   GOOGLE LOGIN BUTTON – FINAL FIX
    ================================ */
 
 button.google-btn {
-  all: unset;                 /* ⬅️ MATIKAN SEMUA STYLE GLOBAL */
-  box-sizing: border-box;
-
   width: 100%;
   padding: 14px;
   border-radius: 14px;
@@ -49,39 +46,27 @@ button.google-btn {
   justify-content: center;
   gap: 10px;
 
-  background: #ffffff;
+  background-color: #ffffff;
   border: 1px solid #dadce0;
 
   font-size: 15px;
   font-weight: 500;
   font-family: Arial, sans-serif;
 
-  color: #3c4043;             /* ⬅️ WARNA TEXT GOOGLE ASLI */
-  cursor: pointer;
+  color: #3c4043;        /* ⬅️ PASTI KELIHATAN */
+  line-height: 1.2;
 
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.15s ease,
-    background 0.2s ease;
+  cursor: pointer;
+}
+
+button.google-btn:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(60,64,67,0.25);
 }
 
 button.google-btn img {
   width: 18px;
   height: 18px;
-}
-
-button.google-btn:hover {
-  background: #f8f9fa;
-  box-shadow: 0 4px 12px rgba(60,64,67,0.3);
-  transform: translateY(-1px);
-}
-
-
-/* Hover */
-.google-btn:hover {
-  background: #f8f8f8;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  transform: translateY(-1px);
 }
 
 /* Link kembali */
