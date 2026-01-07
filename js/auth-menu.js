@@ -6,41 +6,46 @@ import {
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+const provider = new GoogleAuthProvider();
+const menuContent = document.getElementById("menuContent");
 
-  const provider = new GoogleAuthProvider();
-  const menuContent = document.getElementById("menuContent");
+/* JAGA-JAGA */
+if (!menuContent) {
+  console.error("menuContent NOT FOUND");
+}
 
+/* RENDER */
+function renderMenu(user) {
   if (!menuContent) return;
 
-  function renderMenu(user) {
-    if (user) {
-      menuContent.innerHTML = `
-        <a href="/member/profile.html">Profile</a>
-        <a href="#" id="logoutBtn">Logout</a>
-      `;
+  if (user) {
+    menuContent.innerHTML = `
+      <a href="/member/profile.html">Profile</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    `;
 
-      document.getElementById("logoutBtn").onclick = async (e) => {
-        e.preventDefault();
-        await signOut(auth);
-        location.reload();
-      };
+    document.getElementById("logoutBtn").onclick = async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+      location.reload();
+    };
 
-    } else {
-      menuContent.innerHTML = `
-        <button id="loginGoogle" type="button">Login Google</button>
-      `;
+  } else {
+    menuContent.innerHTML = `
+      <button id="loginGoogle" type="button">Login Google</button>
+    `;
 
-      document.getElementById("loginGoogle").onclick = async (e) => {
-        e.preventDefault();
-        await signInWithRedirect(auth, provider);
-      };
-    }
+    document.getElementById("loginGoogle").onclick = async (e) => {
+      e.preventDefault();
+      await signInWithRedirect(auth, provider);
+    };
   }
+}
 
-  // 🔑 INI KUNCI NYA
-  onAuthStateChanged(auth, (user) => {
-    renderMenu(user);
-  });
+/* 🔑 PAKSA RENDER SEKALI */
+renderMenu(null);
 
+/* 🔑 AUTH LISTENER */
+onAuthStateChanged(auth, (user) => {
+  renderMenu(user);
 });
