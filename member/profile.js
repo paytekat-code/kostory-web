@@ -9,9 +9,17 @@ import {
 
 const form = document.getElementById("profileForm");
 
-onAuthStateChanged(auth, async user => {
+const email = document.getElementById("email");
+const nama = document.getElementById("nama");
+const wa = document.getElementById("wa");
+const dob = document.getElementById("dob");
+const instansi = document.getElementById("instansi");
+const alamat = document.getElementById("alamat");
+
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "/";
+    // belum login → tendang balik
+    window.location.href = "login-member.html";
     return;
   }
 
@@ -29,7 +37,7 @@ onAuthStateChanged(auth, async user => {
     alamat.value = d.alamat || "";
   }
 
-  form.addEventListener("submit", async e => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     await setDoc(ref, {
