@@ -15,7 +15,9 @@ function renderMenu(user) {
 
   if (!user) {
     menuContent.innerHTML = `
-      <a href="#" id="loginGoogle">Login Google</a>
+  <button id="loginGoogle" type="button">Login Google</button>
+`;
+
     `;
 
     document
