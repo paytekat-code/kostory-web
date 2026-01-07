@@ -14,11 +14,6 @@ getRedirectResult(auth).catch(err => {
 const provider = new GoogleAuthProvider();
 const menuContent = document.getElementById("menuContent");
 
-menuContent.style.display = "flex";
-menuContent.style.flexDirection = "column";
-menuContent.style.gap = "12px";
-menuContent.style.zIndex = "9999";
-
 function renderMenu(user) {
   if (!menuContent) return;
 
