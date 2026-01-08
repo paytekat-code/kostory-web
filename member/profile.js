@@ -7,6 +7,30 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+function normalizePhoneNumber(input) {
+  if (!input) return "";
+
+  let phone = input.replace(/\D/g, ""); // buang selain angka
+
+  // 08xxxx → 628xxxx
+  if (phone.startsWith("08")) {
+    phone = "62" + phone.slice(1);
+  }
+
+  // +628xxx → 628xxx
+  if (phone.startsWith("628")) {
+    return phone;
+  }
+
+  // 8xxx → 628xxx (user ketik tanpa 0)
+  if (phone.startsWith("8")) {
+    phone = "62" + phone;
+  }
+
+  return phone;
+}
+
+
 const form = document.getElementById("profileForm");
 
 const email = document.getElementById("email");
