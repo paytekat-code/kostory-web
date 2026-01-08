@@ -108,13 +108,19 @@ textarea {
 .btn-secondary {
   display: block;
   margin-top: 12px;
+
   text-align: center;
   padding: 12px;
-  border-radius: 8px;
+
+  border-radius: 10px;
   background: #f1f1f1;
+
   color: #222;
-  text-decoration: none;
+  text-decoration: none;   /* ⬅️ INI KUNCI */
   font-size: 15px;
+  font-weight: 500;
+
+  transition: background 0.2s ease;
 }
 
 .btn-secondary:hover {
