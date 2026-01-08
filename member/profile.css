@@ -100,3 +100,23 @@ textarea {
 .btn-group button:hover {
   opacity: 0.9;
 }
+
+/* ================================
+   SECONDARY BUTTON
+   ================================ */
+
+.btn-secondary {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f1f1f1;
+  color: #222;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e5;
+}
