@@ -66,7 +66,7 @@ loadInfo();
 onAuthStateChanged(auth, user => {
   if (!user) {
     alert("Silakan login terlebih dahulu");
-    location.href = "/login.html";
+    location.href = "https://kostory.id/member/login-member.html?redirect=" + encodeURIComponent(window.location.href);
     return;
   }
 
