@@ -65,6 +65,11 @@ const data = {
   durasiTersedia: durasiTersedia,
   bolehSuamiIstri: bolehSuamiIstri.checked,
   deskripsi: deskripsi.value.trim(),
+kontak: {
+  nama: kontakNama.value.trim(),
+  wa: kontakWa.value.trim()
+},
+  
   fasilitasUmum: fasilitasUmum.value.split(",").map(v => v.trim()).filter(Boolean),
   kebijakan: kebijakan.value.split(",").map(v => v.trim()).filter(Boolean),
   heroImages: heroImages.value.split(",").map(v => v.trim()).filter(Boolean),
