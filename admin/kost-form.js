@@ -36,6 +36,8 @@ async function loadData() {
   deskripsi.value = d.deskripsi || "";
   fasilitasUmum.value = (d.fasilitasUmum || []).join(", ");
   kebijakan.value = (d.kebijakan || []).join(", ");
+  kontakNama.value = d.kontak?.nama || "";
+  kontakWa.value = d.kontak?.wa || "";
   lat.value = d.location?.lat ?? "";
   lng.value = d.location?.lng ?? "";
   heroImages.value = (d.heroImages || []).join(", ");
