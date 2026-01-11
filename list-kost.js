@@ -103,9 +103,10 @@ async function loadKost() {
             🗺️ Near ${k.landmark ?? "-"}
         </div>
 
-        <div class="jenis-kost">
-            Kost ${k.jenisKost ?? ""}
+        <div class="jenis-kost badge-${(k.jenisKost || "").toLowerCase()}">
+        Kost ${k.jenisKost ?? ""}
         </div>
+
 
         <div class="price-row">
           <div class="price">
