@@ -22,6 +22,9 @@
     <label>Alamat</label>
     <textarea id="alamat" required></textarea>
     
+    <label>Kota</label>
+<input type="text" id="kota" placeholder="Contoh: Bandung" required />
+
 <label>Landmark Terdekat</label>
 <input type="text" id="landmark" placeholder="Contoh: Dekat Mall A, 200m dari Kampus B" />
 
@@ -33,6 +36,17 @@
       <option value="Campur">Campur</option>
     </select>
 
+<label>Durasi Tersedia</label>
+<label>
+  <input type="checkbox" name="durasiTersedia" value="Bulanan" /> Bulanan
+</label>
+<label>
+  <input type="checkbox" name="durasiTersedia" value="Mingguan" /> Mingguan
+</label>
+<label>
+  <input type="checkbox" name="durasiTersedia" value="Harian" /> Harian
+</label>
+    
     <label>
       <input type="checkbox" id="bolehSuamiIstri" />
       Bisa Suami Istri
@@ -44,6 +58,10 @@
     <label>Fasilitas Umum (pisahkan dengan koma)</label>
     <input type="text" id="fasilitasUmum" placeholder="AC, WiFi, Parkir" />
 
+    <label>Jumlah Parkir Mobil</label>
+    <input type="number" id="parkirMobil" min="0" placeholder="Contoh: 5" />
+
+    
     <label>Kebijakan (pisahkan dengan koma)</label>
     <input type="text" id="kebijakan" placeholder="Tidak merokok, Tidak bawa hewan" />
 
@@ -56,6 +74,12 @@
     <label>Hero Images (URL, pisahkan koma)</label>
     <textarea id="heroImages" rows="3"></textarea>
 
+    <label>
+  <input type="checkbox" id="aktif" checked />
+  Kost Aktif
+</label>
+
+    
     <button type="submit" class="btn-primary" id="submitBtn">
       Simpan Kostory
     </button>
