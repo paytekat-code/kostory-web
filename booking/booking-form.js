@@ -12,14 +12,18 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 // ===== PARAM =====
-const params = new URLSearchParams(window.location.search);
-const kostId = params.get("kostId");
-const roomTypeId = params.get("roomTypeId");
+const draftRaw = localStorage.getItem("bookingDraft");
 
-if (!kostId || !roomTypeId) {
-  alert("Parameter booking tidak lengkap");
-  throw new Error("missing param");
+if (!draftRaw) {
+  alert("Data pemesanan tidak ditemukan. Silakan ulangi dari awal.");
+  window.location.href = "/index.html";
+  throw new Error("missing bookingDraft");
 }
+
+const draft = JSON.parse(draftRaw);
+
+const kostId = draft.kostId;
+const roomTypeId = draft.roomId;
 
 // ===== ELEMENT =====
 const kostNamaEl = document.getElementById("kostNama");
@@ -59,6 +63,7 @@ async function loadInfo() {
     }
   }
 }
+
 
 loadInfo();
 
