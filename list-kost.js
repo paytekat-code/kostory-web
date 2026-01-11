@@ -45,6 +45,7 @@ async function getHargaBulananTerendah(kostId) {
 
 async function loadKost() {
   const snap = await getDocs(collection(db, "kost"));
+  const temp = [];
 
   for (const doc of snap.docs) {
     const k = doc.data();
@@ -54,6 +55,32 @@ async function loadKost() {
 
     const harga = await getHargaBulananTerendah(doc.id);
     const foto = k.heroImages?.[0] || "img/default-kost.jpg";
+
+    temp.push({ id: doc.id, data: k, harga, foto });
+  }
+
+  // 🔥 SORTING RULES
+  temp.sort((a, b) => {
+    const namaA = a.data.nama?.toLowerCase() || "";
+    const namaB = b.data.nama?.toLowerCase() || "";
+
+    // 1️⃣ Kostory Mekar paling atas
+    if (namaA === "kostory mekar" && namaB !== "kostory mekar") return -1;
+    if (namaB === "kostory mekar" && namaA !== "kostory mekar") return 1;
+
+    // 2️⃣ Yang diawali "kostory"
+    const isA = namaA.startsWith("kostory");
+    const isB = namaB.startsWith("kostory");
+
+    if (isA && !isB) return -1;
+    if (!isA && isB) return 1;
+
+    return 0;
+  });
+
+  // 🧱 Render setelah sorting
+  temp.forEach(item => {
+    const { data: k, harga, foto, id } = item;
 
     const card = document.createElement("div");
     card.className = "kost-card";
@@ -92,14 +119,12 @@ async function loadKost() {
 
     card.querySelector(".btn-detail").onclick = () => {
       location.href =
-  `/detail-kost.html?id=${doc.id}&duration=${duration}&checkin=${checkin}`;
-
+        `/detail-kost.html?id=${id}&duration=${duration}&checkin=${checkin}`;
     };
 
     kostList.appendChild(card);
-allCards.push({ card, data: k });
-
-  }
+    allCards.push({ card, data: k });
+  });
 }
 
 loadKost();
