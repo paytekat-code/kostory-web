@@ -39,12 +39,11 @@ async function loadData() {
   lat.value = d.location?.lat ?? "";
   lng.value = d.location?.lng ?? "";
   heroImages.value = (d.heroImages || []).join(", ");
-}
 const durasiCheckboxes = document.querySelectorAll('input[name="durasiTersedia"]');
 durasiCheckboxes.forEach(cb => {
   cb.checked = (d.durasiTersedia || []).includes(cb.value);
 });
-
+}
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
