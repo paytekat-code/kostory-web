@@ -27,6 +27,7 @@ async function loadData() {
 
   nama.value = d.nama || "";
   alamat.value = d.alamat || "";
+  landmark.value = d.landmark || "";
   jenisKost.value = d.jenisKost || "";
   bolehSuamiIstri.checked = d.bolehSuamiIstri === true;
   deskripsi.value = d.deskripsi || "";
@@ -43,6 +44,7 @@ form.addEventListener("submit", async e => {
   const data = {
     nama: nama.value.trim(),
     alamat: alamat.value.trim(),
+    landmark: landmark.value.trim(),
     jenisKost: jenisKost.value,
     bolehSuamiIstri: bolehSuamiIstri.checked,
     deskripsi: deskripsi.value.trim(),
