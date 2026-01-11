@@ -85,6 +85,15 @@ async function loadKost() {
     const card = document.createElement("div");
     card.className = "kost-card";
 
+const rawJenis = (k.jenisKost || "").toLowerCase();
+
+let badgeClass = "badge-default";
+
+if (rawJenis.includes("pria")) badgeClass = "badge-pria";
+else if (rawJenis.includes("wanita")) badgeClass = "badge-wanita";
+else if (rawJenis.includes("campur")) badgeClass = "badge-campur";
+
+    
     card.innerHTML = `
       <div class="kost-img">
         <img src="${foto}">
@@ -103,9 +112,10 @@ async function loadKost() {
             🗺️ Near ${k.landmark ?? "-"}
         </div>
 
-        <div class="jenis-kost badge-${(k.jenisKost || "").toLowerCase()}">
+        <div class="jenis-kost ${badgeClass}">
         Kost ${k.jenisKost ?? ""}
         </div>
+
 
 
         <div class="price-row">
