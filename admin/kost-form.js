@@ -29,6 +29,9 @@ async function loadData() {
   alamat.value = d.alamat || "";
   landmark.value = d.landmark || "";
   jenisKost.value = d.jenisKost || "";
+  kota.value = d.kota || "";
+  parkirMobil.value = d.parkirMobil ?? "";
+  aktif.checked = d.aktif !== false;
   bolehSuamiIstri.checked = d.bolehSuamiIstri === true;
   deskripsi.value = d.deskripsi || "";
   fasilitasUmum.value = (d.fasilitasUmum || []).join(", ");
@@ -37,27 +40,41 @@ async function loadData() {
   lng.value = d.location?.lng ?? "";
   heroImages.value = (d.heroImages || []).join(", ");
 }
+const durasiCheckboxes = document.querySelectorAll('input[name="durasiTersedia"]');
+durasiCheckboxes.forEach(cb => {
+  cb.checked = (d.durasiTersedia || []).includes(cb.value);
+});
+
 
 form.addEventListener("submit", async e => {
   e.preventDefault();
 
-  const data = {
-    nama: nama.value.trim(),
-    alamat: alamat.value.trim(),
-    landmark: landmark.value.trim(),
-    jenisKost: jenisKost.value,
-    bolehSuamiIstri: bolehSuamiIstri.checked,
-    deskripsi: deskripsi.value.trim(),
-    fasilitasUmum: fasilitasUmum.value.split(",").map(v => v.trim()).filter(Boolean),
-    kebijakan: kebijakan.value.split(",").map(v => v.trim()).filter(Boolean),
-    heroImages: heroImages.value.split(",").map(v => v.trim()).filter(Boolean),
-    location: {
-      lat: Number(lat.value),
-      lng: Number(lng.value)
-    },
-    rating: 0,
-    reviewCount: 0
-  };
+  const durasiTersedia = Array.from(
+  document.querySelectorAll('input[name="durasiTersedia"]:checked')
+).map(cb => cb.value);
+
+const data = {
+  nama: nama.value.trim(),
+  kota: kota.value.trim(),
+  alamat: alamat.value.trim(),
+  landmark: landmark.value.trim(),
+  jenisKost: jenisKost.value,
+  durasiTersedia: durasiTersedia,
+  bolehSuamiIstri: bolehSuamiIstri.checked,
+  deskripsi: deskripsi.value.trim(),
+  fasilitasUmum: fasilitasUmum.value.split(",").map(v => v.trim()).filter(Boolean),
+  kebijakan: kebijakan.value.split(",").map(v => v.trim()).filter(Boolean),
+  heroImages: heroImages.value.split(",").map(v => v.trim()).filter(Boolean),
+  parkirMobil: Number(parkirMobil.value) || 0,
+  aktif: aktif.checked,
+  location: {
+    lat: Number(lat.value),
+    lng: Number(lng.value)
+  },
+  rating: 0,
+  reviewCount: 0
+};
+
 
   try {
     if (isEdit) {
