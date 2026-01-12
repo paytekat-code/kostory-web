@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Riwayat Booking | Kostory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/booking.css" />
+
+  <style>
+    .history-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .history-item h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .history-meta {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.booking {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+
+    .badge.survey {
+      background: #dcfce7;
+      color: #166534;
+    }
+  </style>
+</head>
+
+<body>
+<main class="container">
+
+  <h1>Riwayat Saya</h1>
+  <p class="help">Daftar booking & survey yang pernah kamu lakukan.</p>
+
+  <div id="historyList"></div>
+
+</main>
+
+<script type="module" src="history.js"></script>
+</body>
+</html>
