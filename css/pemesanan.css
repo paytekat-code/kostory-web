@@ -1,7 +1,6 @@
-.page {
-  outline: 10px solid red !important;
+body {
+  background: red !important;
 }
-
 
 /* =============================
    LAYOUT
