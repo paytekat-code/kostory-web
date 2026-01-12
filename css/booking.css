@@ -318,3 +318,27 @@ button.secondary {
 .tnc-agree input {
   margin-top: 2px;
 }
+
+/* ====== HARD LOCK BUTTON HEIGHT (MOBILE SAFE) ====== */
+.action-buttons button {
+  box-sizing: border-box;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  line-height: 1;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .action-buttons {
+    gap: 12px;
+  }
+
+  .action-buttons button {
+    font-size: 15px;
+  }
+}
