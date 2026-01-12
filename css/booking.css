@@ -282,7 +282,7 @@ button.primary:disabled {
 .tnc-agree {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 
   margin-top: 18px;
@@ -294,23 +294,33 @@ button.primary:disabled {
 
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .tnc-agree input {
   flex-shrink: 0;
-  margin-top: 3px;
 }
 
 .tnc-agree span {
   flex: 1;
   min-width: 0;
-
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #374151;
-
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-  text-align: left; /* ⬅️ penting untuk HP */
+}
+
+/* 📱 MOBILE: checkbox atas, teks bawah */
+@media (max-width: 480px) {
+  .tnc-agree {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .tnc-agree span {
+    text-align: center;
+  }
 }
