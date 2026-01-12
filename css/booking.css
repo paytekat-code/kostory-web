@@ -284,7 +284,8 @@ button.primary:disabled {
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   cursor: pointer;
-  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tnc-agree:hover {
@@ -292,21 +293,20 @@ button.primary:disabled {
 }
 
 .tnc-agree input {
-  margin-top: 3px;
   flex-shrink: 0;
-  accent-color: #4f46e5;
-  cursor: pointer;
+  margin-top: 4px;
 }
+
 
 .tnc-agree span {
   display: block;
+  flex: 1;                /* 🔥 INI PENTING */
+  min-width: 0;          /* 🔥 FIX FLEX TEXT BUG */
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
   white-space: normal;
-  word-break: normal;
-  writing-mode: horizontal-tb;
-  transform: none;
+  word-break: break-word;
 }
 
 /* Anti vertikal bug */
