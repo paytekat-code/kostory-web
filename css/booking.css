@@ -278,11 +278,10 @@ button.primary:disabled {
    TNC – SIDE BY SIDE (STABLE)
 ============================== */
 
-/* Default: sejajar kiri–kanan */
 .tnc-agree {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: row;   /* ⬅️ sejajar kiri–kanan */
+  align-items: center;   /* ⬅️ rata tengah secara vertikal */
   gap: 12px;
 
   margin-top: 18px;
@@ -304,23 +303,12 @@ button.primary:disabled {
 .tnc-agree span {
   flex: 1;
   min-width: 0;
+
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
+
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-}
-
-/* 📱 MOBILE: checkbox atas, teks bawah */
-@media (max-width: 480px) {
-  .tnc-agree {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .tnc-agree span {
-    text-align: center;
-  }
 }
