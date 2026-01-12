@@ -191,7 +191,38 @@
   </form>
 
 </main>
-
 <script type="module" src="booking-form.js"></script>
+  
+  <div id="surveyModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+">
+  <div style="
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    width:90%;
+    max-width:360px;
+  ">
+    <h3>Jadwalkan Survey</h3>
+
+    <label>Tanggal Survey</label>
+    <input type="date" id="surveyDate">
+
+    <label>Jam Survey</label>
+    <input type="time" id="surveyTime">
+
+    <div style="display:flex; gap:10px; margin-top:16px;">
+      <button id="cancelSurvey" style="flex:1;">Batal</button>
+      <button id="confirmSurvey" class="primary" style="flex:1;">Kirim</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
