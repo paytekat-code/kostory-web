@@ -315,3 +315,22 @@ button.primary:disabled {
   transform: none !important;
   text-orientation: mixed !important;
 }
+
+.tnc-agree {
+  position: static !important;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.tnc-agree span {
+  white-space: normal !important;
+  word-break: normal !important;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  display: block !important;
+}
