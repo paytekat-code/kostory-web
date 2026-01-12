@@ -308,3 +308,10 @@ button.primary:disabled {
   flex-shrink: 0 !important;
   margin-top: 2px !important;
 }
+
+.tnc-agree,
+.tnc-agree * {
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  text-orientation: mixed !important;
+}
