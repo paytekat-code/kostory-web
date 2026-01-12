@@ -243,3 +243,10 @@ button.secondary {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.action-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* reset */
+}
