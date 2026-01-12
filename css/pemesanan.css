@@ -1,164 +1,64 @@
 /* =============================
-   BASE
+   LAYOUT
 ============================= */
 .page {
   max-width: 720px;
   margin: 0 auto;
-  padding: 20px 16px 40px;
+  padding: 24px 16px 64px;
+  background: #f9fafb;
 }
 
 .section {
-  margin-bottom: 20px;
-}
-
-.section-header h1 {
-  font-size: 22px;
-  margin-bottom: 4px;
-}
-
-.subtext {
-  font-size: 14px;
-  color: #555;
+  margin-bottom: 28px;
 }
 
 .section-title {
   font-size: 16px;
   font-weight: 700;
-  margin-top: 0;       /* ⬅️ INI YANG NGURANGIN JARAK KE ATAS */
-  margin-bottom: 12px;
+  margin: 0 0 12px;
+  color: #111827;
 }
 
+.subtext {
+  font-size: 13px;
+  color: #6b7280;
+}
 
 /* =============================
    CARD
 ============================= */
 .card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);
-  margin-bottom: 20px; /* ⬅️ TAMBAH DI SINI */ 
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
 }
+
 .card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
 }
+
 .summary-row {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
   font-size: 14px;
   line-height: 1.6;
   margin: 6px 0;
+  color: #374151;
+}
+
+.summary-row span {
+  color: #6b7280;
 }
 
 /* =============================
-   ROOM LIST
-============================= */
-.room-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.room {
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.room:hover {
-  border-color: #6366f1;
-}
-
-.room.selected {
-  border: 2px solid #6366f1;
-  background: #f5f7ff;
-}
-
-.room strong {
-  font-size: 15px;
-}
-
-.room .help {
-  font-size: 13px;
-  color: #555;
-  margin-top: 4px;
-  line-height: 1.4;
-}
-
-
-
-/* =============================
-   ADDON
-============================= */
-.addon-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.addon-list label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.addon-list input {
-  margin-right: 8px;
-}
-
-/* =============================
-   SUMMARY
-============================= */
-.summary-card {
-  border: 2px solid #111827;
-}
-
-.summary {
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0;          /* ✅ KUNCI */
-}
-
-/* =============================
-   BUTTON
-============================= */
-.btn-primary {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: #111827;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-   margin-top: 20px;
-}
-
-.btn-primary:disabled {
-  background: #d1d5db;
-  cursor: not-allowed;
-}
-
-/* =============================
-   MOBILE TWEAK
-============================= */
-@media (max-width: 480px) {
-  .durasi {
-    flex-direction: column;
-  }
-}
-
-/* =============================
-   ADDON CARD (PRO STYLE)
+   ADDON LIST
 ============================= */
 .addon-list {
   display: flex;
@@ -170,22 +70,22 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 16px;
-  border-radius: 14px;
+  padding: 16px;
+  border-radius: 16px;
   border: 1.5px solid #e5e7eb;
   cursor: pointer;
-  transition: .2s ease;
-  background: #fff;
+  transition: all .2s ease;
+  background: #ffffff;
 }
 
 .addon-card:hover {
-  border-color: #fb923c;
-  background: #fff7ed;
+  border-color: #6366f1;
+  background: #f5f7ff;
 }
 
 .addon-card.selected {
-  border-color: #fb923c;
-  background: #fff7ed;
+  border-color: #6366f1;
+  background: #f5f7ff;
 }
 
 .addon-left {
@@ -197,34 +97,158 @@
 .addon-title {
   font-weight: 700;
   font-size: 15px;
+  color: #111827;
 }
 
 .addon-price {
-  color: #fb923c;
+  color: #4f46e5;
   font-weight: 600;
   font-size: 14px;
 }
 
 .addon-desc {
   font-size: 13px;
-  color: #555;
-  line-height: 1.4;
+  color: #6b7280;
+  line-height: 1.5;
 }
 
 .addon-right input {
   width: 18px;
   height: 18px;
-  accent-color: #fb923c;
+  accent-color: #6366f1;
 }
 
+/* =============================
+   SUMMARY BOX
+============================= */
 #summary {
-  margin-bottom: 20px; /* ⬅️ INI JARAK YANG KURANG */
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-#summary > div:first-child {
-  margin-top: 0;
+.summary-box {
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
 }
 
-#summary > div:last-child {
-  margin-bottom: 0;
+.summary-total {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #111827;
+}
+
+.summary-period {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.summary-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 14px 0;
+}
+
+/* =============================
+   INCLUDED / EXCLUDED
+============================= */
+.addon-section {
+  margin-top: 14px;
+}
+
+.addon-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.addon-list-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.addon-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.addon-item.included .addon-icon {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.addon-item.excluded .addon-icon {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.addon-item.included {
+  color: #065f46;
+}
+
+.addon-item.excluded {
+  color: #6b7280;
+}
+
+/* =============================
+   BUTTON
+============================= */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(180deg, #4f46e5, #4338ca);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all .2s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-primary:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* =============================
+   MOBILE
+============================= */
+@media (max-width: 480px) {
+  .summary-total {
+    font-size: 22px;
+  }
+
+  .addon-card {
+    padding: 14px;
+  }
+
+  .card {
+    padding: 16px;
+  }
 }
