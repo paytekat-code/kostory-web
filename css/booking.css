@@ -322,3 +322,46 @@ button.primary:disabled {
 .tnc-agree span {
   display: block;
 }
+/* ===== TNC NUCLEAR FIX ===== */
+
+form .tnc-agree {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+
+  width: 100% !important;
+  padding: 12px 14px !important;
+  margin-top: 16px !important;
+
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  background: #fafafa !important;
+
+  height: auto !important;
+  max-height: none !important;
+}
+
+form .tnc-agree input[type="checkbox"] {
+  all: unset !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #999 !important;
+  border-radius: 4px !important;
+  margin-top: 3px !important;
+  cursor: pointer !important;
+}
+
+form .tnc-agree input[type="checkbox"]:checked {
+  background: #4f46e5 !important;
+  border-color: #4f46e5 !important;
+}
+
+form .tnc-agree span {
+  all: unset !important;
+  display: block !important;
+  flex: 1 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  color: #374151 !important;
+  text-align: left !important;
+}
