@@ -304,3 +304,21 @@ button.primary:disabled {
     font-size: 15px;
   }
 }
+/* === FORCE FIX TNC AGREE === */
+
+.tnc-agree {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.tnc-agree input[type="checkbox"] {
+  width: auto !important;
+  padding: 0 !important;
+  margin: 2px 0 0 0 !important;
+  border-radius: 4px;
+}
+
+.tnc-agree span {
+  display: block;
+}
