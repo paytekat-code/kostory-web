@@ -274,34 +274,40 @@ button.primary:disabled {
    TNC CHECKBOX – CLEAN & UX
 ============================== */
 
+/* ==============================
+   TNC – SIDE BY SIDE (STABLE)
+============================== */
+
 .tnc-agree {
   display: flex;
-  flex-direction: column;   /* ⬅️ penting */
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: row;       /* ⬅️ sejajar: checkbox kiri, teks kanan */
+  align-items: flex-start;
+  gap: 12px;
 
   margin-top: 18px;
-  padding: 16px 14px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   cursor: pointer;
 
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
+  overflow: hidden;          /* ⬅️ cegah bocor keluar kotak */
 }
 
 .tnc-agree input {
-  flex-shrink: 0;
+  flex-shrink: 0;            /* ⬅️ jangan mengecil */
+  margin-top: 3px;
 }
 
 .tnc-agree span {
-  display: block;
-  width: 100%;
+  flex: 1;                   /* ⬅️ ambil sisa lebar */
+  min-width: 0;              /* ⬅️ FIX bug flex overflow */
   max-width: 100%;
 
-  text-align: center;      /* ⬅️ biar cakep */
+  display: block;
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
