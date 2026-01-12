@@ -280,8 +280,8 @@ button.primary:disabled {
 
 .tnc-agree {
   display: flex;
-  flex-direction: row;       /* ⬅️ sejajar: checkbox kiri, teks kanan */
-  align-items: flex-start;
+  flex-direction: row;   /* ⬅️ sejajar kiri–kanan */
+  align-items: center;   /* ⬅️ rata tengah secara vertikal */
   gap: 12px;
 
   margin-top: 18px;
@@ -292,22 +292,18 @@ button.primary:disabled {
   cursor: pointer;
 
   width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
-  overflow: hidden;          /* ⬅️ cegah bocor keluar kotak */
+  overflow: hidden;
 }
 
 .tnc-agree input {
-  flex-shrink: 0;            /* ⬅️ jangan mengecil */
-  margin-top: 3px;
+  flex-shrink: 0;
 }
 
 .tnc-agree span {
-  flex: 1;                   /* ⬅️ ambil sisa lebar */
-  min-width: 0;              /* ⬅️ FIX bug flex overflow */
-  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 
-  display: block;
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
