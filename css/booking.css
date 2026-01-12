@@ -287,3 +287,24 @@ button.primary:disabled {
     font-size: 15px;
   }
 }
+/* ===== FIX TNC ALIGNMENT ===== */
+
+.tnc-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #374151;
+  max-width: 100%;
+}
+
+.tnc-agree span {
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.tnc-agree input {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
