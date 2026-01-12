@@ -307,3 +307,13 @@ button.primary:disabled {
   overflow-wrap: break-word;
   text-align: left;
 }
+/* KUNCI BOX SYARAT & KETENTUAN */
+.card > div[style*="max-height"] {
+  max-height: 180px !important;
+  height: auto !important;
+  overflow-y: auto !important;
+}
+.tnc-agree {
+  flex: 0 0 auto !important;
+  align-self: flex-start !important;
+}
