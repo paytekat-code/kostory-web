@@ -1,127 +1,199 @@
-/* =========================
-   BOOKING FORM STYLE
-   ========================= */
-
+/* =============================
+   PAGE LAYOUT
+============================= */
 .container {
   max-width: 720px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px 16px 64px;
+  background: #f9fafb;
 }
 
-/* ---------- Title ---------- */
+/* =============================
+   TYPOGRAPHY
+============================= */
 h1 {
-  font-size: 26px;
+  font-size: 22px;
+  font-weight: 800;
   margin-bottom: 6px;
 }
 
 .help {
-  color: #6b7280;
   font-size: 14px;
+  color: #6b7280;
 }
 
-/* ---------- Card ---------- */
+/* =============================
+   CARD
+============================= */
 .card {
   background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
 }
 
-/* ---------- Form ---------- */
-form.card {
-  margin-top: 16px;
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
 }
 
-h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  margin-top: 0;
-}
-
-/* ---------- Input ---------- */
+/* =============================
+   FORM
+============================= */
 label {
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
   display: block;
+  color: #374151;
 }
 
 input,
-select,
-textarea {
+select {
   width: 100%;
-  padding: 12px 14px;
-  margin-top: 6px;
+  padding: 12px;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  font-size: 15px;
-  transition: all .2s ease;
+  font-size: 14px;
+  margin-bottom: 12px;
   background: #fff;
 }
 
 input:focus,
-select:focus,
-textarea:focus {
+select:focus {
   outline: none;
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
 }
 
-/* Disabled email */
-input[disabled] {
-  background: #f9fafb;
+/* =============================
+   SUMMARY BOX
+============================= */
+#hargaBox {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.summary-box {
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+}
+
+.summary-total {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #111827;
+}
+
+.summary-period {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.summary-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 14px 0;
+}
+
+/* =============================
+   INCLUDED / EXCLUDED
+============================= */
+.addon-section {
+  margin-top: 14px;
+}
+
+.addon-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.addon-list-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.addon-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.addon-item.included .addon-icon {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.addon-item.excluded .addon-icon {
+  background: #f3f4f6;
   color: #6b7280;
 }
 
-/* ---------- Divider ---------- */
-hr {
-  border: none;
-  height: 1px;
-  background: #e5e7eb;
-  margin: 24px 0;
+.addon-item.included {
+  color: #065f46;
 }
 
-/* ---------- Price Box ---------- */
-#hargaBox {
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-  background: #f9fafb;
-  padding: 12px 14px;
+.addon-item.excluded {
+  color: #6b7280;
+}
+
+/* =============================
+   T&C BOX
+============================= */
+.tnc-box {
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-}
-
-/* ---------- Terms Box ---------- */
-form .card {
-  box-shadow: none;
-}
-
-form .card > div {
+  padding: 14px;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #fafafa;
   font-size: 14px;
+  line-height: 1.6;
 }
 
-/* ---------- Checkbox ---------- */
-input[type="checkbox"] {
-  width: auto;
-  margin-top: 0;
-}
-
-label input[type="checkbox"] {
-  accent-color: #6366f1;
-}
-
-/* ---------- Button ---------- */
+/* =============================
+   BUTTON
+============================= */
 button.primary {
   width: 100%;
   padding: 14px;
-  font-size: 16px;
   border-radius: 14px;
   border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all .2s ease;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(180deg, #4f46e5, #4338ca);
   color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all .2s ease;
+}
+
+button.primary:hover {
+  filter: brightness(1.05);
 }
 
 button.primary:disabled {
@@ -129,19 +201,12 @@ button.primary:disabled {
   cursor: not-allowed;
 }
 
-button.primary:not(:disabled):hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 25px rgba(79,70,229,0.25);
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 640px) {
-  h1 {
+/* =============================
+   MOBILE
+============================= */
+@media (max-width: 480px) {
+  .summary-total {
     font-size: 22px;
-  }
-
-  .container {
-    padding: 14px;
   }
 
   .card {
