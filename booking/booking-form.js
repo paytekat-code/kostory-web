@@ -27,6 +27,15 @@ const roomTypeId = draft.roomId;
 const selectedAddons = draft.addons || [];
 const selectedDurasi = draft.durasi;
 
+function generateCode(prefix = "BK") {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "";
+  for (let i = 0; i < 5; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return `${prefix}-${code}`;
+}
+
 // ===== DEFAULT LABEL UNTUK YANG TIDAK DIPILIH =====
 const DEFAULT_ADDON_LABELS = {
   autoRenew: "Tidak Aktif, kamar di-open di periode berikutnya",
@@ -159,8 +168,21 @@ untukSiapa.addEventListener("change", () => {
 
 // ===== T&C CHECK =====
 agreeTnc.addEventListener("change", () => {
-  submitBtn.disabled = !agreeTnc.checked;
+  const enabled = agreeTnc.checked;
+  btnBooking.disabled = !enabled;
+  btnSurvey.disabled = !enabled;
 });
+
+
+const btnBooking = document.getElementById("btnBooking");
+const btnSurvey = document.getElementById("btnSurvey");
+
+const surveyModal = document.getElementById("surveyModal");
+const cancelSurvey = document.getElementById("cancelSurvey");
+const confirmSurvey = document.getElementById("confirmSurvey");
+
+btnBooking.disabled = true;
+btnSurvey.disabled = true;
 
 // ===== SUBMIT =====
 form.addEventListener("submit", async e => {
