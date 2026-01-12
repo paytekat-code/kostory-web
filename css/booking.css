@@ -284,12 +284,11 @@ button.primary:disabled {
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-}
 
-.tnc-agree:hover {
-  background: #f3f4f6;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* ⬅️ PENTING: cegah bocor */
 }
 
 .tnc-agree input {
@@ -297,22 +296,18 @@ button.primary:disabled {
   margin-top: 4px;
 }
 
-
 .tnc-agree span {
+  position: static !important; /* ⬅️ pastikan tidak absolute */
+  flex: 1;                    /* ⬅️ wajib */
+  min-width: 0;              /* ⬅️ fix flex overflow bug */
+  max-width: 100%;
+
   display: block;
-  flex: 1;                /* 🔥 INI PENTING */
-  min-width: 0;          /* 🔥 FIX FLEX TEXT BUG */
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
+
   white-space: normal;
   word-break: break-word;
-}
-
-/* Anti vertikal bug */
-.tnc-agree,
-.tnc-agree * {
-  writing-mode: horizontal-tb !important;
-  transform: none !important;
-  text-orientation: mixed !important;
+  overflow-wrap: break-word;
 }
