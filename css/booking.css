@@ -270,45 +270,40 @@ button.primary:disabled {
     font-size: 15px;
   }
 }
-/* ==============================
-   TNC – SIDE BY SIDE (STABLE)
-============================== */
+
+/* === TNC FINAL STABLE === */
 
 .tnc-agree {
   display: flex;
-  flex-direction: row;       /* ⬅️ sejajar: checkbox kiri, teks kanan */
   align-items: flex-start;
   gap: 12px;
 
-  margin-top: 18px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-
   width: 100%;
-  max-width: 100%;
+  padding: 12px 14px;
+  margin-top: 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+
   box-sizing: border-box;
-  overflow: hidden;          /* ⬅️ cegah bocor keluar kotak */
 }
 
 .tnc-agree input {
-  flex-shrink: 0;            /* ⬅️ jangan mengecil */
+  flex-shrink: 0;
   margin-top: 3px;
 }
 
 .tnc-agree span {
-  flex: 1;                   /* ⬅️ ambil sisa lebar */
-  min-width: 0;              /* ⬅️ FIX bug flex overflow */
-  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 
-  display: block;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.4;
   color: #374151;
 
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
+  text-align: left;
 }
