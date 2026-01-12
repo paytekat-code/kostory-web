@@ -250,23 +250,6 @@ button.primary:disabled {
 }
 
 /* =============================
-   TNC CHECKBOX
-============================= */
-
-.tnc-agree {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 14px;
-  font-size: 14px;
-  color: #374151;
-}
-
-.tnc-agree input {
-  margin-top: 2px;
-}
-
-/* =============================
    MOBILE LOCK
 ============================= */
 
@@ -287,53 +270,37 @@ button.primary:disabled {
     font-size: 15px;
   }
 }
-/* ===== FIX TNC ALIGNMENT ===== */
+/* ==============================
+   FINAL ISOLATED TNC AGREEMENT
+============================== */
 
-.tnc-agree {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 16px;
-  font-size: 14px;
-  color: #374151;
-  max-width: 100%;
-}
-
-.tnc-agree span {
-  line-height: 1.4;
-  word-break: break-word;
-}
-
-.tnc-agree input {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-/* === HARD RESET FOR TNC SECTION === */
-
-.tnc-agree {
+.booking-page .tnc-agree {
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
   justify-content: flex-start !important;
-  gap: 10px;
-  margin-top: 16px;
-  font-size: 14px;
-  color: #374151;
-  max-width: 100%;
+  gap: 10px !important;
+  margin-top: 16px !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  max-width: 100% !important;
+  width: 100% !important;
   writing-mode: horizontal-tb !important;
   transform: none !important;
 }
 
-.tnc-agree span {
+.booking-page .tnc-agree span {
+  display: block !important;
   writing-mode: horizontal-tb !important;
   transform: none !important;
   text-orientation: mixed !important;
-  word-break: break-word;
-  white-space: normal;
-  max-width: 100%;
+  word-break: break-word !important;
+  white-space: normal !important;
+  max-width: 100% !important;
+  line-height: 1.4 !important;
 }
 
-.tnc-agree input {
-  flex-shrink: 0;
-  margin-top: 2px;
+.booking-page .tnc-agree input {
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
 }
