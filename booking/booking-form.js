@@ -38,13 +38,15 @@ function generateCode(prefix = "BK") {
 
 // ===== DEFAULT LABEL UNTUK YANG TIDAK DIPILIH =====
 const DEFAULT_ADDON_LABELS = {
-  autoRenew: "Tidak Aktif, kamar di-open di periode berikutnya",
-  mobil: "Tidak membawa mobil",
-  laundry: "Kiloan (minimal 3Kg)",
-  listrik: "Mengisi Token Sendiri",
-  pasangan: "Tinggal Sendiri",
-  housekeeping: "Standard (Setiap 14 Hari)"
+  autoRenew: "Perpanjangan otomatis tidak aktif, kamar bisa di-book orang lain di periode berikutnya",
+  motor: "Tidak membawa Sepeda Motor",
+  mobil: "Tidak membawa Mobil",
+  laundry: "Laundry sendiri atau Kiloan by Kostory (min 3kg)",
+  listrik: "Token listrik mengisi sendiri",
+  pasangan: "Tinggal sendiri / Tidak membawa pasangan",
+  housekeeping: "Layanan Housekeeping Standard (setiap 14 hari)"
 };
+
 
 // ===== DAFTAR SEMUA ADDON =====
 const ALL_ADDONS = [
@@ -131,12 +133,13 @@ function renderRingkasanHarga(hargaKamar) {
   html += `</div>`;
 
   // === TIDAK TERMASUK ===
-  html += `<div class="addon-section"><div class="addon-title">Tidak Termasuk</div>`;
+ html += `<div class="addon-section"><div class="addon-title">Catatan</div>`;
+
 
   ALL_ADDONS.forEach(a => {
     if (!includedIds.includes(a.id)) {
       const label = DEFAULT_ADDON_LABELS[a.id] || "";
-      html += `<div class="addon-item excluded">❌ ${a.nama}${label ? ": " + label : ""}</div>`;
+      html += `<div class="addon-item excluded">- ${label}</div>`;
     }
   });
 
