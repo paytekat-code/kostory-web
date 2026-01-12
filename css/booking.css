@@ -271,33 +271,37 @@ button.primary:disabled {
   }
 }
 /* ==============================
-   FIX TOTAL T&C CHECKBOX LAYOUT
+   TNC CHECKBOX – CLEAN & UX
 ============================== */
 
 .tnc-agree {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin-top: 16px;
-  width: 100%;
-  max-width: 100%;
-  position: static;
-  writing-mode: horizontal-tb;
-  transform: none;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tnc-agree:hover {
+  background: #f3f4f6;
 }
 
 .tnc-agree input {
-  flex-shrink: 0;
   margin-top: 3px;
-  width: auto;
+  flex-shrink: 0;
+  accent-color: #4f46e5;
+  cursor: pointer;
 }
 
 .tnc-agree span {
   display: block;
-  width: 100%;
-  max-width: 100%;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #374151;
   white-space: normal;
   word-break: normal;
@@ -305,7 +309,7 @@ button.primary:disabled {
   transform: none;
 }
 
-/* Hard reset jika ada CSS lain yang maksa jadi vertikal */
+/* Anti vertikal bug */
 .tnc-agree,
 .tnc-agree * {
   writing-mode: horizontal-tb !important;
