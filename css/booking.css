@@ -278,6 +278,7 @@ button.primary:disabled {
   display: flex;
   align-items: flex-start;
   gap: 12px;
+
   margin-top: 18px;
   padding: 12px 14px;
   border-radius: 12px;
@@ -285,10 +286,12 @@ button.primary:disabled {
   border: 1px solid #e5e7eb;
   cursor: pointer;
 
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: hidden; /* ⬅️ PENTING: cegah bocor */
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+
+  align-self: stretch;   /* ⬅️ PENTING untuk flex parent */
+  overflow: hidden;
 }
 
 .tnc-agree input {
@@ -297,9 +300,8 @@ button.primary:disabled {
 }
 
 .tnc-agree span {
-  position: static !important; /* ⬅️ pastikan tidak absolute */
-  flex: 1;                    /* ⬅️ wajib */
-  min-width: 0;              /* ⬅️ fix flex overflow bug */
+  flex: 1;
+  min-width: 0;
   max-width: 100%;
 
   display: block;
@@ -310,4 +312,9 @@ button.primary:disabled {
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.tnc-wrapper {
+  width: 100%;
+  display: block;
 }
