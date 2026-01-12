@@ -184,19 +184,24 @@ const confirmSurvey = document.getElementById("confirmSurvey");
 btnBooking.disabled = true;
 btnSurvey.disabled = true;
 
-// ===== SUBMIT =====
-form.addEventListener("submit", async e => {
-  e.preventDefault();
+// ===== LOGIC BOOKING & SURVEY =====
+
+btnBooking.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return;
 
   if (!agreeTnc.checked) {
     alert("Anda harus menyetujui Syarat & Ketentuan.");
     return;
   }
 
-  const user = auth.currentUser;
-  if (!user) return;
+  const bookingCode = generateCode("BK");
 
   const data = {
+    type: "booking",
+    status: "booking",
+    bookingCode,
+
     booker: {
       uid: user.uid,
       email: user.email,
@@ -227,22 +232,90 @@ form.addEventListener("submit", async e => {
     addons: selectedAddons,
     autoRenew: draft.autoRenew || false,
 
-    status: "submitted",
-
     termsAccepted: true,
     termsAcceptedAt: new Date().toISOString(),
 
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp()
+    createdAt: serverTimestamp()
   };
 
   try {
-    await addDoc(collection(db, "bookings"), data);
-    alert("Booking berhasil dikirim");
+    await addDoc(collection(db, "orders"), data);
     localStorage.removeItem("bookingDraft");
-    location.href = "/booking/success.html";
+    location.href = "/member/history.html";
   } catch (err) {
     console.error(err);
-    alert("Gagal mengirim booking");
+    alert("Gagal menyimpan booking");
+  }
+});
+
+// ===== SURVEY =====
+
+btnSurvey.addEventListener("click", () => {
+  if (!agreeTnc.checked) {
+    alert("Anda harus menyetujui Syarat & Ketentuan.");
+    return;
+  }
+
+  surveyModal.style.display = "flex";
+});
+
+cancelSurvey.addEventListener("click", () => {
+  surveyModal.style.display = "none";
+});
+
+confirmSurvey.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const date = document.getElementById("surveyDate").value;
+  const time = document.getElementById("surveyTime").value;
+
+  if (!date || !time) {
+    alert("Pilih tanggal dan jam survey");
+    return;
+  }
+
+  const surveyCode = generateCode("SV");
+
+  const data = {
+    type: "survey",
+    status: "survey",
+    bookingCode: surveyCode,
+
+    booker: {
+      uid: user.uid,
+      email: user.email,
+      nama: bookerNama.value
+    },
+
+    kostId,
+    roomTypeId,
+
+    tanggalSurvey: date,
+    jamSurvey: time,
+
+    createdAt: serverTimestamp()
+  };
+
+  try {
+    await addDoc(collection(db, "orders"), data);
+
+    const waText = encodeURIComponent(
+`Halo Kak, saya ingin melakukan Survey
+
+Kode: ${surveyCode}
+Tanggal : ${date}
+Jam : ${time}
+
+Mohon konfirmasinya ya kak, terima kasih.`
+    );
+
+    // TODO: ganti dengan nomor WA dari data kost
+    window.open(`https://wa.me/62XXXXXXXXXX?text=${waText}`, "_blank");
+
+    surveyModal.style.display = "none";
+  } catch (err) {
+    console.error(err);
+    alert("Gagal menyimpan survey");
   }
 });
