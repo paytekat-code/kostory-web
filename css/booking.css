@@ -276,35 +276,32 @@ button.primary:disabled {
 
 .tnc-agree {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;   /* ⬅️ penting */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 
   margin-top: 18px;
-  padding: 12px 14px;
+  padding: 16px 14px;
   border-radius: 12px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   cursor: pointer;
 
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-
-  align-self: stretch;   /* ⬅️ PENTING untuk flex parent */
-  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tnc-agree input {
   flex-shrink: 0;
-  margin-top: 4px;
 }
 
 .tnc-agree span {
-  flex: 1;
-  min-width: 0;
+  display: block;
+  width: 100%;
   max-width: 100%;
 
-  display: block;
+  text-align: center;      /* ⬅️ biar cakep */
   font-size: 14px;
   line-height: 1.5;
   color: #374151;
@@ -312,9 +309,4 @@ button.primary:disabled {
   white-space: normal;
   word-break: break-word;
   overflow-wrap: break-word;
-}
-
-.tnc-wrapper {
-  width: 100%;
-  display: block;
 }
