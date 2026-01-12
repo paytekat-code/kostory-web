@@ -271,44 +271,44 @@ button.primary:disabled {
   }
 }
 /* ==============================
-   TNC CHECKBOX – CLEAN & UX
-/* FIX FINAL TNC */
+   TNC – SIDE BY SIDE (STABLE)
+============================== */
 
 .tnc-agree {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: flex-start !important;
-  gap: 12px !important;
+  display: flex;
+  flex-direction: row;       /* ⬅️ sejajar: checkbox kiri, teks kanan */
+  align-items: flex-start;
+  gap: 12px;
 
-  width: 100% !important;
-  padding: 12px 14px !important;
-  margin-top: 16px !important;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
 
-  border: 1px solid #e5e7eb !important;
-  border-radius: 12px !important;
-  background: #fafafa !important;
-
-  box-sizing: border-box !important;
-  height: auto !important;
-  min-height: unset !important;
-  max-height: unset !important;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;          /* ⬅️ cegah bocor keluar kotak */
 }
 
 .tnc-agree input {
-  flex-shrink: 0 !important;
-  margin-top: 3px !important;
+  flex-shrink: 0;            /* ⬅️ jangan mengecil */
+  margin-top: 3px;
 }
 
 .tnc-agree span {
-  flex: 1 !important;
-  min-width: 0 !important;
+  flex: 1;                   /* ⬅️ ambil sisa lebar */
+  min-width: 0;              /* ⬅️ FIX bug flex overflow */
+  max-width: 100%;
 
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  color: #374151 !important;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #374151;
 
-  white-space: normal !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  text-align: left !important;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
