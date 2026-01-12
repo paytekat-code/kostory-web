@@ -11,7 +11,7 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-// ===== PARAM =====
+// ===== AMBIL DRAFT DARI LOCALSTORAGE =====
 const draftRaw = localStorage.getItem("bookingDraft");
 
 if (!draftRaw) {
@@ -24,6 +24,29 @@ const draft = JSON.parse(draftRaw);
 
 const kostId = draft.kostId;
 const roomTypeId = draft.roomId;
+const selectedAddons = draft.addons || [];
+const selectedDurasi = draft.durasi;
+
+// ===== DEFAULT LABEL UNTUK YANG TIDAK DIPILIH =====
+const DEFAULT_ADDON_LABELS = {
+  autoRenew: "Tidak Aktif, kamar di-open di periode berikutnya",
+  mobil: "Tidak membawa mobil",
+  laundry: "Kiloan (minimal 3Kg)",
+  listrik: "Mengisi Token Sendiri",
+  pasangan: "Tinggal Sendiri",
+  housekeeping: "Standard (Setiap 14 Hari)"
+};
+
+// ===== DAFTAR SEMUA ADDON =====
+const ALL_ADDONS = [
+  { id: "autoRenew", nama: "Perpanjangan Otomatis" },
+  { id: "motor", nama: "Garasi Motor" },
+  { id: "mobil", nama: "Parkir Mobil" },
+  { id: "laundry", nama: "Laundry" },
+  { id: "listrik", nama: "Token Listrik" },
+  { id: "pasangan", nama: "Pasangan Kost" },
+  { id: "housekeeping", nama: "Layanan Housekeeping" }
+];
 
 // ===== ELEMENT =====
 const kostNamaEl = document.getElementById("kostNama");
@@ -49,6 +72,8 @@ async function loadInfo() {
     doc(db, "kost", kostId, "rooms", roomTypeId)
   );
 
+  let hargaKamar = 0;
+
   if (kostSnap.exists()) {
     kostNamaEl.textContent = kostSnap.data().nama;
   }
@@ -57,21 +82,68 @@ async function loadInfo() {
     const room = roomSnap.data();
     roomTypeNamaEl.textContent = room.nama;
 
-    if (room.hargaBulanan) {
-      hargaBox.innerHTML =
-        `Harga Bulanan: Rp ${room.hargaBulanan.toLocaleString("id-ID")}`;
-    }
+    hargaKamar = room[`harga${selectedDurasi}`] || 0;
   }
+
+  renderRingkasanHarga(hargaKamar);
 }
 
-
 loadInfo();
+
+// ===== RENDER RINGKASAN =====
+function renderRingkasanHarga(hargaKamar) {
+  let total = hargaKamar;
+
+  selectedAddons.forEach(a => {
+    total += a.harga || 0;
+  });
+
+  const includedIds = selectedAddons.map(a => a.id);
+
+  let html = `
+    <div style="font-size:18px;font-weight:600;margin-bottom:8px">
+      Total: Rp ${total.toLocaleString("id-ID")} / ${selectedDurasi}
+    </div>
+  `;
+
+  // === SUDAH TERMASUK ===
+  html += `<div class="addon-section"><div class="addon-title">Sudah Termasuk</div>`;
+
+  if (includedIds.length === 0) {
+    html += `<div class="addon-item excluded">Tidak ada tambahan</div>`;
+  } else {
+    ALL_ADDONS.forEach(a => {
+      if (includedIds.includes(a.id)) {
+        html += `<div class="addon-item included">✅ ${a.nama}</div>`;
+      }
+    });
+  }
+
+  html += `</div>`;
+
+  // === TIDAK TERMASUK ===
+  html += `<div class="addon-section"><div class="addon-title">Tidak Termasuk</div>`;
+
+  ALL_ADDONS.forEach(a => {
+    if (!includedIds.includes(a.id)) {
+      const label = DEFAULT_ADDON_LABELS[a.id] || "";
+      html += `<div class="addon-item excluded">❌ ${a.nama}${label ? ": " + label : ""}</div>`;
+    }
+  });
+
+  html += `</div>`;
+
+  hargaBox.innerHTML = html;
+}
 
 // ===== AUTH =====
 onAuthStateChanged(auth, user => {
   if (!user) {
-    alert("Silakan login terlebih dahulu");
-    location.href = "https://kostory.id/member/login-member.html?redirect=" + encodeURIComponent(window.location.href);
+    const currentUrl = window.location.href;
+    const loginUrl =
+      "https://kostory.id/member/login-member.html?redirect=" +
+      encodeURIComponent(currentUrl);
+    location.href = loginUrl;
     return;
   }
 
@@ -127,6 +199,12 @@ form.addEventListener("submit", async e => {
     kostId,
     roomTypeId,
 
+    durasi: draft.durasi,
+    checkin: draft.checkin,
+    checkout: draft.checkout,
+    addons: selectedAddons,
+    autoRenew: draft.autoRenew || false,
+
     status: "submitted",
 
     termsAccepted: true,
@@ -139,6 +217,7 @@ form.addEventListener("submit", async e => {
   try {
     await addDoc(collection(db, "bookings"), data);
     alert("Booking berhasil dikirim");
+    localStorage.removeItem("bookingDraft");
     location.href = "/booking/success.html";
   } catch (err) {
     console.error(err);
