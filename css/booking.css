@@ -176,7 +176,48 @@ select:focus {
 }
 
 /* =============================
-   PRIMARY BUTTON (GLOBAL)
+   T&C AGREE
+============================= */
+.tnc-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+
+  box-sizing: border-box;
+}
+
+.tnc-agree input {
+  width: auto;
+  margin: 2px 0 0 0;
+  flex-shrink: 0;
+}
+
+.tnc-agree span {
+  flex: 1;
+  min-width: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+  color: #374151;
+
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+
+  writing-mode: horizontal-tb;
+  text-align: left;
+}
+
+/* =============================
+   PRIMARY BUTTON
 ============================= */
 button.primary {
   width: 100%;
@@ -204,7 +245,6 @@ button.primary:disabled {
 /* =============================
    FINAL BUTTON SYSTEM
 ============================= */
-
 .action-buttons {
   display: flex;
   gap: 14px;
@@ -215,10 +255,8 @@ button.primary:disabled {
   box-sizing: border-box;
   flex: 1;
   height: 56px;
-  min-height: 56px;
-  max-height: 56px;
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  margin: 0;
   border-radius: 14px;
   font-weight: 600;
   font-size: 16px;
@@ -229,30 +267,26 @@ button.primary:disabled {
   white-space: nowrap;
 }
 
-/* Override global primary */
 .action-buttons .primary {
-  width: auto !important;
-  margin-top: 0 !important;
-  padding: 0 !important;
+  width: auto;
+  margin-top: 0;
+  padding: 0;
 }
 
-/* Secondary */
 .action-buttons .secondary {
   background: #ffffff;
   color: #4f46e5;
   border: 2px solid #4f46e5;
 }
 
-/* Disabled */
 .action-buttons button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
 /* =============================
-   MOBILE LOCK
+   MOBILE
 ============================= */
-
 @media (max-width: 480px) {
   .summary-total {
     font-size: 22px;
@@ -269,40 +303,4 @@ button.primary:disabled {
   .action-buttons button {
     font-size: 15px;
   }
-}
-
-/* === TNC FINAL STABLE === */
-
-.tnc-agree {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-
-  width: 100%;
-  padding: 12px 14px;
-  margin-top: 16px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  background: #fafafa;
-
-  box-sizing: border-box;
-}
-
-.tnc-agree input {
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-
-.tnc-agree span {
-  flex: 1;
-  min-width: 0;
-
-  font-size: 14px;
-  line-height: 1.5;
-  color: #374151;
-
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: break-word;
 }
