@@ -365,3 +365,18 @@ form .tnc-agree span {
   color: #374151 !important;
   text-align: left !important;
 }
+
+/* ==== FIX CONTAINER BOOKING ==== */
+main.container {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+}
+/* ==== FIX TNC LAYOUT ==== */
+.tnc-agree {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.tnc-agree span {
+  max-width: 100% !important;
+}
