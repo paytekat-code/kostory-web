@@ -291,7 +291,7 @@ button.primary:disabled {
 
 .tnc-agree input {
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
 .tnc-agree span {
@@ -299,21 +299,10 @@ button.primary:disabled {
   min-width: 0;
 
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #374151;
 
   white-space: normal;
-  word-break: break-word;
+  word-break: normal;
   overflow-wrap: break-word;
-  text-align: left;
-}
-/* KUNCI BOX SYARAT & KETENTUAN */
-.card > div[style*="max-height"] {
-  max-height: 180px !important;
-  height: auto !important;
-  overflow-y: auto !important;
-}
-.tnc-agree {
-  flex: 0 0 auto !important;
-  align-self: flex-start !important;
 }
