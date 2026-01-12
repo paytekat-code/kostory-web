@@ -274,7 +274,11 @@ button.primary:disabled {
    FINAL ISOLATED TNC AGREEMENT
 ============================== */
 
-.booking-page .tnc-agree {
+/* ==============================
+   FINAL HARD FIX TNC (ACTIVE)
+============================== */
+
+.container .tnc-agree {
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
@@ -283,24 +287,24 @@ button.primary:disabled {
   margin-top: 16px !important;
   font-size: 14px !important;
   color: #374151 !important;
-  max-width: 100% !important;
   width: 100% !important;
+  max-width: 100% !important;
   writing-mode: horizontal-tb !important;
   transform: none !important;
 }
 
-.booking-page .tnc-agree span {
+.container .tnc-agree span {
   display: block !important;
   writing-mode: horizontal-tb !important;
   transform: none !important;
   text-orientation: mixed !important;
-  word-break: break-word !important;
   white-space: normal !important;
-  max-width: 100% !important;
+  word-break: break-word !important;
   line-height: 1.4 !important;
+  max-width: 100% !important;
 }
 
-.booking-page .tnc-agree input {
+.container .tnc-agree input {
   flex-shrink: 0 !important;
   margin-top: 2px !important;
 }
