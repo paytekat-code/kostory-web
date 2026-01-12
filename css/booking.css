@@ -308,3 +308,32 @@ button.primary:disabled {
   flex-shrink: 0;
   margin-top: 2px;
 }
+/* === HARD RESET FOR TNC SECTION === */
+
+.tnc-agree {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #374151;
+  max-width: 100%;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+}
+
+.tnc-agree span {
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  text-orientation: mixed !important;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.tnc-agree input {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
