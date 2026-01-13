@@ -22,11 +22,16 @@ onAuthStateChanged(auth, async user => {
     location.href = loginUrl;
     return;
   }
-
+  
+ console.log("USER LOGIN UID:", user.uid);
+  
   loadHistory(user.uid);
 });
 
 async function loadHistory(uid) {
+
+    console.log("QUERY UID:", uid); // 👈 TAMBAH DI SINI
+  
   historyList.innerHTML = renderLoading();
 
   try {
