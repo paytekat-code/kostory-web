@@ -40,10 +40,8 @@ async function loadHistory(uid) {
   historyList.innerHTML = renderLoading();
 
   try {
-    const q = query(
-  collection(db, "orders"),
-  orderBy("createdAt", "desc")
-);
+   const q = query(collection(db, "orders"));
+
 
 
     const snap = await getDocs(q);
