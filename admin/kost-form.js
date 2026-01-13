@@ -99,6 +99,10 @@ kontak: {
       alert("Kostory berhasil diperbarui");
     } else {
       const slug = slugify(data.nama);
+if (!slug) {
+  alert("Nama kost tidak valid.");
+  return;
+}
 
 const ref = doc(db, "kost", slug);
 const snap = await getDoc(ref);
