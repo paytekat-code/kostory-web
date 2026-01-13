@@ -41,10 +41,10 @@ async function loadHistory(uid) {
 
   try {
     const q = query(
-      collection(db, "orders"),
-      where("uid", "==", uid),
-      orderBy("createdAt", "desc")
-    );
+  collection(db, "orders"),
+  orderBy("createdAt", "desc")
+);
+
 
     const snap = await getDocs(q);
 
