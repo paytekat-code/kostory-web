@@ -14,6 +14,8 @@ import {
 const historyList = document.getElementById("historyList");
 
 onAuthStateChanged(auth, async user => {
+  console.log("AUTH STATE CHANGED:", user);
+
   if (!user) {
     const currentUrl = window.location.href;
     const loginUrl =
