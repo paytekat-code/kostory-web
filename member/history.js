@@ -138,12 +138,13 @@ function formatStatus(status) {
   if (!status) return "-";
 
   const map = {
-    booking: "Booking",
+    booking: "Menunggu Pembayaran",
+    paid: "Sudah Dibayar",
     confirmed: "Dikonfirmasi",
     cancelled: "Dibatalkan",
     completed: "Selesai"
   };
-
+  
   return map[status] || status;
 }
 
@@ -151,7 +152,8 @@ function getStatusClass(status) {
   if (!status) return "default";
 
   const map = {
-    booking: "blue",
+    booking: "yellow",
+    paid: "blue",
     confirmed: "green",
     cancelled: "red",
     completed: "gray"
@@ -159,3 +161,4 @@ function getStatusClass(status) {
 
   return map[status] || "default";
 }
+
