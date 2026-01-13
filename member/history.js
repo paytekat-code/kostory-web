@@ -1,3 +1,6 @@
+console.log("🔥 HISTORY.JS LOADED");
+
+
 import { db, auth } from "../js/firebase.js";
 import {
   collection,
