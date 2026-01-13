@@ -6,6 +6,15 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+
 const params = new URLSearchParams(window.location.search);
 const kostId = params.get("id");
 const isEdit = !!kostId;
@@ -89,8 +98,21 @@ kontak: {
       await updateDoc(doc(db, "kost", kostId), data);
       alert("Kostory berhasil diperbarui");
     } else {
-      const newRef = doc(db, "kost", crypto.randomUUID());
-      await setDoc(newRef, data);
+      const slug = slugify(data.nama);
+
+const ref = doc(db, "kost", slug);
+const snap = await getDoc(ref);
+
+if (snap.exists()) {
+  alert("Nama kost sudah ada. Gunakan nama lain.");
+  return;
+}
+
+await setDoc(ref, {
+  ...data,
+  slug
+});
+
       alert("Kostory berhasil ditambahkan");
       form.reset();
     }
