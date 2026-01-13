@@ -1,6 +1,3 @@
-console.log("🔥 HISTORY.JS LOADED");
-
-
 import { db, auth } from "../js/firebase.js";
 import {
   collection,
@@ -17,8 +14,6 @@ import {
 const historyList = document.getElementById("historyList");
 
 onAuthStateChanged(auth, async user => {
-  console.log("AUTH STATE CHANGED:", user);
-
   if (!user) {
     const currentUrl = window.location.href;
     const loginUrl =
@@ -27,22 +22,19 @@ onAuthStateChanged(auth, async user => {
     location.href = loginUrl;
     return;
   }
-  
- console.log("USER LOGIN UID:", user.uid);
-  
+
   loadHistory(user.uid);
 });
 
 async function loadHistory(uid) {
-
-    console.log("QUERY UID:", uid); // 👈 TAMBAH DI SINI
-  
   historyList.innerHTML = renderLoading();
 
   try {
-   const q = query(collection(db, "orders"));
-
-
+    const q = query(
+      collection(db, "orders"),
+      where("uid", "==", uid),
+      orderBy("createdAt", "desc")
+    );
 
     const snap = await getDocs(q);
 
@@ -152,7 +144,7 @@ function formatStatus(status) {
     cancelled: "Dibatalkan",
     completed: "Selesai"
   };
-  
+
   return map[status] || status;
 }
 
@@ -169,4 +161,3 @@ function getStatusClass(status) {
 
   return map[status] || "default";
 }
-
