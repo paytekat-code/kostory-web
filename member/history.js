@@ -27,41 +27,135 @@ onAuthStateChanged(auth, async user => {
 });
 
 async function loadHistory(uid) {
-  historyList.innerHTML = "Loading...";
+  historyList.innerHTML = renderLoading();
 
-  const q = query(
-    collection(db, "orders"),
-    where("booker.uid", "==", uid),
-    orderBy("createdAt", "desc")
-  );
+  try {
+    const q = query(
+      collection(db, "orders"),
+      where("uid", "==", uid),
+      orderBy("createdAt", "desc")
+    );
 
-  const snap = await getDocs(q);
+    const snap = await getDocs(q);
 
-  if (snap.empty) {
-    historyList.innerHTML = "<p>Kamu belum punya riwayat booking.</p>";
-    return;
+    if (snap.empty) {
+      historyList.innerHTML = renderEmpty();
+      return;
+    }
+
+    let html = "";
+
+    snap.forEach(doc => {
+      const d = doc.data();
+      html += renderItem(d);
+    });
+
+    historyList.innerHTML = html;
+
+  } catch (err) {
+    console.error("History error:", err);
+    historyList.innerHTML = renderError();
   }
+}
 
-  let html = "";
+/* =========================
+   UI RENDERING
+========================= */
 
-  snap.forEach(doc => {
-    const d = doc.data();
+function renderItem(d) {
+  const typeLabel = d.type === "survey" ? "Survey" : "Booking";
+  const badgeClass = d.type === "survey" ? "survey" : "booking";
 
-    const typeLabel = d.type === "survey" ? "Survey" : "Booking";
-    const badgeClass = d.type === "survey" ? "survey" : "booking";
+  const statusLabel = formatStatus(d.status);
+  const statusClass = getStatusClass(d.status);
 
-    html += `
-      <div class="history-item">
-        <h4>${typeLabel} - ${d.bookingCode}</h4>
-        <div class="history-meta">
-          Status: ${d.status}
-        </div>
+  const createdAt = d.createdAt?.toDate
+    ? formatDate(d.createdAt.toDate())
+    : "-";
+
+  return `
+    <div class="history-item">
+      <div class="history-header">
+        <h4>${typeLabel} - ${d.bookingCode ?? "-"}</h4>
         <span class="badge ${badgeClass}">
           ${typeLabel}
         </span>
       </div>
-    `;
-  });
 
-  historyList.innerHTML = html;
+      <div class="history-meta">
+        <div><strong>Kost:</strong> ${d.kostId ?? "-"}</div>
+        <div><strong>Tipe Kamar:</strong> ${d.roomTypeId ?? "-"}</div>
+        <div><strong>Durasi:</strong> ${d.durasi ?? "-"}</div>
+        <div><strong>Tanggal:</strong> ${createdAt}</div>
+      </div>
+
+      <div class="history-footer">
+        <span class="status ${statusClass}">
+          ${statusLabel}
+        </span>
+      </div>
+    </div>
+  `;
+}
+
+function renderLoading() {
+  return `
+    <div class="history-loading">
+      Memuat riwayat kamu...
+    </div>
+  `;
+}
+
+function renderEmpty() {
+  return `
+    <div class="history-empty">
+      <p>Kamu belum punya riwayat booking.</p>
+    </div>
+  `;
+}
+
+function renderError() {
+  return `
+    <div class="history-error">
+      <p>Gagal memuat data. Silakan refresh.</p>
+    </div>
+  `;
+}
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatDate(date) {
+  return date.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+}
+
+function formatStatus(status) {
+  if (!status) return "-";
+
+  const map = {
+    booking: "Booking",
+    confirmed: "Dikonfirmasi",
+    cancelled: "Dibatalkan",
+    completed: "Selesai"
+  };
+
+  return map[status] || status;
+}
+
+function getStatusClass(status) {
+  if (!status) return "default";
+
+  const map = {
+    booking: "blue",
+    confirmed: "green",
+    cancelled: "red",
+    completed: "gray"
+  };
+
+  return map[status] || "default";
 }
